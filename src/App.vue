@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import CityPicker from './components/CityPicker.vue'
-import AllergenPicker from './components/AllergenPicker.vue'
+import AllergenPicker from "./components/AllergenPicker.vue";
+import CityPicker from "./components/CityPicker.vue";
 </script>
 
 <template>

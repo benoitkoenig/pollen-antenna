@@ -1,22 +1,26 @@
 <script setup lang="ts">
 import memoizee from "memoizee";
+
 import AutoComplete, { type AutoCompleteOption } from "./AutoComplete.vue";
 
-const fetchLocationsPerCountry = memoizee(async function fetchLocationsPerCountry(countryCode: string) {
-  const response = await fetch(`/locations/${countryCode}.tsv`);
-  const rawResponse = await response.text();
+const fetchLocationsPerCountry = memoizee(
+  async function fetchLocationsPerCountry(countryCode: string) {
+    const response = await fetch(`/locations/${countryCode}.tsv`);
+    const rawResponse = await response.text();
 
-  const options = rawResponse
-    .split("\n")
-    .map((row) => {
-      const [, postalCode, city] = row.split("\t")
+    const options = rawResponse
+      .split("\n")
+      .map((row) => {
+        const [, postalCode, city] = row.split("\t");
 
-      return `${city} - ${postalCode}`
-    })
-    .filter((v, i, arr) => arr.indexOf(v) === i);
+        return `${city} - ${postalCode}`;
+      })
+      .filter((v, i, arr) => arr.indexOf(v) === i);
 
-  return options;
-}, { max: 1 })
+    return options;
+  },
+  { max: 1 },
+);
 
 async function search(value: string) {
   const allLocations = await fetchLocationsPerCountry("FR");
@@ -40,7 +44,10 @@ async function search(value: string) {
     }
   }
 
-  const matches = [...startingMatches, ...otherMatches.slice(0, 5 - startingMatches.length)];
+  const matches = [
+    ...startingMatches,
+    ...otherMatches.slice(0, 5 - startingMatches.length),
+  ];
 
   return matches.map((value): AutoCompleteOption => ({ value }));
 }

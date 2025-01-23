@@ -1,11 +1,12 @@
 <script setup lang="ts">
-import allergensStaticData from '../static-data/allergens.static-data';
-import { ref, watch } from 'vue';
+import { ref, watch } from "vue";
+
+import allergensStaticData from "../static-data/allergens.static-data";
 
 const pickedAllergens = ref([]);
 const emit = defineEmits({
   update: null,
-})
+});
 
 watch(pickedAllergens, (allergens) => emit("update", allergens));
 </script>
@@ -13,7 +14,12 @@ watch(pickedAllergens, (allergens) => emit("update", allergens));
 <template>
   <div class="grid grid-cols-2">
     <span v-for="allergen of allergensStaticData" :key="allergen">
-      <input :id="allergen" type="checkbox" :value="allergen" v-model="pickedAllergens">
+      <input
+        :id="allergen"
+        v-model="pickedAllergens"
+        type="checkbox"
+        :value="allergen"
+      />
       <label :for="allergen">{{ allergen }}</label>
     </span>
   </div>
