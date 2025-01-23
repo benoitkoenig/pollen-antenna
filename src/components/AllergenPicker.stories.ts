@@ -1,12 +1,12 @@
-import type { Meta, StoryObj } from '@storybook/vue3';
+import type { Meta, StoryObj } from "@storybook/vue3";
+import { ref } from "vue";
 
-import AllergenPicker from './AllergenPicker.vue';
-import { ref } from 'vue';
+import AllergenPicker from "./AllergenPicker.vue";
 
 const meta = {
-  title: 'AllergenPicker',
+  title: "AllergenPicker",
   component: AllergenPicker,
-  tags: ['autodocs'],
+  tags: ["autodocs"],
 } satisfies Meta<typeof AllergenPicker>;
 
 export default meta;
@@ -25,5 +25,5 @@ export const Standard: Story = {
       <AllergenPicker @update="(values) => pickedAllergens = values" />
       <div>{{ JSON.stringify(pickedAllergens) }}</div>
       `,
-  })
+  }),
 };
