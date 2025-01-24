@@ -18,6 +18,6 @@ export const allergensStaticData = [
   "willow",
   "linden",
   "nettle",
-];
+] as const;
 
 export type Allergen = (typeof allergensStaticData)[number];
