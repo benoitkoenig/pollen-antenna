@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { provide, ref } from "vue";
 
+import type { DateOnRecord } from "../date-on-record";
+
 import {
   profileDataProviderKey,
   type DiagnosedAllergenData,
@@ -17,24 +19,21 @@ const diagnosedAllergenHistory = ref<DiagnosedAllergenData[]>([]);
 function addDiagnosedAllergenData(
   diagnosedAllergenData: DiagnosedAllergenData,
 ) {
-  const dateInMs = diagnosedAllergenData.date.getTime();
-
   if (
     diagnosedAllergenHistory.value.some(
-      ({ date }) => date.getTime() === dateInMs,
+      ({ date }) => date === diagnosedAllergenData.date,
     )
   ) {
-    throw new Error("Cannot have two allergen data diagnosed symultaneously");
+    // TODO: using the date as the ID is not acceptable. Introduce a proper ID
+    throw new Error("Cannot have two allergen data diagnosed on the same date");
   }
 
   diagnosedAllergenHistory.value.push(diagnosedAllergenData);
 }
 
-function removeDiagnosedAllergenData(date: Date) {
-  const dateInMs = date.getTime();
-
+function removeDiagnosedAllergenData(date: DateOnRecord) {
   const index = diagnosedAllergenHistory.value.findIndex(
-    ({ date }) => date.getTime() !== dateInMs,
+    (diagnosedAllergenEntry) => date !== diagnosedAllergenEntry.date,
   );
 
   if (index === -1) {

@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { inject } from "vue";
+import { useRouter } from "vue-router";
 
 import AllergenPicker from "../components/AllergenPicker.vue";
 import CityPicker from "../components/CityPicker.vue";
@@ -13,8 +14,10 @@ const {
   setDiagnosedAllergenData,
 } = inject(anonymousDataProviderKey)!;
 
+const router = useRouter();
+
 function proceed() {
-  alert("Not implemented");
+  router.push("/graph");
 }
 </script>
 
