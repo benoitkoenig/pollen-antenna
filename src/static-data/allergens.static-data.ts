@@ -1,4 +1,4 @@
-const allergensStaticData = [
+export const allergensStaticData = [
   "ragweed",
   "mugwort",
   "alder",
@@ -20,4 +20,4 @@ const allergensStaticData = [
   "nettle",
 ];
 
-export default allergensStaticData;
+export type Allergen = (typeof allergensStaticData)[number];

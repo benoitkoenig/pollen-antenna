@@ -1,11 +1,10 @@
 <script setup lang="ts">
-import AllergenPicker from "./components/AllergenPicker.vue";
-import CityPicker from "./components/CityPicker.vue";
+import ProfileData from "./providers/ProfileData.vue";
+import AppViews from "./views/AppViews.vue";
 </script>
 
 <template>
-  <div class="flex flex-col">
-    <CityPicker />
-    <AllergenPicker />
-  </div>
+  <ProfileData>
+    <AppViews />
+  </ProfileData>
 </template>

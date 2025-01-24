@@ -3,6 +3,14 @@ import memoizee from "memoizee";
 
 import AutoComplete, { type AutoCompleteOption } from "./AutoComplete.vue";
 
+defineProps<{
+  defaultValue?: string | undefined;
+}>();
+
+const emit = defineEmits({
+  select: (_location: string) => true,
+});
+
 const fetchLocationsPerCountry = memoizee(
   async function fetchLocationsPerCountry(countryCode: string) {
     const response = await fetch(`/locations/${countryCode}.tsv`);
@@ -54,5 +62,8 @@ async function search(value: string) {
 </script>
 
 <template>
-  <AutoComplete :search="search" />
+  <AutoComplete
+    :search="search"
+    @select="({ value, label }) => emit('select', label ?? value)"
+  />
 </template>

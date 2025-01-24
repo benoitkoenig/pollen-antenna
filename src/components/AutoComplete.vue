@@ -14,7 +14,7 @@ const inputRawText = ref(defaultValue?.label ?? "");
 const selectedOption = defineModel<AutoCompleteOption>();
 const options = ref<AutoCompleteOption[]>();
 const emit = defineEmits({
-  select: null,
+  select: (_option: AutoCompleteOption) => true,
 });
 
 /**
