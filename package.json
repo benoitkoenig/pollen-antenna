@@ -1,5 +1,6 @@
 {
   "name": "pollen-antenna",
+  "description": "Every allergic person is an antenna. Let's make it public data now",
   "private": true,
   "version": "0.0.0",
   "type": "module",
