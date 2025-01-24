@@ -4,7 +4,7 @@ import { provide, ref } from "vue";
 import {
   profileDataProviderKey,
   type DiagnosedAllergenData,
-} from "./ProfileData.key";
+} from "./ProfileData.provider-definition";
 
 const latestLocation = ref<string>();
 
