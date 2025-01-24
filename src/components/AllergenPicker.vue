@@ -12,7 +12,7 @@ watch(pickedAllergens, (allergens) => emit("update", allergens));
 </script>
 
 <template>
-  <div class="grid grid-cols-4 p-8 gap-8 border bg-gray-800">
+  <div class="grid grid-cols-4 p-8 gap-8 border bg-teal-800">
     <span v-for="allergen of allergensStaticData" :key="allergen">
       <input
         :id="allergen"

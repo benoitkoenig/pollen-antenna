@@ -15,7 +15,7 @@ function expand() {
 </script>
 
 <template>
-  <div class="w-full flex flex-col p-4 gap-4 border">
+  <div class="w-full flex flex-col p-4 gap-4 border border-teal-600">
     <div class="w-full flex gap-4">
       <h3 class="flex-grow">{{ title }}</h3>
       <button v-if="$slots.collapsed && isExpanded" @click="collapse">V</button>

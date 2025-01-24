@@ -89,18 +89,25 @@ const hasOptionsToShow = computed(
 </script>
 
 <template>
-  <input
-    v-model="inputRawText"
-    class="bg-transparent border border-white"
-    type="text"
-  />
-  <ul v-if="hasOptionsToShow">
-    <li
-      v-for="{ value, label } of options"
-      :key="value"
-      @click="inputRawText = value"
+  <div class="relative text-black">
+    <input
+      v-model="inputRawText"
+      class="w-full px-4 rounded-full bg-transparent bg-gray-200"
+      type="text"
+    />
+    <ul
+      v-if="hasOptionsToShow"
+      class="absolute top-[calc(100%+4px)] inset-x-2 text-left bg-gray-200"
     >
-      {{ label ?? value }}
-    </li>
-  </ul>
+      <li
+        v-for="{ value, label } of options"
+        :key="value"
+        role="button"
+        class="hover:bg-gray-300 px-2"
+        @click="inputRawText = value"
+      >
+        {{ label ?? value }}
+      </li>
+    </ul>
+  </div>
 </template>
