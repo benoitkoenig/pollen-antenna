@@ -25,7 +25,7 @@ interface GraphData {
 
 const graphData = shallowRef<GraphData>();
 
-watch([selectedAllergen, dateOnMount], async ([allergen, to]) => {
+watch([selectedAllergen, dateOnMount], async ([allergen, to], _, onCleanup) => {
   if (!to) {
     throw new Error("dateOnMount should be defined");
   }
@@ -37,11 +37,21 @@ watch([selectedAllergen, dateOnMount], async ([allergen, to]) => {
   const from = new Date(to);
   from.setDate(from.getDate() - 7);
 
+  let isCanceled = false;
+
+  onCleanup(() => {
+    isCanceled = true;
+  });
+
   const graphDataToSet = await fetchMockGraphData(
     allergen as Allergen,
     getDateOnRecord(from),
     getDateOnRecord(to),
   );
+
+  if (isCanceled) {
+    return;
+  }
 
   graphData.value = graphDataToSet;
 });
