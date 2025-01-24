@@ -30,6 +30,10 @@ watch([selectedAllergen, dateOnMount], async ([allergen, to]) => {
     throw new Error("dateOnMount should be defined");
   }
 
+  if (!allergen) {
+    return;
+  }
+
   const from = new Date(to);
   from.setDate(from.getDate() - 7);
 
