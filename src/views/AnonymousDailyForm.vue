@@ -5,14 +5,14 @@ import { useRouter } from "vue-router";
 import AllergenPicker from "../components/AllergenPicker.vue";
 import CityPicker from "../components/CityPicker.vue";
 import QuestionBlock from "../components/QuestionBlock.vue";
-import { anonymousDataProviderKey } from "../providers/AnonymousData.provider-definition";
+import { anonymousDataKey } from "../global-providers/AnonymousData.ts";
 
 const {
   location,
   setLocation,
   diagnosedAllergenData,
   setDiagnosedAllergenData,
-} = inject(anonymousDataProviderKey)!;
+} = inject(anonymousDataKey)!;
 
 const router = useRouter();
 

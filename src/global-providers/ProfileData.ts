@@ -1,12 +1,27 @@
-<script setup lang="ts">
-import { provide, ref } from "vue";
+import { ref } from "vue";
+import type { InjectionKey, Ref } from "vue";
 
 import type { DateOnRecord } from "../date-on-record";
+import type { Allergen } from "../static-data/allergens.static-data";
 
-import {
-  profileDataProviderKey,
-  type DiagnosedAllergenData,
-} from "./ProfileData.provider-definition";
+export interface DiagnosedAllergenData {
+  date: DateOnRecord;
+  allergens: Allergen[];
+}
+
+export interface ProfileData {
+  latestLocation: Ref<string | undefined>;
+  setLatestLocation: (newLocation: string) => void;
+  diagnosedAllergenHistory: Ref<DiagnosedAllergenData[]>;
+  addDiagnosedAllergenData: (
+    diagnosedAllergenData: DiagnosedAllergenData,
+  ) => void;
+  removeDiagnosedAllergenData: (date: DateOnRecord) => void;
+}
+
+export const profileDataKey = Symbol(
+  "profile-data",
+) as InjectionKey<ProfileData>;
 
 const latestLocation = ref<string>();
 
@@ -43,15 +58,10 @@ function removeDiagnosedAllergenData(date: DateOnRecord) {
   diagnosedAllergenHistory.value.splice(index, 1);
 }
 
-provide(profileDataProviderKey, {
+export const profileData: ProfileData = {
   latestLocation,
   setLatestLocation,
   diagnosedAllergenHistory,
   addDiagnosedAllergenData,
   removeDiagnosedAllergenData,
-});
-</script>
-
-<template>
-  <slot></slot>
-</template>
+};
