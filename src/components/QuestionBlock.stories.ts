@@ -23,7 +23,7 @@ export const WithoutCollapsed: Story = {
   },
   render: (args) => ({
     setup: () => ({ args }),
-    components: { QuestionBloc: QuestionBlock },
+    components: { QuestionBlock: QuestionBlock },
     template: `
       <QuestionBlock v-bind="args">
         This is the only version of the content<br />
@@ -39,7 +39,7 @@ export const WithCollapsed: Story = {
   },
   render: (args) => ({
     setup: () => ({ args }),
-    components: { QuestionBloc: QuestionBlock },
+    components: { QuestionBlock: QuestionBlock },
     template: `
       <QuestionBlock v-bind="args">
         This is the long version of the content<br />
