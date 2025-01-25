@@ -80,6 +80,8 @@ watch(inputRawText, async (_, __, onCleanup) => {
   selectOptionIfRelevant();
 });
 
+const inputIsFocus = ref(false);
+
 const hasOptionsToShow = computed(
   () =>
     options.value?.length &&
@@ -92,11 +94,13 @@ const hasOptionsToShow = computed(
   <div class="relative text-black">
     <input
       v-model="inputRawText"
-      class="w-full px-4 rounded-full bg-transparent bg-gray-200"
+      class="w-full px-4 rounded-full bg-gray-200"
       type="text"
+      @focus="inputIsFocus = true"
+      @blur="inputIsFocus = false"
     />
     <ul
-      v-if="hasOptionsToShow"
+      v-show="hasOptionsToShow && inputIsFocus"
       class="absolute top-[calc(100%+4px)] inset-x-2 text-left bg-gray-200"
     >
       <li
