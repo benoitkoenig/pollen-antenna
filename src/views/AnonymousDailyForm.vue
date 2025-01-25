@@ -26,10 +26,8 @@ const areThereSelectedAllergen = computed(
 </script>
 
 <template>
-  <div class="relative w-full h-full">
-    <div
-      class="absolute inset-y-12 inset-x-1/3 flex flex-col gap-4 items-center"
-    >
+  <div class="relative w-full">
+    <div class="absolute top-12 inset-x-1/3 flex flex-col gap-4 items-center">
       <QuestionBlock title="What is your current location?">
         <div class="w-full flex place-content-center">
           <CityPicker

@@ -77,7 +77,7 @@ async function fetchMockGraphData(
 </script>
 
 <template>
-  <div class="relative w-full h-full">
+  <div class="relative top-12 w-full">
     <div
       class="absolute inset-y-0 inset-x-1/3 flex flex-col gap-4 items-center"
     >
@@ -90,7 +90,8 @@ async function fetchMockGraphData(
           {{ allergen }}
         </option>
       </select>
-      <div>{{ JSON.stringify(graphData, undefined, 2) }}</div>
+      <div v-if="graphData">{{ JSON.stringify(graphData, undefined, 2) }}</div>
+      <div v-else>Pick an allergen to see the graph</div>
     </div>
   </div>
 </template>
