@@ -99,19 +99,22 @@ const hasOptionsToShow = computed(
       @focus="inputIsFocus = true"
       @blur="inputIsFocus = false"
     />
-    <ul
-      v-show="hasOptionsToShow && inputIsFocus"
-      class="absolute top-[calc(100%+4px)] inset-x-2 text-left bg-gray-200"
-    >
-      <li
-        v-for="{ value, label } of options"
-        :key="value"
-        role="button"
-        class="hover:bg-gray-300 px-2"
-        @click="inputRawText = value"
+    <!-- Adding a duration of 75ms is a simple hack to ensure that the @click event is fired before the list is hidden by the inputs blur -->
+    <Transition leave-active-class="duration-75">
+      <ul
+        v-show="hasOptionsToShow && inputIsFocus"
+        class="absolute top-[calc(100%+4px)] inset-x-2 text-left bg-gray-200"
       >
-        {{ label ?? value }}
-      </li>
-    </ul>
+        <li
+          v-for="{ value, label } of options"
+          :key="value"
+          role="button"
+          class="hover:bg-gray-300 px-2"
+          @click="inputRawText = value"
+        >
+          {{ label ?? value }}
+        </li>
+      </ul>
+    </Transition>
   </div>
 </template>
