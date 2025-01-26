@@ -90,8 +90,16 @@ async function fetchMockGraphData(
           {{ allergen }}
         </option>
       </select>
-      <div v-if="graphData">{{ JSON.stringify(graphData, undefined, 2) }}</div>
-      <div v-else>Pick an allergen to see the graph</div>
+      <Transition
+        enter-active-class="duration-300 ease-out"
+        enter-from-class="transform opacity-0 scale-75"
+        enter-to-class="opacity-100 scale-100"
+      >
+        <div v-if="graphData" :key="graphData">
+          {{ JSON.stringify(graphData, undefined, 2) }}
+        </div>
+      </Transition>
+      <div v-if="!graphData">Pick an allergen to see the graph</div>
     </div>
   </div>
 </template>
