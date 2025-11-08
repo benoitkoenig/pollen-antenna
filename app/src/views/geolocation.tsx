@@ -1,4 +1,5 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, memo } from "react";
+import { useNavigate } from "react-router-dom";
 
 import {
   countryCodes,
@@ -6,11 +7,13 @@ import {
   importSubdivisions,
 } from "@pollen-antenna/static-data";
 
-interface GeolocationProps {
-  onNext: () => void;
-}
+export default memo(function Geolocation() {
+  const navigate = useNavigate();
 
-export function Geolocation({ onNext }: GeolocationProps) {
+  function onConfirm() {
+    navigate("/graphs");
+  }
+
   const [selectedCountry, setSelectedCountry] = useState<
     CountryCode | undefined
   >(undefined);
@@ -108,7 +111,7 @@ export function Geolocation({ onNext }: GeolocationProps) {
           </div>
 
           <button
-            onClick={handleConfirm}
+            onClick={onConfirm}
             disabled={!selectedCountry || !selectedSubdivision}
             className="w-full py-4 px-6 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700 transition-colors disabled:bg-gray-300 disabled:cursor-not-allowed"
           >
@@ -118,4 +121,4 @@ export function Geolocation({ onNext }: GeolocationProps) {
       </div>
     </div>
   );
-}
+});
