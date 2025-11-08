@@ -1,20 +1,11 @@
 {
+  "extends": "../tsconfig.json",
   "compilerOptions": {
-    "moduleResolution": "bundler",
-    "module": "ESNext",
-    "target": "ESNext",
     "sourceMap": true,
-    "skipLibCheck": true,
     "outDir": "dist",
     "baseUrl": "./src",
     "jsx": "react-jsx",
     "composite": true,
-    "esModuleInterop": true,
-    "strict": true,
-    "types": ["vite/client"],
-    "exactOptionalPropertyTypes": true,
-    "noPropertyAccessFromIndexSignature": true,
-    "noFallthroughCasesInSwitch": true,
-    "verbatimModuleSyntax": true
+    "types": ["vite/client"]
   }
 }
