@@ -5,12 +5,12 @@ import eslintPluginPrettierRecommended from "eslint-plugin-prettier/recommended"
 import reactPlugin from "eslint-plugin-react";
 import tseslint from "typescript-eslint";
 
-export default tseslint.config(
+export default [
   {
     ignores: ["**/dist", "**/public"],
   },
   eslint.configs.recommended,
-  tseslint.configs.recommended,
+  ...tseslint.configs.recommended,
   reactPlugin.configs.flat["jsx-runtime"],
   importPlugin.flatConfigs.recommended,
   formatjs.configs.recommended,
@@ -53,4 +53,4 @@ export default tseslint.config(
       },
     },
   },
-);
+];
