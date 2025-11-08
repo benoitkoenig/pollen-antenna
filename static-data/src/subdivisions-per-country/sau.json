@@ -1,0 +1,54 @@
+[
+  {
+    "id": "25081817B34473806557189",
+    "name": "Eastern Region"
+  },
+  {
+    "id": "25081817B54479367627811",
+    "name": "Najran Region"
+  },
+  {
+    "id": "25081817B61333239611232",
+    "name": "Northern Borders Region"
+  },
+  {
+    "id": "25081817B30843703179747",
+    "name": "Hayel Region"
+  },
+  {
+    "id": "25081817B56088895138556",
+    "name": "Riyadh Region"
+  },
+  {
+    "id": "25081817B79414847265706",
+    "name": "'Asir Region"
+  },
+  {
+    "id": "25081817B13159281784364",
+    "name": "Makkah Region"
+  },
+  {
+    "id": "25081817B21311317754967",
+    "name": "Tabuk Region"
+  },
+  {
+    "id": "25081817B5326875801694",
+    "name": "Al Madinah Region"
+  },
+  {
+    "id": "25081817B98761102949945",
+    "name": "Al-Qassim Region"
+  },
+  {
+    "id": "25081817B90917209203250",
+    "name": "Al Bahah Region"
+  },
+  {
+    "id": "25081817B72054791986965",
+    "name": "Jazan Region"
+  },
+  {
+    "id": "25081817B5742042673291",
+    "name": "Al Jawf Region"
+  }
+]

@@ -1,0 +1,66 @@
+[
+  {
+    "id": "10402087B60055985875400",
+    "name": "Baden-Württemberg"
+  },
+  {
+    "id": "10402087B60477050509260",
+    "name": "Bayern"
+  },
+  {
+    "id": "10402087B20892132820961",
+    "name": "Berlin"
+  },
+  {
+    "id": "10402087B40185768535592",
+    "name": "Brandenburg"
+  },
+  {
+    "id": "10402087B44391416804171",
+    "name": "Bremen"
+  },
+  {
+    "id": "10402087B45896528657515",
+    "name": "Hamburg"
+  },
+  {
+    "id": "10402087B85226028911536",
+    "name": "Hessen"
+  },
+  {
+    "id": "10402087B60782008682549",
+    "name": "Mecklenburg-Vorpommern"
+  },
+  {
+    "id": "10402087B38053019909436",
+    "name": "Niedersachsen"
+  },
+  {
+    "id": "10402087B86022102756745",
+    "name": "Nordrhein-Westfalen"
+  },
+  {
+    "id": "10402087B42728698084544",
+    "name": "Rheinland-Pfalz"
+  },
+  {
+    "id": "10402087B83775792336645",
+    "name": "Saarland"
+  },
+  {
+    "id": "10402087B89016843004490",
+    "name": "Sachsen"
+  },
+  {
+    "id": "10402087B23625801106445",
+    "name": "Sachsen-Anhalt"
+  },
+  {
+    "id": "10402087B46069870964378",
+    "name": "Schleswig-Holstein"
+  },
+  {
+    "id": "10402087B67217417145666",
+    "name": "Thüringen"
+  }
+]

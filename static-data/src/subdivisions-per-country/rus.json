@@ -1,0 +1,334 @@
+[
+  {
+    "id": "28173009B80457268982215",
+    "name": "Altai Krai"
+  },
+  {
+    "id": "28173009B16834140201491",
+    "name": "Republic of Mordovia"
+  },
+  {
+    "id": "28173009B42082792489997",
+    "name": "Tula Oblast"
+  },
+  {
+    "id": "28173009B71296032393878",
+    "name": "Kurgan Oblast"
+  },
+  {
+    "id": "28173009B75413689166101",
+    "name": "Ingushetia"
+  },
+  {
+    "id": "28173009B731487536241",
+    "name": "Khanty-Mansiysk Autonomous Okrug – Ugra"
+  },
+  {
+    "id": "28173009B31225333555943",
+    "name": "Kirov Oblast"
+  },
+  {
+    "id": "28173009B21210279674314",
+    "name": "Komi Republic"
+  },
+  {
+    "id": "28173009B70678486994214",
+    "name": "Kostroma Oblast"
+  },
+  {
+    "id": "28173009B65133456612022",
+    "name": "Krasnoyarsk Krai"
+  },
+  {
+    "id": "28173009B29209288820923",
+    "name": "Zabaykalsky Krai"
+  },
+  {
+    "id": "28173009B92397886288731",
+    "name": "Sverdlovsk Oblast"
+  },
+  {
+    "id": "28173009B90356867269748",
+    "name": "Volgograd Oblast"
+  },
+  {
+    "id": "28173009B78872068540735",
+    "name": "Irkutsk Oblast"
+  },
+  {
+    "id": "28173009B90469334921421",
+    "name": "Perm Krai"
+  },
+  {
+    "id": "28173009B86476767341172",
+    "name": "Pskov Oblast"
+  },
+  {
+    "id": "28173009B46424166303156",
+    "name": "Rostov Oblast"
+  },
+  {
+    "id": "28173009B69714658607289",
+    "name": "Ryazan Oblast"
+  },
+  {
+    "id": "28173009B41832925814017",
+    "name": "Adygea"
+  },
+  {
+    "id": "28173009B25497318303482",
+    "name": "Samara Oblast"
+  },
+  {
+    "id": "28173009B55422170414647",
+    "name": "Khakassia"
+  },
+  {
+    "id": "28173009B50284711669511",
+    "name": "Tambov Oblast"
+  },
+  {
+    "id": "28173009B46738131000378",
+    "name": "Tatarstan"
+  },
+  {
+    "id": "28173009B26811060113320",
+    "name": "Tomsk Oblast"
+  },
+  {
+    "id": "28173009B18259284234443",
+    "name": "Nizhny Novgorod Oblast"
+  },
+  {
+    "id": "28173009B96976580001980",
+    "name": "Republic of Karelia"
+  },
+  {
+    "id": "28173009B62882423633207",
+    "name": "Arkhangelsk Oblast"
+  },
+  {
+    "id": "28173009B68474107072963",
+    "name": "Astrakhan Oblast"
+  },
+  {
+    "id": "28173009B21416061393121",
+    "name": "Belgorod Oblast"
+  },
+  {
+    "id": "28173009B9124867987859",
+    "name": "Bryansk Oblast"
+  },
+  {
+    "id": "28173009B49563687485750",
+    "name": "Buryatia"
+  },
+  {
+    "id": "28173009B98838729156012",
+    "name": "Chechnya"
+  },
+  {
+    "id": "28173009B19466568926459",
+    "name": "Chelyabinsk Oblast"
+  },
+  {
+    "id": "28173009B91429860602147",
+    "name": "Chuvashia"
+  },
+  {
+    "id": "28173009B77673499236961",
+    "name": "Tyumen Oblast"
+  },
+  {
+    "id": "28173009B7235812138525",
+    "name": "North Ossetia–Alania"
+  },
+  {
+    "id": "28173009B59972517059449",
+    "name": "Penza Oblast"
+  },
+  {
+    "id": "28173009B24080199016459",
+    "name": "Amur Oblast"
+  },
+  {
+    "id": "28173009B46612801043871",
+    "name": "Kabardino-Balkaria"
+  },
+  {
+    "id": "28173009B83675725671802",
+    "name": "Krasnodar Krai"
+  },
+  {
+    "id": "28173009B94971452660823",
+    "name": "Kursk Oblast"
+  },
+  {
+    "id": "28173009B90810482533567",
+    "name": "Leningrad oblast"
+  },
+  {
+    "id": "28173009B61240048498251",
+    "name": "Mari El"
+  },
+  {
+    "id": "28173009B19676032168465",
+    "name": "Moscow"
+  },
+  {
+    "id": "28173009B74836580104791",
+    "name": "Moscow Oblast"
+  },
+  {
+    "id": "28173009B70218250039968",
+    "name": "Murmansk Oblast"
+  },
+  {
+    "id": "28173009B3082792446388",
+    "name": "Nenets Autonomous Okrug"
+  },
+  {
+    "id": "28173009B16533507618293",
+    "name": "Novgorod Oblast"
+  },
+  {
+    "id": "28173009B27844369294009",
+    "name": "Novosibirsk Oblast"
+  },
+  {
+    "id": "28173009B55503329301013",
+    "name": "Omsk Oblast"
+  },
+  {
+    "id": "28173009B3932420572168",
+    "name": "Oryol Oblast"
+  },
+  {
+    "id": "28173009B8796515134902",
+    "name": "Saint Petersburg"
+  },
+  {
+    "id": "28173009B36269087375583",
+    "name": "Sakhalin Oblast"
+  },
+  {
+    "id": "28173009B48058606062294",
+    "name": "Sakha Republic"
+  },
+  {
+    "id": "28173009B21415173479872",
+    "name": "Saratov Oblast"
+  },
+  {
+    "id": "28173009B31773571872137",
+    "name": "Smolensk Oblast"
+  },
+  {
+    "id": "28173009B89423349656391",
+    "name": "Stavropol Krai"
+  },
+  {
+    "id": "28173009B55293521919285",
+    "name": "Tuva"
+  },
+  {
+    "id": "28173009B63182593849600",
+    "name": "Tver Oblast"
+  },
+  {
+    "id": "28173009B34434912986355",
+    "name": "Udmurtia"
+  },
+  {
+    "id": "28173009B99237675212372",
+    "name": "Kaluga Oblast"
+  },
+  {
+    "id": "28173009B5502896824563",
+    "name": "Lipetsk Oblast"
+  },
+  {
+    "id": "28173009B2185273376578",
+    "name": "Magadan Oblast"
+  },
+  {
+    "id": "28173009B42697300509311",
+    "name": "Ulyanovsk Oblast"
+  },
+  {
+    "id": "28173009B91128253561055",
+    "name": "Vladimir Oblast"
+  },
+  {
+    "id": "28173009B96664025860642",
+    "name": "Vologda Oblast"
+  },
+  {
+    "id": "28173009B38848907206629",
+    "name": "Yaroslavl Oblast"
+  },
+  {
+    "id": "28173009B2687808218031",
+    "name": "Voronezh Oblast"
+  },
+  {
+    "id": "28173009B47279883421777",
+    "name": "Yamalo-Nenets Autonomous Okrug"
+  },
+  {
+    "id": "28173009B30008444211385",
+    "name": "Altai Republic"
+  },
+  {
+    "id": "28173009B41275184158050",
+    "name": "Ivanovo Oblast"
+  },
+  {
+    "id": "28173009B51962491984110",
+    "name": "Jewish Autonomous Oblast"
+  },
+  {
+    "id": "28173009B57398385788417",
+    "name": "Kalmykia"
+  },
+  {
+    "id": "28173009B70023447378008",
+    "name": "Kamchatka Krai"
+  },
+  {
+    "id": "28173009B95588705134862",
+    "name": "Karachay-Cherkessia"
+  },
+  {
+    "id": "28173009B4400867918714",
+    "name": "Kemerovo Oblast"
+  },
+  {
+    "id": "28173009B57295377776076",
+    "name": "Khabarovsk Krai"
+  },
+  {
+    "id": "28173009B11091203162490",
+    "name": "Chukotka Autonomous Okrug"
+  },
+  {
+    "id": "28173009B24428243574749",
+    "name": "Dagestan"
+  },
+  {
+    "id": "28173009B40138449315491",
+    "name": "Kaliningrad"
+  },
+  {
+    "id": "28173009B76603557910928",
+    "name": "Orenburg Oblast"
+  },
+  {
+    "id": "28173009B46831765844996",
+    "name": "Primorsky Krai"
+  },
+  {
+    "id": "28173009B30250450380208",
+    "name": "Bashkortostan"
+  }
+]

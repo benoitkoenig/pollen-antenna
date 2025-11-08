@@ -1,6 +1,7 @@
 {
   "references": [
-    { "path": "app" }
+    { "path": "app" },
+    { "path": "static-data" },
   ],
   "compilerOptions": {
     "moduleResolution": "bundler",
