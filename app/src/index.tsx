@@ -1,5 +1,6 @@
 import { memo } from "react";
 import { createRoot } from "react-dom/client";
+import { IntlProvider } from "react-intl";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
 import Geolocation from "./views/geolocation";
@@ -10,14 +11,16 @@ import "./main.css";
 
 const App = memo(function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Navigate to="/symptoms" replace />} />
-        <Route path="/symptoms" element={<Symptoms />} />
-        <Route path="/geolocation" element={<Geolocation />} />
-        <Route path="/graphs" element={<Graphs />} />
-      </Routes>
-    </BrowserRouter>
+    <IntlProvider messages={{}} locale="en" defaultLocale="en">
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Navigate to="/symptoms" replace />} />
+          <Route path="/symptoms" element={<Symptoms />} />
+          <Route path="/geolocation" element={<Geolocation />} />
+          <Route path="/graphs" element={<Graphs />} />
+        </Routes>
+      </BrowserRouter>
+    </IntlProvider>
   );
 });
 

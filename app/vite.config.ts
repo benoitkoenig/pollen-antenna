@@ -10,7 +10,23 @@ export default defineConfig({
     emptyOutDir: true,
     outDir: "../dist/",
   },
-  plugins: [react(), tsconfigPaths({ root: ".." }), tailwindcss()],
+  plugins: [
+    react({
+      babel: {
+        plugins: [
+          [
+            "formatjs",
+            {
+              idInterpolationPattern: "[sha512:contenthash:base64:6]",
+              ast: true,
+            },
+          ],
+        ],
+      },
+    }),
+    tsconfigPaths({ root: ".." }),
+    tailwindcss(),
+  ],
   server: {
     strictPort: true,
   },

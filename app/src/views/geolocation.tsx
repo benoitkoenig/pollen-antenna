@@ -1,4 +1,5 @@
 import { useState, useEffect, memo } from "react";
+import { FormattedMessage, useIntl } from "react-intl";
 import { useNavigate } from "react-router-dom";
 
 import {
@@ -9,6 +10,7 @@ import {
 
 export default memo(function Geolocation() {
   const navigate = useNavigate();
+  const intl = useIntl();
 
   function onConfirm() {
     navigate("/graphs");
@@ -47,16 +49,15 @@ export default memo(function Geolocation() {
     };
   }, [selectedCountry]);
 
-  const handleConfirm = () => {
-    if (selectedCountry && selectedSubdivision) {
-      onNext();
-    }
-  };
-
   return (
     <div className="min-h-screen flex items-center justify-center px-4">
       <div className="w-full max-w-md">
-        <h1 className="text-2xl font-bold mb-8 text-center">Where are you?</h1>
+        <h1 className="text-2xl font-bold mb-8 text-center">
+          <FormattedMessage
+            defaultMessage="Where are you?"
+            description="geolocation"
+          />
+        </h1>
 
         <div className="flex flex-col gap-6">
           <div>
@@ -64,7 +65,10 @@ export default memo(function Geolocation() {
               htmlFor="country"
               className="block text-sm font-medium text-gray-700 mb-2"
             >
-              Country
+              <FormattedMessage
+                defaultMessage="Country"
+                description="geolocation"
+              />
             </label>
             <select
               id="country"
@@ -74,7 +78,12 @@ export default memo(function Geolocation() {
               }
               className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
             >
-              <option value="">Select a country</option>
+              <option value="">
+                {intl.formatMessage({
+                  defaultMessage: "Select a country",
+                  description: "geolocation",
+                })}
+              </option>
               {countryCodes.map((code) => (
                 <option key={code} value={code}>
                   {code}
@@ -88,7 +97,10 @@ export default memo(function Geolocation() {
               htmlFor="subdivision"
               className="block text-sm font-medium text-gray-700 mb-2"
             >
-              Region/State
+              <FormattedMessage
+                defaultMessage="Region/State"
+                description="geolocation"
+              />
             </label>
             <select
               id="subdivision"
@@ -99,13 +111,23 @@ export default memo(function Geolocation() {
             >
               {subdivisions ? (
                 <>
-                  <option value="">Select a region</option>
+                  <option value="">
+                    {intl.formatMessage({
+                      defaultMessage: "Select a region",
+                      description: "geolocation",
+                    })}
+                  </option>
                   {subdivisions?.map(({ id, name }) => (
                     <option value={id}>{name}</option>
                   ))}
                 </>
               ) : (
-                <option value="">Loading...</option>
+                <option value="">
+                  {intl.formatMessage({
+                    defaultMessage: "Loading…",
+                    description: "geolocation",
+                  })}
+                </option>
               )}
             </select>
           </div>
@@ -115,7 +137,10 @@ export default memo(function Geolocation() {
             disabled={!selectedCountry || !selectedSubdivision}
             className="w-full py-4 px-6 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700 transition-colors disabled:bg-gray-300 disabled:cursor-not-allowed"
           >
-            Confirm
+            <FormattedMessage
+              defaultMessage="See the graphs"
+              description="geolocation"
+            />
           </button>
         </div>
       </div>
