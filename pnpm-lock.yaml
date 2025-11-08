@@ -51,6 +51,9 @@ importers:
 
   app:
     dependencies:
+      '@pollen-antenna/static-data':
+        specifier: workspace:^
+        version: link:../static-data
       '@tailwindcss/vite':
         specifier: ^4.1.5
         version: 4.1.16(vite@6.4.1(@types/node@24.10.0)(jiti@2.6.1)(lightningcss@1.30.2))
