@@ -3,6 +3,7 @@ import { FormattedMessage } from "react-intl";
 
 import { useGeolocation } from "../../global-providers/geolocation";
 
+import { AnswersByDateChart } from "./answers-by-date-chart";
 import { useAnswersByDate } from "./use-answers-by-date";
 
 export const AnswersByDate = memo(function AnswersByDate() {
@@ -61,9 +62,16 @@ export const AnswersByDate = memo(function AnswersByDate() {
           description="graphs - answers by date title"
         />
       </h2>
-      <pre className="text-xs overflow-auto">
-        {JSON.stringify(data, null, 2)}
-      </pre>
+      {data?.answersByDate && data.answersByDate.length > 0 ? (
+        <AnswersByDateChart data={data.answersByDate} />
+      ) : (
+        <p className="text-gray-600 text-center py-8">
+          <FormattedMessage
+            defaultMessage="No data available"
+            description="graphs - no data"
+          />
+        </p>
+      )}
     </div>
   );
 });
