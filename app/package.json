@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "The web app",
   "scripts": {
-    "dev": "vite",
+    "start": "vite",
     "build": "vite build",
     "tsc": "tsc",
     "codegen": "graphql-codegen --config codegen.ts",

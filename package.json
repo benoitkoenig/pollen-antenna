@@ -4,7 +4,7 @@
   "description": "Every person with hay fever is an antenna. Let's make that data public!",
   "private": true,
   "scripts": {
-    "dev": "pnpm --filter=app dev",
+    "start": "pnpm --filter=app --filter=data-storage start",
     "lint": "eslint . --fix",
     "tsc": "pnpm --recursive tsc",
     "test": "pnpm --recursive --no-bail test",
