@@ -1,7 +1,7 @@
 import { useState, memo, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 
-import { useTodaysAnswerId } from "store/todays-answer-id";
+import { useTodaysAnswerId } from "global-providers/todays-answer-id";
 
 import type { GeolocationData } from "./types";
 import { useRegisterAnswer } from "./use-register-answer";
