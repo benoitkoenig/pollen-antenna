@@ -14,12 +14,12 @@ type Query {
 }
 
 type Mutation {
-  registerAnswer(hasHayFever: Boolean!, country: String!, subdivision: String!): String
+  registerAnswer(hasSymptoms: String!, country: String!, subdivision: String!): String
 }
 `;
 
 interface RegisterAnswerArgs {
-  hasHayFever: boolean;
+  hasSymptoms: boolean;
   country: string;
   subdivision: string;
 }
@@ -31,13 +31,13 @@ const resolvers = {
   Mutation: {
     registerAnswer: async (
       _: unknown,
-      { hasHayFever, country, subdivision }: RegisterAnswerArgs,
+      { hasSymptoms, country, subdivision }: RegisterAnswerArgs,
     ) => {
       const sequelize = await getSequelize();
 
       try {
         await sequelize.models["Answers"].create({
-          hasHayFever,
+          hasSymptoms,
           country,
           subdivision,
         });

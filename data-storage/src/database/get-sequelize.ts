@@ -44,8 +44,8 @@ export async function getSequelize() {
       primaryKey: true,
       autoIncrement: true,
     },
-    hasHayFever: {
-      type: DataTypes.BOOLEAN,
+    hasSymptoms: {
+      type: DataTypes.STRING,
       allowNull: false,
     },
     country: {
