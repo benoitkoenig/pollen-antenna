@@ -62,13 +62,13 @@ const resolvers = {
         const results = await sequelize.query(
           `
           SELECT
-            CAST(createdAt AS DATE) as date,
-            SUM(CASE WHEN hasSymptoms = 'yes' THEN 1 ELSE 0 END) as yesCount,
-            SUM(CASE WHEN hasSymptoms = 'no' THEN 1 ELSE 0 END) as noCount
-          FROM Answers
-          WHERE country = :country AND subdivision = :subdivision
-          GROUP BY CAST(createdAt AS DATE)
-          ORDER BY date DESC
+            CAST("createdAt" AS DATE) as date,
+            SUM(CASE WHEN "hasSymptoms" = 'yes' THEN 1 ELSE 0 END) as "yesCount",
+            SUM(CASE WHEN "hasSymptoms" = 'no' THEN 1 ELSE 0 END) as "noCount"
+          FROM "Answers"
+          WHERE "country" = :country AND "subdivision" = :subdivision
+          GROUP BY CAST("createdAt" AS DATE)
+          ORDER BY "date" DESC
           `,
           {
             replacements: { country, subdivision },
@@ -88,14 +88,14 @@ const resolvers = {
         const results = await sequelize.query(
           `
           SELECT
-            country,
-            subdivision,
-            SUM(CASE WHEN hasSymptoms = 'yes' THEN 1 ELSE 0 END) as yesCount,
-            SUM(CASE WHEN hasSymptoms = 'no' THEN 1 ELSE 0 END) as noCount
-          FROM Answers
-          WHERE CAST(createdAt AS DATE) = CAST(GETDATE() AS DATE)
-          GROUP BY country, subdivision
-          ORDER BY country, subdivision
+            "country",
+            "subdivision",
+            SUM(CASE WHEN "hasSymptoms" = 'yes' THEN 1 ELSE 0 END) as "yesCount",
+            SUM(CASE WHEN "hasSymptoms" = 'no' THEN 1 ELSE 0 END) as "noCount"
+          FROM "Answers"
+          WHERE CAST("createdAt" AS DATE) = CURRENT_DATE
+          GROUP BY "country", "subdivision"
+          ORDER BY "country", "subdivision"
           `,
           {
             type: QueryTypes.SELECT,
