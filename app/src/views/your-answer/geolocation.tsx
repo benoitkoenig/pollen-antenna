@@ -1,6 +1,5 @@
-import { useState, useEffect, memo } from "react";
+import { useState, useEffect, memo, useCallback } from "react";
 import { FormattedMessage, useIntl } from "react-intl";
-import { useNavigate } from "react-router-dom";
 
 import {
   countryCodes,
@@ -8,15 +7,16 @@ import {
   importSubdivisions,
 } from "@pollen-antenna/static-data";
 
-export default memo(function Geolocation() {
-  const navigate = useNavigate();
+import type { GeolocationData } from "./types";
+
+export default memo(function Geolocation({
+  onSubmit,
+}: {
+  onSubmit: (answer: GeolocationData) => void;
+}) {
   const intl = useIntl();
 
-  function onConfirm() {
-    navigate("/graphs");
-  }
-
-  const [selectedCountry, setSelectedCountry] = useState<
+  const [selectedCountryCode, setSelectedCountryCode] = useState<
     CountryCode | undefined
   >(undefined);
   const [subdivisions, setSubdivisions] = useState<
@@ -30,14 +30,14 @@ export default memo(function Geolocation() {
     setSubdivisions(null);
     setSelectedSubdivision(undefined);
 
-    if (!selectedCountry) {
+    if (!selectedCountryCode) {
       return;
     }
 
     let isCanceled = false;
 
     (async () => {
-      const subdivisionsToSet = await importSubdivisions(selectedCountry);
+      const subdivisionsToSet = await importSubdivisions(selectedCountryCode);
 
       if (!isCanceled) {
         setSubdivisions(subdivisionsToSet);
@@ -47,7 +47,18 @@ export default memo(function Geolocation() {
     return () => {
       isCanceled = true;
     };
-  }, [selectedCountry]);
+  }, [selectedCountryCode]);
+
+  const onConfirm = useCallback(() => {
+    if (!selectedCountryCode || !selectedSubdivision) {
+      throw new Error("Need both countryCode and subdivision to submit");
+    }
+
+    onSubmit({
+      countryCode: selectedCountryCode,
+      subdivision: selectedSubdivision,
+    });
+  }, [selectedCountryCode, selectedSubdivision]);
 
   return (
     <div className="min-h-screen flex items-center justify-center px-4">
@@ -72,9 +83,9 @@ export default memo(function Geolocation() {
             </label>
             <select
               id="country"
-              value={selectedCountry}
+              value={selectedCountryCode}
               onChange={(e) =>
-                setSelectedCountry(e.target.value as CountryCode)
+                setSelectedCountryCode(e.target.value as CountryCode)
               }
               className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
             >
@@ -134,7 +145,7 @@ export default memo(function Geolocation() {
 
           <button
             onClick={onConfirm}
-            disabled={!selectedCountry || !selectedSubdivision}
+            disabled={!selectedCountryCode || !selectedSubdivision}
             className="w-full py-4 px-6 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700 transition-colors disabled:bg-gray-300 disabled:cursor-not-allowed"
           >
             <FormattedMessage
