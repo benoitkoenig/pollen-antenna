@@ -29,8 +29,12 @@ type LocationAnswers {
   noCount: Int!
 }
 
+type RegisterAnswerResponse {
+  id: ID!
+}
+
 type Mutation {
-  registerAnswer(hasSymptoms: String!, country: String!, subdivision: String!): String
+  registerAnswer(hasSymptoms: String!, country: String!, subdivision: String!): RegisterAnswerResponse
 }
 `;
 
@@ -112,16 +116,16 @@ const resolvers = {
       const sequelize = await getSequelize();
 
       try {
-        await sequelize.models["Answers"].create({
+        const answer = await sequelize.models["Answers"].create({
           hasSymptoms,
           country,
           subdivision,
         });
+
+        return { id: answer.get("id") };
       } finally {
         sequelize.connectionManager.close();
       }
-
-      return "ok";
     },
   },
 };
