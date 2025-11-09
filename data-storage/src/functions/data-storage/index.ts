@@ -137,7 +137,7 @@ const server = new ApolloServer({
 
 server.startInBackgroundHandlingStartupErrorsByLoggingAndFailingAllRequests();
 
-export async function ewiDataCollector(
+export async function pollenAntenna(
   request: HttpRequest,
   context: InvocationContext,
 ): Promise<HttpResponseInit> {
@@ -167,8 +167,8 @@ export async function ewiDataCollector(
   };
 }
 
-app.http("ewi-data-collector", {
+app.http("pollen-antenna", {
   methods: ["POST"],
   authLevel: "anonymous",
-  handler: ewiDataCollector,
+  handler: pollenAntenna,
 });
