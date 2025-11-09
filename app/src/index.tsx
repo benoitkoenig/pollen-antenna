@@ -4,6 +4,7 @@ import { IntlProvider } from "react-intl";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import ApolloWrapper from "apollo-wrapper";
+import { GeolocationProvider } from "global-providers/geolocation";
 import { TodaysAnswerIdProvider } from "global-providers/todays-answer-id";
 import Graphs from "pages/graphs";
 import YourAnswer from "pages/your-answer";
@@ -16,10 +17,12 @@ const App = memo(function App() {
       <IntlProvider messages={{}} locale="en" defaultLocale="en">
         <BrowserRouter>
           <TodaysAnswerIdProvider>
-            <Routes>
-              <Route path="/" element={<YourAnswer />} />
-              <Route path="/graphs" element={<Graphs />} />
-            </Routes>
+            <GeolocationProvider>
+              <Routes>
+                <Route path="/" element={<YourAnswer />} />
+                <Route path="/graphs" element={<Graphs />} />
+              </Routes>
+            </GeolocationProvider>
           </TodaysAnswerIdProvider>
         </BrowserRouter>
       </IntlProvider>

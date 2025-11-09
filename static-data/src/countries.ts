@@ -254,3 +254,12 @@ export const countryCodes = [
 ] as const;
 
 export type CountryCode = (typeof countryCodes)[number];
+
+export function checkIsCountryCode(
+  countryCode: unknown,
+): countryCode is CountryCode {
+  return (
+    typeof countryCode === "string" &&
+    (countryCodes as readonly string[]).includes(countryCode)
+  );
+}

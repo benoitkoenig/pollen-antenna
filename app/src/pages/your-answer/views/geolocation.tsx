@@ -7,6 +7,8 @@ import {
   importSubdivisions,
 } from "@pollen-antenna/static-data";
 
+import { useGeolocation } from "global-providers/geolocation";
+
 import type { GeolocationData } from "../types";
 
 export default memo(function Geolocation({
@@ -16,20 +18,19 @@ export default memo(function Geolocation({
 }) {
   const intl = useIntl();
 
+  const { geolocation: initialGeolocation } = useGeolocation();
+
   const [selectedCountryCode, setSelectedCountryCode] = useState<
     CountryCode | undefined
-  >(undefined);
+  >(initialGeolocation?.countryCode ?? undefined);
   const [subdivisions, setSubdivisions] = useState<
     { id: string; name: string }[] | null
   >(null);
   const [selectedSubdivision, setSelectedSubdivision] = useState<
     string | undefined
-  >(undefined);
+  >(initialGeolocation?.subdivision ?? undefined);
 
   useEffect(() => {
-    setSubdivisions(null);
-    setSelectedSubdivision(undefined);
-
     if (!selectedCountryCode) {
       return;
     }
@@ -45,6 +46,9 @@ export default memo(function Geolocation({
     })();
 
     return () => {
+      setSubdivisions(null);
+      setSelectedSubdivision(undefined);
+
       isCanceled = true;
     };
   }, [selectedCountryCode]);
