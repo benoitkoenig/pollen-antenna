@@ -1,6 +1,8 @@
 import { useState, memo, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 
+import { useTodaysAnswerId } from "store/todays-answer-id";
+
 import type { GeolocationData } from "./types";
 import { useRegisterAnswer } from "./use-register-answer";
 import Geolocation from "./views/geolocation";
@@ -9,6 +11,8 @@ import Symptoms from "./views/symptoms";
 export default memo(function YourAnswer() {
   const navigate = useNavigate();
   const registerAnswer = useRegisterAnswer();
+
+  const { setTodaysAnswerId } = useTodaysAnswerId();
 
   const [hasSymptoms, setHasSymptoms] = useState<string | null>(null);
 
@@ -22,7 +26,14 @@ export default memo(function YourAnswer() {
         throw new Error("Users cannot submit geolocation before symptoms");
       }
 
-      await registerAnswer(hasSymptoms, answer.countryCode, answer.subdivision);
+      const answerId = await registerAnswer(
+        hasSymptoms,
+        answer.countryCode,
+        answer.subdivision,
+      );
+
+      setTodaysAnswerId(answerId);
+
       navigate("/graphs");
     },
     [hasSymptoms, registerAnswer, navigate],

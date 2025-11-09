@@ -32,7 +32,15 @@ export function useRegisterAnswer() {
         },
       });
 
-      return result.data?.registerAnswer?.id;
+      const answerId = result.data?.registerAnswer?.id;
+
+      if (!answerId) {
+        throw new Error(
+          "Expected registerAnswer mutation to return the answerId",
+        );
+      }
+
+      return answerId;
     },
     [registerAnswerMutation],
   );
