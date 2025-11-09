@@ -7,7 +7,7 @@ import {
   importSubdivisions,
 } from "@pollen-antenna/static-data";
 
-import type { GeolocationData } from "./types";
+import type { GeolocationData } from "../types";
 
 export default memo(function Geolocation({
   onSubmit,

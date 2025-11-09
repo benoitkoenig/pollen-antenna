@@ -1,9 +1,9 @@
 import { useState, memo, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 
-import Geolocation from "./geolocation";
-import Symptoms from "./symptoms";
 import type { GeolocationData } from "./types";
+import Geolocation from "./views/geolocation";
+import Symptoms from "./views/symptoms";
 
 export default memo(function YourAnswer() {
   const navigate = useNavigate();
