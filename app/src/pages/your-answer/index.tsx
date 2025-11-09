@@ -2,11 +2,13 @@ import { useState, memo, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 
 import type { GeolocationData } from "./types";
+import { useRegisterAnswer } from "./use-register-answer";
 import Geolocation from "./views/geolocation";
 import Symptoms from "./views/symptoms";
 
 export default memo(function YourAnswer() {
   const navigate = useNavigate();
+  const registerAnswer = useRegisterAnswer();
 
   const [hasSymptoms, setHasSymptoms] = useState<string | null>(null);
 
@@ -14,9 +16,17 @@ export default memo(function YourAnswer() {
     setHasSymptoms(answer);
   }, []);
 
-  const onSubmitGeolocation = useCallback((_answer: GeolocationData) => {
-    navigate("/graphs");
-  }, []);
+  const onSubmitGeolocation = useCallback(
+    async (answer: GeolocationData) => {
+      if (!hasSymptoms) {
+        throw new Error("Users cannot submit geolocation before symptoms");
+      }
+
+      await registerAnswer(hasSymptoms, answer.countryCode, answer.subdivision);
+      navigate("/graphs");
+    },
+    [hasSymptoms, registerAnswer, navigate],
+  );
 
   // Display symptoms view if hasSymptoms is not set
   if (!hasSymptoms) {
