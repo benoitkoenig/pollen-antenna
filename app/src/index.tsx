@@ -3,8 +3,8 @@ import { createRoot } from "react-dom/client";
 import { IntlProvider } from "react-intl";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-import Graphs from "./views/graphs";
-import YourAnswer from "./views/your-answer";
+import Graphs from "./pages/graphs";
+import YourAnswer from "./pages/your-answer";
 
 import "./main.css";
 
