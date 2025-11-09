@@ -49,16 +49,21 @@ export default memo(function Geolocation({
     };
   }, [selectedCountryCode]);
 
-  const onConfirm = useCallback(() => {
-    if (!selectedCountryCode || !selectedSubdivision) {
-      throw new Error("Need both countryCode and subdivision to submit");
-    }
+  const handleSubmit = useCallback(
+    (e: React.FormEvent<HTMLFormElement>) => {
+      e.preventDefault();
 
-    onSubmit({
-      countryCode: selectedCountryCode,
-      subdivision: selectedSubdivision,
-    });
-  }, [selectedCountryCode, selectedSubdivision]);
+      if (!selectedCountryCode || !selectedSubdivision) {
+        throw new Error("Need both countryCode and subdivision to submit");
+      }
+
+      onSubmit({
+        countryCode: selectedCountryCode,
+        subdivision: selectedSubdivision,
+      });
+    },
+    [selectedCountryCode, selectedSubdivision, onSubmit],
+  );
 
   return (
     <div className="min-h-screen flex items-center justify-center px-4">
@@ -70,7 +75,7 @@ export default memo(function Geolocation({
           />
         </h1>
 
-        <div className="flex flex-col gap-6">
+        <form onSubmit={handleSubmit} className="flex flex-col gap-6">
           <div>
             <label
               htmlFor="country"
@@ -83,10 +88,12 @@ export default memo(function Geolocation({
             </label>
             <select
               id="country"
-              value={selectedCountryCode}
+              name="country"
+              value={selectedCountryCode ?? ""}
               onChange={(e) =>
                 setSelectedCountryCode(e.target.value as CountryCode)
               }
+              required
               className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
             >
               <option value="">
@@ -115,9 +122,11 @@ export default memo(function Geolocation({
             </label>
             <select
               id="subdivision"
-              value={selectedSubdivision}
+              name="subdivision"
+              value={selectedSubdivision ?? ""}
               onChange={(e) => setSelectedSubdivision(e.target.value)}
               disabled={!subdivisions}
+              required
               className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent disabled:bg-gray-100 disabled:cursor-not-allowed text-base"
             >
               {subdivisions ? (
@@ -128,8 +137,10 @@ export default memo(function Geolocation({
                       description: "geolocation",
                     })}
                   </option>
-                  {subdivisions?.map(({ id, name }) => (
-                    <option value={id}>{name}</option>
+                  {subdivisions.map(({ id, name }) => (
+                    <option key={id} value={id}>
+                      {name}
+                    </option>
                   ))}
                 </>
               ) : (
@@ -144,7 +155,7 @@ export default memo(function Geolocation({
           </div>
 
           <button
-            onClick={onConfirm}
+            type="submit"
             disabled={!selectedCountryCode || !selectedSubdivision}
             className="w-full py-4 px-6 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700 transition-colors disabled:bg-gray-300 disabled:cursor-not-allowed"
           >
@@ -153,7 +164,7 @@ export default memo(function Geolocation({
               description="geolocation"
             />
           </button>
-        </div>
+        </form>
       </div>
     </div>
   );
