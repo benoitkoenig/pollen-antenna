@@ -1,5 +1,5 @@
 packages:
   - "app"
-  - "data-warehouse"
+  - "data-storage"
   - "static-data"
-sharedWorkspaceLockfile: false # Necessary for @pollen-antenna/data-warehouse
+sharedWorkspaceLockfile: false # Necessary for @pollen-antenna/data-storage
