@@ -23,9 +23,7 @@ export default memo(function Geolocation({
   const [selectedCountryCode, setSelectedCountryCode] = useState<
     CountryCode | undefined
   >(initialGeolocation?.countryCode ?? undefined);
-  const [subdivisions, setSubdivisions] = useState<
-    { id: string; name: string }[] | null
-  >(null);
+  const [subdivisions, setSubdivisions] = useState<string[] | null>(null);
   const [selectedSubdivision, setSelectedSubdivision] = useState<
     string | undefined
   >(initialGeolocation?.subdivision ?? undefined);
@@ -141,9 +139,9 @@ export default memo(function Geolocation({
                       description: "geolocation",
                     })}
                   </option>
-                  {subdivisions.map(({ id, name }) => (
-                    <option key={id} value={id}>
-                      {name}
+                  {subdivisions.map((subdivision) => (
+                    <option key={subdivision} value={subdivision}>
+                      {subdivision}
                     </option>
                   ))}
                 </>
