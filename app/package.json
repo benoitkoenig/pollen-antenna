@@ -16,6 +16,7 @@
   "dependencies": {
     "@apollo/client": "^4.0.9",
     "@pollen-antenna/static-data": "workspace:^",
+    "@react-oauth/google": "^0.12.2",
     "@tailwindcss/vite": "^4.1.5",
     "@vitejs/plugin-react": "^4.4.1",
     "babel-plugin-formatjs": "^10.5.41",

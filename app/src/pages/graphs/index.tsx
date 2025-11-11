@@ -2,6 +2,7 @@ import { memo } from "react";
 
 import { AnswersByDate } from "./answers-by-date";
 import { AnswersByLocation } from "./answers-by-location";
+import LoginButton from "./login-button";
 
 export default memo(function Graphs() {
   return (
@@ -9,6 +10,7 @@ export default memo(function Graphs() {
       <div className="max-w-6xl mx-auto space-y-6">
         <AnswersByDate />
         <AnswersByLocation />
+        <LoginButton />
       </div>
     </div>
   );
