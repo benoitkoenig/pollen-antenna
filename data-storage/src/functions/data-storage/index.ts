@@ -6,6 +6,7 @@ import {
   type InvocationContext,
 } from "@azure/functions";
 
+import { getExtendedContext } from "./middlewares";
 import { server } from "./server";
 
 export async function pollenAntenna(
@@ -21,7 +22,10 @@ export async function pollenAntenna(
 
   const { body, headers, status } = await server.executeHTTPGraphQLRequest({
     httpGraphQLRequest: normalizedRequest,
-    context: () => Promise.resolve(context),
+    context: () =>
+      Promise.resolve(
+        getExtendedContext(context, request.headers as unknown as HeaderMap),
+      ),
   });
 
   if (body.kind === "chunked") {

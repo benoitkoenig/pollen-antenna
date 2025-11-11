@@ -1,4 +1,5 @@
 import { getSequelize } from "../../../database/get-sequelize";
+import type { ExtendedContext } from "../middlewares";
 
 export interface RegisterAnswerArgs {
   hasSymptoms: boolean;
@@ -11,6 +12,7 @@ export const mutations = {
   registerAnswer: async (
     _: unknown,
     { hasSymptoms, country, subdivision, date }: RegisterAnswerArgs,
+    context: ExtendedContext,
   ) => {
     const sequelize = await getSequelize();
 
@@ -19,7 +21,7 @@ export const mutations = {
         hasSymptoms,
         country,
         subdivision,
-        userId: null, // TODO
+        userId: context.userId,
         date,
       });
 
