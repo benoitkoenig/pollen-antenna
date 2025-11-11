@@ -19,7 +19,7 @@ export const mutations = {
         hasSymptoms,
         country,
         subdivision,
-        authId: null, // TODO
+        userId: null, // TODO
         date,
       });
 

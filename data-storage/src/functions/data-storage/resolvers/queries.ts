@@ -2,7 +2,7 @@ import * as jwt from "jsonwebtoken";
 import { QueryTypes } from "sequelize";
 
 import { getSequelize } from "../../../database/get-sequelize";
-import getAuthId from "../get-auth-id";
+import getUserId from "../get-user-id";
 
 export interface AnswersByDateArgs {
   country: string;
@@ -72,7 +72,7 @@ export const queries = {
     }
   },
   jwt: async (_: unknown, { provider, token }: JwtArgs) => {
-    const authId = await getAuthId(provider, token);
+    const userId = await getUserId(provider, token);
 
     const jwtSecret = process.env["JWT_SECRET"];
     if (!jwtSecret) {
@@ -80,7 +80,7 @@ export const queries = {
     }
 
     return {
-      token: jwt.sign({ authId }, jwtSecret, {
+      token: jwt.sign({ userId }, jwtSecret, {
         expiresIn: "1h",
       }),
     };

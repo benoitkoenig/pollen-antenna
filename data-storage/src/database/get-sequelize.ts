@@ -44,7 +44,7 @@ export async function getSequelize() {
       defaultValue: DataTypes.UUIDV4,
       primaryKey: true,
     },
-    authId: {
+    userId: {
       type: DataTypes.STRING,
       allowNull: true,
     },

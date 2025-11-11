@@ -1,13 +1,10 @@
 import { OAuth2Client } from "google-auth-library";
 
 const client = new OAuth2Client({
-  client_id:
-    process.env[
-      "952779456087-s4nam55a7kq8v9hs5rmvci0bb0vnpjf6.apps.googleusercontent.com"
-    ],
+  client_id: process.env["GOOGLE_OAUTH_CLIENT_ID"],
 });
 
-export default async function getAuthId(provider: string, token: string) {
+export default async function getUserId(provider: string, token: string) {
   if (provider !== "google") {
     throw new Error("Unsupported authentication provider");
   }
