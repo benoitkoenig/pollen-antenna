@@ -16,12 +16,12 @@ import type { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-
 type Documents = {
     "\n  query AnswersByDate($country: String!, $subdivision: String!) {\n    answersByDate(country: $country, subdivision: $subdivision) {\n      date\n      yesCount\n      noCount\n    }\n  }\n": typeof types.AnswersByDateDocument,
     "\n  query AnswersByLocation {\n    answersByLocation {\n      country\n      subdivision\n      yesCount\n      noCount\n    }\n  }\n": typeof types.AnswersByLocationDocument,
-    "\n  mutation RegisterAnswer(\n    $hasSymptoms: String!\n    $country: String!\n    $subdivision: String!\n  ) {\n    registerAnswer(\n      hasSymptoms: $hasSymptoms\n      country: $country\n      subdivision: $subdivision\n    ) {\n      id\n    }\n  }\n": typeof types.RegisterAnswerDocument,
+    "\n  mutation RegisterAnswer(\n    $hasSymptoms: String!\n    $country: String!\n    $subdivision: String!\n    $authProvider: String\n    $authToken: String\n    $date: String!\n  ) {\n    registerAnswer(\n      hasSymptoms: $hasSymptoms\n      country: $country\n      subdivision: $subdivision\n      authProvider: $authProvider\n      authToken: $authToken\n      date: $date\n    ) {\n      id\n    }\n  }\n": typeof types.RegisterAnswerDocument,
 };
 const documents: Documents = {
     "\n  query AnswersByDate($country: String!, $subdivision: String!) {\n    answersByDate(country: $country, subdivision: $subdivision) {\n      date\n      yesCount\n      noCount\n    }\n  }\n": types.AnswersByDateDocument,
     "\n  query AnswersByLocation {\n    answersByLocation {\n      country\n      subdivision\n      yesCount\n      noCount\n    }\n  }\n": types.AnswersByLocationDocument,
-    "\n  mutation RegisterAnswer(\n    $hasSymptoms: String!\n    $country: String!\n    $subdivision: String!\n  ) {\n    registerAnswer(\n      hasSymptoms: $hasSymptoms\n      country: $country\n      subdivision: $subdivision\n    ) {\n      id\n    }\n  }\n": types.RegisterAnswerDocument,
+    "\n  mutation RegisterAnswer(\n    $hasSymptoms: String!\n    $country: String!\n    $subdivision: String!\n    $authProvider: String\n    $authToken: String\n    $date: String!\n  ) {\n    registerAnswer(\n      hasSymptoms: $hasSymptoms\n      country: $country\n      subdivision: $subdivision\n      authProvider: $authProvider\n      authToken: $authToken\n      date: $date\n    ) {\n      id\n    }\n  }\n": types.RegisterAnswerDocument,
 };
 
 /**
@@ -49,7 +49,7 @@ export function graphql(source: "\n  query AnswersByLocation {\n    answersByLoc
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "\n  mutation RegisterAnswer(\n    $hasSymptoms: String!\n    $country: String!\n    $subdivision: String!\n  ) {\n    registerAnswer(\n      hasSymptoms: $hasSymptoms\n      country: $country\n      subdivision: $subdivision\n    ) {\n      id\n    }\n  }\n"): (typeof documents)["\n  mutation RegisterAnswer(\n    $hasSymptoms: String!\n    $country: String!\n    $subdivision: String!\n  ) {\n    registerAnswer(\n      hasSymptoms: $hasSymptoms\n      country: $country\n      subdivision: $subdivision\n    ) {\n      id\n    }\n  }\n"];
+export function graphql(source: "\n  mutation RegisterAnswer(\n    $hasSymptoms: String!\n    $country: String!\n    $subdivision: String!\n    $authProvider: String\n    $authToken: String\n    $date: String!\n  ) {\n    registerAnswer(\n      hasSymptoms: $hasSymptoms\n      country: $country\n      subdivision: $subdivision\n      authProvider: $authProvider\n      authToken: $authToken\n      date: $date\n    ) {\n      id\n    }\n  }\n"): (typeof documents)["\n  mutation RegisterAnswer(\n    $hasSymptoms: String!\n    $country: String!\n    $subdivision: String!\n    $authProvider: String\n    $authToken: String\n    $date: String!\n  ) {\n    registerAnswer(\n      hasSymptoms: $hasSymptoms\n      country: $country\n      subdivision: $subdivision\n      authProvider: $authProvider\n      authToken: $authToken\n      date: $date\n    ) {\n      id\n    }\n  }\n"];
 
 export function graphql(source: string) {
   return (documents as any)[source] ?? {};

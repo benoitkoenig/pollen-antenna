@@ -44,6 +44,14 @@ export async function getSequelize() {
       primaryKey: true,
       autoIncrement: true,
     },
+    authProvider: {
+      type: DataTypes.ENUM("google"),
+      allowNull: true,
+    },
+    authToken: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
     hasSymptoms: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -54,6 +62,10 @@ export async function getSequelize() {
     },
     subdivision: {
       type: DataTypes.STRING,
+      allowNull: false,
+    },
+    date: {
+      type: DataTypes.DATEONLY,
       allowNull: false,
     },
   });

@@ -42,6 +42,7 @@ export default memo(function YourAnswer() {
         hasSymptoms,
         geolocation.countryCode,
         geolocation.subdivision,
+        date,
       );
 
       setTodaysAnswerId(answerId, date);

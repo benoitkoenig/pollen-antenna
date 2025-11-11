@@ -34,7 +34,7 @@ type RegisterAnswerResponse {
 }
 
 type Mutation {
-  registerAnswer(hasSymptoms: String!, country: String!, subdivision: String!): RegisterAnswerResponse
+  registerAnswer(hasSymptoms: String!, country: String!, subdivision: String!, authProvider: String, authToken: String, date: String!): RegisterAnswerResponse
 }
 `;
 
@@ -42,6 +42,9 @@ interface RegisterAnswerArgs {
   hasSymptoms: boolean;
   country: string;
   subdivision: string;
+  authProvider?: string;
+  authToken?: string;
+  date: string;
 }
 
 interface AnswersByDateArgs {
@@ -111,7 +114,14 @@ const resolvers = {
   Mutation: {
     registerAnswer: async (
       _: unknown,
-      { hasSymptoms, country, subdivision }: RegisterAnswerArgs,
+      {
+        hasSymptoms,
+        country,
+        subdivision,
+        authProvider,
+        authToken,
+        date,
+      }: RegisterAnswerArgs,
     ) => {
       const sequelize = await getSequelize();
 
@@ -120,6 +130,9 @@ const resolvers = {
           hasSymptoms,
           country,
           subdivision,
+          authProvider,
+          authToken,
+          date,
         });
 
         return { id: answer.get("id") };
