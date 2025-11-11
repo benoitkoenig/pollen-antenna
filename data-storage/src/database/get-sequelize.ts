@@ -40,9 +40,9 @@ export async function getSequelize() {
 
   s.define("Answers", {
     id: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.UUID,
+      defaultValue: DataTypes.UUIDV4,
       primaryKey: true,
-      autoIncrement: true,
     },
     authId: {
       type: DataTypes.STRING,
