@@ -1,8 +1,6 @@
 import { useMutation } from "@apollo/client/react";
 import { useCallback } from "react";
 
-import { useStore } from "store";
-
 import { graphql } from "../../generated/gql";
 
 const RegisterAnswerDocument = graphql(/* GraphQL */ `
@@ -10,14 +8,12 @@ const RegisterAnswerDocument = graphql(/* GraphQL */ `
     $hasSymptoms: String!
     $country: String!
     $subdivision: String!
-    $authToken: String
     $date: String!
   ) {
     registerAnswer(
       hasSymptoms: $hasSymptoms
       country: $country
       subdivision: $subdivision
-      authToken: $authToken
       date: $date
     ) {
       id
@@ -27,7 +23,6 @@ const RegisterAnswerDocument = graphql(/* GraphQL */ `
 
 export function useRegisterAnswer() {
   const [registerAnswerMutation] = useMutation(RegisterAnswerDocument);
-  const authToken = useStore(({ authToken }) => authToken);
 
   const registerAnswer = useCallback(
     async (
@@ -41,9 +36,6 @@ export function useRegisterAnswer() {
           hasSymptoms,
           country,
           subdivision,
-          authToken: authToken
-            ? `${authToken.provider}:${authToken.token}`
-            : null,
           date,
         },
       });
@@ -58,7 +50,7 @@ export function useRegisterAnswer() {
 
       return answerId;
     },
-    [authToken, registerAnswerMutation],
+    [registerAnswerMutation],
   );
 
   return registerAnswer;

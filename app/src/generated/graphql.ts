@@ -23,6 +23,11 @@ export type DateAnswers = {
   yesCount: Scalars['Int']['output'];
 };
 
+export type JwtResponse = {
+  __typename?: 'JwtResponse';
+  token: Scalars['String']['output'];
+};
+
 export type LocationAnswers = {
   __typename?: 'LocationAnswers';
   country: Scalars['String']['output'];
@@ -38,7 +43,6 @@ export type Mutation = {
 
 
 export type MutationRegisterAnswerArgs = {
-  authToken?: InputMaybe<Scalars['String']['input']>;
   country: Scalars['String']['input'];
   date: Scalars['String']['input'];
   hasSymptoms: Scalars['String']['input'];
@@ -50,6 +54,7 @@ export type Query = {
   answersByDate: Array<DateAnswers>;
   answersByLocation: Array<LocationAnswers>;
   health: Scalars['String']['output'];
+  jwt: JwtResponse;
 };
 
 
@@ -58,10 +63,24 @@ export type QueryAnswersByDateArgs = {
   subdivision: Scalars['String']['input'];
 };
 
+
+export type QueryJwtArgs = {
+  provider: Scalars['String']['input'];
+  token: Scalars['String']['input'];
+};
+
 export type RegisterAnswerResponse = {
   __typename?: 'RegisterAnswerResponse';
   id: Scalars['ID']['output'];
 };
+
+export type GetJwtQueryVariables = Exact<{
+  provider: Scalars['String']['input'];
+  token: Scalars['String']['input'];
+}>;
+
+
+export type GetJwtQuery = { __typename?: 'Query', jwt: { __typename?: 'JwtResponse', token: string } };
 
 export type AnswersByDateQueryVariables = Exact<{
   country: Scalars['String']['input'];
@@ -80,7 +99,6 @@ export type RegisterAnswerMutationVariables = Exact<{
   hasSymptoms: Scalars['String']['input'];
   country: Scalars['String']['input'];
   subdivision: Scalars['String']['input'];
-  authToken?: InputMaybe<Scalars['String']['input']>;
   date: Scalars['String']['input'];
 }>;
 
@@ -88,6 +106,7 @@ export type RegisterAnswerMutationVariables = Exact<{
 export type RegisterAnswerMutation = { __typename?: 'Mutation', registerAnswer?: { __typename?: 'RegisterAnswerResponse', id: string } | null };
 
 
+export const GetJwtDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetJwt"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"provider"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"token"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"jwt"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"provider"},"value":{"kind":"Variable","name":{"kind":"Name","value":"provider"}}},{"kind":"Argument","name":{"kind":"Name","value":"token"},"value":{"kind":"Variable","name":{"kind":"Name","value":"token"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"token"}}]}}]}}]} as unknown as DocumentNode<GetJwtQuery, GetJwtQueryVariables>;
 export const AnswersByDateDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"AnswersByDate"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"country"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"subdivision"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"answersByDate"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"country"},"value":{"kind":"Variable","name":{"kind":"Name","value":"country"}}},{"kind":"Argument","name":{"kind":"Name","value":"subdivision"},"value":{"kind":"Variable","name":{"kind":"Name","value":"subdivision"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"date"}},{"kind":"Field","name":{"kind":"Name","value":"yesCount"}},{"kind":"Field","name":{"kind":"Name","value":"noCount"}}]}}]}}]} as unknown as DocumentNode<AnswersByDateQuery, AnswersByDateQueryVariables>;
 export const AnswersByLocationDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"AnswersByLocation"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"answersByLocation"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"country"}},{"kind":"Field","name":{"kind":"Name","value":"subdivision"}},{"kind":"Field","name":{"kind":"Name","value":"yesCount"}},{"kind":"Field","name":{"kind":"Name","value":"noCount"}}]}}]}}]} as unknown as DocumentNode<AnswersByLocationQuery, AnswersByLocationQueryVariables>;
-export const RegisterAnswerDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"RegisterAnswer"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"hasSymptoms"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"country"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"subdivision"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"authToken"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"date"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"registerAnswer"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"hasSymptoms"},"value":{"kind":"Variable","name":{"kind":"Name","value":"hasSymptoms"}}},{"kind":"Argument","name":{"kind":"Name","value":"country"},"value":{"kind":"Variable","name":{"kind":"Name","value":"country"}}},{"kind":"Argument","name":{"kind":"Name","value":"subdivision"},"value":{"kind":"Variable","name":{"kind":"Name","value":"subdivision"}}},{"kind":"Argument","name":{"kind":"Name","value":"authToken"},"value":{"kind":"Variable","name":{"kind":"Name","value":"authToken"}}},{"kind":"Argument","name":{"kind":"Name","value":"date"},"value":{"kind":"Variable","name":{"kind":"Name","value":"date"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}}]}}]}}]} as unknown as DocumentNode<RegisterAnswerMutation, RegisterAnswerMutationVariables>;
+export const RegisterAnswerDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"RegisterAnswer"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"hasSymptoms"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"country"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"subdivision"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"date"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"registerAnswer"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"hasSymptoms"},"value":{"kind":"Variable","name":{"kind":"Name","value":"hasSymptoms"}}},{"kind":"Argument","name":{"kind":"Name","value":"country"},"value":{"kind":"Variable","name":{"kind":"Name","value":"country"}}},{"kind":"Argument","name":{"kind":"Name","value":"subdivision"},"value":{"kind":"Variable","name":{"kind":"Name","value":"subdivision"}}},{"kind":"Argument","name":{"kind":"Name","value":"date"},"value":{"kind":"Variable","name":{"kind":"Name","value":"date"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}}]}}]}}]} as unknown as DocumentNode<RegisterAnswerMutation, RegisterAnswerMutationVariables>;

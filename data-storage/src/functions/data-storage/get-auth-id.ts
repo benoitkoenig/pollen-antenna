@@ -7,9 +7,7 @@ const client = new OAuth2Client({
     ],
 });
 
-export default async function getAuthId(authToken: string) {
-  const [provider, token] = authToken.split(":");
-
+export default async function getAuthId(provider: string, token: string) {
   if (provider !== "google") {
     throw new Error("Unsupported authentication provider");
   }

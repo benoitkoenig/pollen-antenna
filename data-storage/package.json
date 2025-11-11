@@ -12,12 +12,14 @@
     "@apollo/server": "^4.10.4",
     "@azure/functions": "^4.0.0",
     "google-auth-library": "^10.5.0",
+    "jsonwebtoken": "^9.0.2",
     "pg": "^8.12.0",
     "pg-hstore": "^2.3.4",
     "sequelize": "^6.37.3"
   },
   "devDependencies": {
     "@dotenvx/dotenvx": "^0.44.5",
+    "@types/jsonwebtoken": "^9.0.10",
     "@types/node": "^20.12.12",
     "rimraf": "^5.0.0",
     "typescript": "^5.9.2"

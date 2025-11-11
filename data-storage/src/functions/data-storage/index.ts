@@ -5,6 +5,7 @@ import {
   type HttpResponseInit,
   type InvocationContext,
 } from "@azure/functions";
+import * as jwt from "jsonwebtoken";
 import { QueryTypes } from "sequelize";
 
 import { getSequelize } from "../../database/get-sequelize";
@@ -16,6 +17,7 @@ type Query {
   health: String!
   answersByDate(country: String!, subdivision: String!): [DateAnswers!]!
   answersByLocation: [LocationAnswers!]!
+  jwt(provider: String!, token: String!): JwtResponse!
 }
 
 type DateAnswers {
@@ -31,12 +33,16 @@ type LocationAnswers {
   noCount: Int!
 }
 
+type JwtResponse {
+  token: String!
+}
+
 type RegisterAnswerResponse {
   id: ID!
 }
 
 type Mutation {
-  registerAnswer(hasSymptoms: String!, country: String!, subdivision: String!, authToken: String, date: String!): RegisterAnswerResponse
+  registerAnswer(hasSymptoms: String!, country: String!, subdivision: String!, date: String!): RegisterAnswerResponse
 }
 `;
 
@@ -44,13 +50,17 @@ interface RegisterAnswerArgs {
   hasSymptoms: boolean;
   country: string;
   subdivision: string;
-  authToken?: string;
   date: string;
 }
 
 interface AnswersByDateArgs {
   country: string;
   subdivision: string;
+}
+
+interface JwtArgs {
+  provider: string;
+  token: string;
 }
 
 const resolvers = {
@@ -111,27 +121,34 @@ const resolvers = {
         sequelize.connectionManager.close();
       }
     },
+    jwt: async (_: unknown, { provider, token }: JwtArgs) => {
+      const authId = await getAuthId(provider, token);
+
+      const jwtSecret = process.env["JWT_SECRET"];
+      if (!jwtSecret) {
+        throw new Error("JWT_SECRET is not configured");
+      }
+
+      return {
+        token: jwt.sign({ authId }, jwtSecret, {
+          expiresIn: "1h",
+        }),
+      };
+    },
   },
   Mutation: {
     registerAnswer: async (
       _: unknown,
-      {
-        hasSymptoms,
-        country,
-        subdivision,
-        authToken,
-        date,
-      }: RegisterAnswerArgs,
+      { hasSymptoms, country, subdivision, date }: RegisterAnswerArgs,
     ) => {
       const sequelize = await getSequelize();
 
       try {
-        const authId = authToken ? await getAuthId(authToken) : null;
         const answer = await sequelize.models["Answers"].create({
           hasSymptoms,
           country,
           subdivision,
-          authId,
+          authId: null, // TODO
           date,
         });
 
