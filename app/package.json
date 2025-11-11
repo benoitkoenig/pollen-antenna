@@ -29,7 +29,8 @@
     "tailwindcss": "^4.1.5",
     "typescript": "^5.9.2",
     "vite": "^6.3.5",
-    "vite-tsconfig-paths": "^5.1.4"
+    "vite-tsconfig-paths": "^5.1.4",
+    "zustand": "^5.0.8"
   },
   "devDependencies": {
     "@graphql-codegen/cli": "^6.0.1",

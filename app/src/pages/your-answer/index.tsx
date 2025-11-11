@@ -1,8 +1,7 @@
 import { useState, memo, useCallback } from "react";
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 
-import { useGeolocation } from "global-providers/geolocation";
-import { useTodaysAnswerId } from "global-providers/todays-answer-id";
+import { useStore } from "../../store";
 
 import type { GeolocationData } from "./types";
 import { useRegisterAnswer } from "./use-register-answer";
@@ -13,10 +12,20 @@ export default memo(function YourAnswer() {
   const navigate = useNavigate();
   const registerAnswer = useRegisterAnswer();
 
-  const { setTodaysAnswerId } = useTodaysAnswerId();
-  const { setGeolocation } = useGeolocation();
+  const hasTodaysAnswerId = useStore(({ todaysAnswerId }) =>
+    Boolean(todaysAnswerId),
+  );
+
+  const setTodaysAnswerId = useStore(
+    ({ setTodaysAnswerId }) => setTodaysAnswerId,
+  );
+  const setGeolocation = useStore(({ setGeolocation }) => setGeolocation);
 
   const [hasSymptoms, setHasSymptoms] = useState<string | null>(null);
+
+  if (hasTodaysAnswerId) {
+    return <Navigate to="/graphs" />;
+  }
 
   const onSubmitSymptoms = useCallback((answer: string) => {
     setHasSymptoms(answer);

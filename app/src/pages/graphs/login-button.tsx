@@ -1,10 +1,11 @@
 import { GoogleLogin } from "@react-oauth/google";
 import { memo } from "react";
 
-import { useAuthToken } from "global-providers/auth-token";
+import { useStore } from "store";
 
 export default memo(function LoginButton() {
-  const { authToken, setAuthToken } = useAuthToken();
+  const authToken = useStore(({ authToken }) => authToken);
+  const setAuthToken = useStore(({ setAuthToken }) => setAuthToken);
 
   if (authToken) {
     return null;

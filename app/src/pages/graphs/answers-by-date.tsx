@@ -1,13 +1,13 @@
 import { memo } from "react";
 import { FormattedMessage } from "react-intl";
 
-import { useGeolocation } from "../../global-providers/geolocation";
+import { useStore } from "store";
 
 import { AnswersByDateChart } from "./answers-by-date-chart";
 import { useAnswersByDate } from "./use-answers-by-date";
 
 export const AnswersByDate = memo(function AnswersByDate() {
-  const { geolocation } = useGeolocation();
+  const geolocation = useStore(({ geolocation }) => geolocation);
 
   const { data, loading, error } = useAnswersByDate(
     geolocation?.countryCode ?? "",
