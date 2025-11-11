@@ -79,10 +79,16 @@ export const queries = {
       throw new Error("JWT_SECRET is not configured");
     }
 
+    const jwtToken = jwt.sign({ userId }, jwtSecret, {
+      expiresIn: "70m", // Must last a little longer than {@link expiresAt}
+    });
+
+    const expiresAt = new Date();
+    expiresAt.setHours(expiresAt.getHours() + 1);
+
     return {
-      token: jwt.sign({ userId }, jwtSecret, {
-        expiresIn: "1h",
-      }),
+      token: jwtToken,
+      expiresAt: expiresAt.toUTCString(),
     };
   },
 };

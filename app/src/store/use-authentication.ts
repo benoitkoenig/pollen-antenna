@@ -11,11 +11,8 @@ function checkIsAuthenticated(): boolean {
   return isAuthenticated;
 }
 
-function setCookie(token: string) {
-  const expirationDate = new Date();
-  expirationDate.setMinutes(expirationDate.getMinutes() + 1, 0, 0); // TODO
-
-  document.cookie = `${COOKIE_NAME}=Bearer ${token}; expires=${expirationDate.toUTCString()}; path=/`;
+function setCookie(token: string, expiresAt: string) {
+  document.cookie = `${COOKIE_NAME}=Bearer ${token}; expires=${expiresAt}; path=/`;
 }
 
 export function useAuthentication() {
@@ -23,10 +20,13 @@ export function useAuthentication() {
     checkIsAuthenticated(),
   );
 
-  const setAuthenticationHeader = useCallback((token: string) => {
-    setIsAuthenticatedState(true);
-    setCookie(token);
-  }, []);
+  const setAuthenticationHeader = useCallback(
+    (token: string, expiresAt: string) => {
+      setIsAuthenticatedState(true);
+      setCookie(token, expiresAt);
+    },
+    [],
+  );
 
   return {
     isAuthenticated,

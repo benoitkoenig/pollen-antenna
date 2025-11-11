@@ -14,11 +14,9 @@ export default memo(function LoginButton() {
       return;
     }
 
-    const jwt = await getJwt("google", credential);
+    const { token: jwtToken, expiresAt } = await getJwt("google", credential);
 
-    if (jwt) {
-      setAuthenticationHeader(jwt);
-    }
+    setAuthenticationHeader(jwtToken, expiresAt);
   }, []);
 
   if (isAuthenticated) {

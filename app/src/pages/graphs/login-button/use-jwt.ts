@@ -7,6 +7,7 @@ const GetJwtDocument = graphql(/* GraphQL */ `
   query GetJwt($provider: String!, $token: String!) {
     jwt(provider: $provider, token: $token) {
       token
+      expiresAt
     }
   }
 `);
@@ -14,16 +15,30 @@ const GetJwtDocument = graphql(/* GraphQL */ `
 export function useJwt() {
   const [fetch] = useLazyQuery(GetJwtDocument);
 
-  const getJwt = useCallback(async (provider: string, token: string) => {
-    const response = await fetch({
-      variables: {
-        provider,
-        token,
-      },
-    });
+  const getJwt = useCallback(
+    async (provider: string, providerToken: string) => {
+      const response = await fetch({
+        variables: {
+          provider,
+          token: providerToken,
+        },
+      });
 
-    return response.data?.jwt.token ?? null;
-  }, []);
+      if (!response.data) {
+        throw new Error("Expected jwt to not return undefined");
+      }
+
+      const {
+        jwt: { token, expiresAt },
+      } = response.data;
+
+      return {
+        token,
+        expiresAt,
+      };
+    },
+    [],
+  );
 
   return getJwt;
 }

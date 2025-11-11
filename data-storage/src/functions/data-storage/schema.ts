@@ -21,6 +21,7 @@ type LocationAnswers {
 
 type JwtResponse {
   token: String!
+  expiresAt: String!
 }
 
 type RegisterAnswerResponse {
