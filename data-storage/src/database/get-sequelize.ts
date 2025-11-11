@@ -44,10 +44,6 @@ export async function getSequelize() {
       primaryKey: true,
       autoIncrement: true,
     },
-    authProvider: {
-      type: DataTypes.ENUM("google"),
-      allowNull: true,
-    },
     authToken: {
       type: DataTypes.STRING,
       allowNull: true,

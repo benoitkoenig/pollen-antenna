@@ -10,7 +10,6 @@ const RegisterAnswerDocument = graphql(/* GraphQL */ `
     $hasSymptoms: String!
     $country: String!
     $subdivision: String!
-    $authProvider: String
     $authToken: String
     $date: String!
   ) {
@@ -18,7 +17,6 @@ const RegisterAnswerDocument = graphql(/* GraphQL */ `
       hasSymptoms: $hasSymptoms
       country: $country
       subdivision: $subdivision
-      authProvider: $authProvider
       authToken: $authToken
       date: $date
     ) {
@@ -43,8 +41,9 @@ export function useRegisterAnswer() {
           hasSymptoms,
           country,
           subdivision,
-          authProvider: authToken ? authToken.provider : null,
-          authToken: authToken ? authToken.token : null,
+          authToken: authToken
+            ? `${authToken.provider}:${authToken.token}`
+            : null,
           date,
         },
       });

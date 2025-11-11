@@ -34,7 +34,7 @@ type RegisterAnswerResponse {
 }
 
 type Mutation {
-  registerAnswer(hasSymptoms: String!, country: String!, subdivision: String!, authProvider: String, authToken: String, date: String!): RegisterAnswerResponse
+  registerAnswer(hasSymptoms: String!, country: String!, subdivision: String!, authToken: String, date: String!): RegisterAnswerResponse
 }
 `;
 
@@ -42,7 +42,6 @@ interface RegisterAnswerArgs {
   hasSymptoms: boolean;
   country: string;
   subdivision: string;
-  authProvider?: string;
   authToken?: string;
   date: string;
 }
@@ -118,7 +117,6 @@ const resolvers = {
         hasSymptoms,
         country,
         subdivision,
-        authProvider,
         authToken,
         date,
       }: RegisterAnswerArgs,
@@ -130,7 +128,6 @@ const resolvers = {
           hasSymptoms,
           country,
           subdivision,
-          authProvider,
           authToken,
           date,
         });
