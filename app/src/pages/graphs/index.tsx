@@ -1,18 +1,16 @@
 import { memo } from "react";
 import { Navigate } from "react-router-dom";
 
-import { useStore } from "store";
+import { useTodaysAnswerId } from "store/use-todays-answer-id";
 
 import { AnswersByDate } from "./answers-by-date";
 import { AnswersByLocation } from "./answers-by-location";
 import LoginButton from "./login-button";
 
 export default memo(function Graphs() {
-  const hasTodaysAnswerId = useStore(({ todaysAnswerId }) =>
-    Boolean(todaysAnswerId),
-  );
+  const { todaysAnswerId } = useTodaysAnswerId();
 
-  if (!hasTodaysAnswerId) {
+  if (!todaysAnswerId) {
     return <Navigate to="/" />;
   }
 

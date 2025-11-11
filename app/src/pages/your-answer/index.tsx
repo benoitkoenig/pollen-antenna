@@ -1,6 +1,8 @@
 import { useState, memo, useCallback } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
 
+import { useTodaysAnswerId } from "store/use-todays-answer-id";
+
 import { useStore } from "../../store";
 
 import type { GeolocationData } from "./types";
@@ -12,18 +14,13 @@ export default memo(function YourAnswer() {
   const navigate = useNavigate();
   const registerAnswer = useRegisterAnswer();
 
-  const hasTodaysAnswerId = useStore(({ todaysAnswerId }) =>
-    Boolean(todaysAnswerId),
-  );
+  const { todaysAnswerId, setTodaysAnswerId } = useTodaysAnswerId();
 
-  const setTodaysAnswerId = useStore(
-    ({ setTodaysAnswerId }) => setTodaysAnswerId,
-  );
   const setGeolocation = useStore(({ setGeolocation }) => setGeolocation);
 
   const [hasSymptoms, setHasSymptoms] = useState<string | null>(null);
 
-  if (hasTodaysAnswerId) {
+  if (todaysAnswerId) {
     return <Navigate to="/graphs" />;
   }
 
@@ -37,13 +34,17 @@ export default memo(function YourAnswer() {
         throw new Error("Users cannot submit geolocation before symptoms");
       }
 
+      const now = new Date();
+      now.setHours(now.getHours() - 4);
+      const date = now.toLocaleDateString("en-CA"); // en-CA gives yyyy-mm-dd format
+
       const answerId = await registerAnswer(
         hasSymptoms,
         geolocation.countryCode,
         geolocation.subdivision,
       );
 
-      setTodaysAnswerId(answerId);
+      setTodaysAnswerId(answerId, date);
       setGeolocation(geolocation);
 
       navigate("/graphs");

@@ -6,20 +6,13 @@ import {
   createGeolocationSlice,
   type GeolocationSlice,
 } from "./slices/geolocation";
-import {
-  createTodaysAnswerIdSlice,
-  type TodaysAnswerIdSlice,
-} from "./slices/todays-answer-id";
 
-export type StoreState = AuthTokenSlice &
-  TodaysAnswerIdSlice &
-  GeolocationSlice;
+export type StoreState = AuthTokenSlice & GeolocationSlice;
 
 export const useStore = create<StoreState>()(
   persist(
     (...args) => ({
       ...createAuthTokenSlice(...args),
-      ...createTodaysAnswerIdSlice(...args),
       ...createGeolocationSlice(...args),
     }),
     {
