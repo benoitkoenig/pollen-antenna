@@ -3,7 +3,7 @@ import { ApolloProvider } from "@apollo/client/react";
 import { memo, type PropsWithChildren } from "react";
 
 const httpLink = new HttpLink({
-  uri: "/api/pollen-antenna",
+  uri: import.meta.env["VITE_GRAPHQL_URL"],
 });
 
 const apolloClient = new ApolloClient({

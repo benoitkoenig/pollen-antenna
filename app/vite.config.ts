@@ -29,11 +29,5 @@ export default defineConfig({
   ],
   server: {
     strictPort: true,
-    proxy: {
-      "/api/pollen-antenna": {
-        target: "http://localhost:7071",
-        changeOrigin: true,
-      },
-    },
   },
 });
