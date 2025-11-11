@@ -14,5 +14,11 @@ const AnswersByLocationDocument = graphql(/* GraphQL */ `
 `);
 
 export function useAnswersByLocation() {
-  return useQuery(AnswersByLocationDocument);
+  return useQuery(AnswersByLocationDocument, {
+    context: {
+      fetchOptions: {
+        credentials: "include",
+      },
+    },
+  });
 }

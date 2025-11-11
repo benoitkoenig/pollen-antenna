@@ -38,6 +38,11 @@ export function useRegisterAnswer() {
           subdivision,
           date,
         },
+        context: {
+          fetchOptions: {
+            credentials: "include",
+          },
+        },
       });
 
       const answerId = result.data?.registerAnswer?.id;

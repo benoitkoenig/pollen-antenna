@@ -18,5 +18,10 @@ export function useAnswersByDate(country: string, subdivision: string) {
       country,
       subdivision,
     },
+    context: {
+      fetchOptions: {
+        credentials: "include",
+      },
+    },
   });
 }
