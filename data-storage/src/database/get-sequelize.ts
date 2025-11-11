@@ -44,7 +44,7 @@ export async function getSequelize() {
       primaryKey: true,
       autoIncrement: true,
     },
-    authToken: {
+    authId: {
       type: DataTypes.STRING,
       allowNull: true,
     },

@@ -9,6 +9,8 @@ import { QueryTypes } from "sequelize";
 
 import { getSequelize } from "../../database/get-sequelize";
 
+import getAuthId from "./get-auth-id";
+
 const typeDefs = `#graphql
 type Query {
   health: String!
@@ -124,11 +126,12 @@ const resolvers = {
       const sequelize = await getSequelize();
 
       try {
+        const authId = authToken ? await getAuthId(authToken) : null;
         const answer = await sequelize.models["Answers"].create({
           hasSymptoms,
           country,
           subdivision,
-          authToken,
+          authId,
           date,
         });
 
