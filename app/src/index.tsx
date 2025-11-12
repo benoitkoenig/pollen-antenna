@@ -4,7 +4,7 @@ import { createRoot } from "react-dom/client";
 import { IntlProvider } from "react-intl";
 
 import ApolloWrapper from "apollo-wrapper";
-import Router from "pages/router";
+import Pages from "pages";
 import { AuthenticationProvider } from "store/authentication";
 import { TodaysAnswerIdProvider } from "store/todays-answer-id";
 
@@ -19,7 +19,7 @@ const App = memo(function App() {
         <TodaysAnswerIdProvider>
           <ApolloWrapper>
             <IntlProvider messages={{}} locale="en" defaultLocale="en">
-              <Router />
+              <Pages />
             </IntlProvider>
           </ApolloWrapper>
         </TodaysAnswerIdProvider>
