@@ -3,8 +3,8 @@ import { Navigate } from "react-router-dom";
 
 import { useTodaysAnswerId } from "store/use-todays-answer-id";
 
-import { AnswersByDate } from "./answers-by-date";
-import { AnswersByLocation } from "./answers-by-location";
+import { AnswersByDate } from "./answers-by-date/answers-by-date";
+import { AnswersByLocation } from "./answers-by-location/answers-by-location";
 import LoginButton from "./login-button";
 
 export default memo(function Graphs() {

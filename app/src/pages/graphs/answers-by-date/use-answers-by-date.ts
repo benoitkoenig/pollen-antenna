@@ -1,6 +1,6 @@
 import { useQuery } from "@apollo/client/react";
 
-import { graphql } from "../../generated/gql";
+import { graphql } from "generated/gql";
 
 const AnswersByDateDocument = graphql(/* GraphQL */ `
   query AnswersByDate($country: String!, $subdivision: String!) {
