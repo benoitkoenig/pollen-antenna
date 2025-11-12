@@ -1,6 +1,6 @@
 import { googleLogout } from "@react-oauth/google";
 import { memo, useState, useRef, useEffect, useCallback } from "react";
-import { FormattedMessage } from "react-intl";
+import { FormattedMessage, useIntl } from "react-intl";
 import { useNavigate } from "react-router-dom";
 
 import { useAuthentication } from "global-providers/authentication";
@@ -10,6 +10,7 @@ export default memo(function Header() {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const navigate = useNavigate();
+  const intl = useIntl();
 
   const logout = useCallback(() => {
     googleLogout();
@@ -47,8 +48,37 @@ export default memo(function Header() {
     setIsDropdownOpen((o) => !o);
   }, []);
 
+  const navigateToHome = useCallback(() => {
+    navigate("/");
+  }, [navigate]);
+
   return (
-    <header className="flex justify-end items-center p-4">
+    <header className="flex justify-between items-center p-4">
+      {/* Graph icon in top left */}
+      <button
+        onClick={navigateToHome}
+        className="w-10 h-10 rounded-full hover:bg-gray-200 transition-colors flex items-center justify-center focus:outline-none focus:ring-2 focus:ring-blue-500"
+        aria-label={intl.formatMessage({
+          defaultMessage: "Home",
+          description: "header home button aria-label",
+        })}
+      >
+        <svg
+          className="w-6 h-6 text-gray-700"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z"
+          />
+        </svg>
+      </button>
+
       <div className="relative" ref={dropdownRef}>
         {/* Avatar circle */}
         <button

@@ -4,13 +4,11 @@ import { FormattedMessage } from "react-intl";
 import { Navigate } from "react-router-dom";
 
 import { useAuthentication } from "global-providers/authentication";
-import { useTodaysAnswerId } from "global-providers/todays-answer-id";
 
 import { useJwt } from "./use-jwt";
 
 export default memo(function Login() {
   const { isAuthenticated, setAuthenticationHeader } = useAuthentication();
-  const { todaysAnswerId } = useTodaysAnswerId();
   const getJwt = useJwt();
 
   const onSuccess = useCallback(async ({ credential }: CredentialResponse) => {
@@ -24,7 +22,7 @@ export default memo(function Login() {
   }, []);
 
   if (isAuthenticated) {
-    return <Navigate to={todaysAnswerId ? "/graphs" : "/"} />;
+    return <Navigate to="/" />;
   }
 
   return (
