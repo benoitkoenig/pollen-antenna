@@ -15,17 +15,24 @@ export const AnswersByDateChart = memo(function AnswersByDateChart({
   data,
 }: AnswersByDateChartProps) {
   const svgRef = useRef<SVGSVGElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (!svgRef.current || !data || data.length === 0) return;
+    if (!svgRef.current || !containerRef.current || !data || data.length === 0)
+      return;
 
     // Clear previous chart
     d3.select(svgRef.current).selectAll("*").remove();
 
+    // Get dimensions from container
+    const containerRect = containerRef.current.getBoundingClientRect();
+    const containerWidth = containerRect.width;
+    const containerHeight = containerRect.height;
+
     // Set up dimensions
     const margin = { top: 20, right: 80, bottom: 50, left: 60 };
-    const width = 800 - margin.left - margin.right;
-    const height = 400 - margin.top - margin.bottom;
+    const width = containerWidth - margin.left - margin.right;
+    const height = containerHeight - margin.top - margin.bottom;
 
     // Parse dates and sort data
     const parsedData = data
@@ -195,7 +202,7 @@ export const AnswersByDateChart = memo(function AnswersByDateChart({
   }, [data]);
 
   return (
-    <div className="w-full overflow-x-auto">
+    <div ref={containerRef} className="w-full aspect-12/3 overflow-x-auto">
       <svg ref={svgRef} className="mx-auto" />
     </div>
   );
