@@ -1,7 +1,7 @@
 import { useState, memo, useCallback } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
 
-import { useTodaysAnswerId } from "store/use-todays-answer-id";
+import { useTodaysAnswerId } from "store/todays-answer-id";
 
 import { useStore } from "../../store";
 
