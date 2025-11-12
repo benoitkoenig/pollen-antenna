@@ -7,7 +7,7 @@ import {
   importSubdivisions,
 } from "@pollen-antenna/static-data";
 
-import { useStore } from "store";
+import { useStore } from "global-providers";
 
 import type { GeolocationData } from "../types";
 

@@ -1,9 +1,9 @@
 import { useState, memo, useCallback } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
 
-import { useTodaysAnswerId } from "store/todays-answer-id";
+import { useTodaysAnswerId } from "global-providers/todays-answer-id";
 
-import { useStore } from "../../store";
+import { useStore } from "../../global-providers";
 
 import type { GeolocationData } from "./types";
 import { useRegisterAnswer } from "./use-register-answer";

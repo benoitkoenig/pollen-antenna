@@ -1,7 +1,7 @@
 import { memo, useState, useRef, useEffect, useCallback } from "react";
 import { FormattedMessage } from "react-intl";
 
-import { useAuthentication } from "store/authentication";
+import { useAuthentication } from "global-providers/authentication";
 
 export default memo(function Header() {
   const { isAuthenticated } = useAuthentication();

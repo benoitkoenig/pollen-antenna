@@ -4,9 +4,9 @@ import { createRoot } from "react-dom/client";
 import { IntlProvider } from "react-intl";
 
 import ApolloWrapper from "apollo-wrapper";
+import { AuthenticationProvider } from "global-providers/authentication";
+import { TodaysAnswerIdProvider } from "global-providers/todays-answer-id";
 import Pages from "pages";
-import { AuthenticationProvider } from "store/authentication";
-import { TodaysAnswerIdProvider } from "store/todays-answer-id";
 
 import "./main.css";
 

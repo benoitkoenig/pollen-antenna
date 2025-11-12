@@ -1,7 +1,7 @@
 import { memo } from "react";
 import { FormattedMessage } from "react-intl";
 
-import { useStore } from "store";
+import { useStore } from "global-providers";
 
 import { AnswersByDateChart } from "./answers-by-date-chart";
 import { useAnswersByDate } from "./use-answers-by-date";
