@@ -2,11 +2,9 @@ import { GoogleOAuthProvider } from "@react-oauth/google";
 import { memo } from "react";
 import { createRoot } from "react-dom/client";
 import { IntlProvider } from "react-intl";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import ApolloWrapper from "apollo-wrapper";
-import Graphs from "pages/graphs";
-import YourAnswer from "pages/your-answer";
+import Router from "pages/router";
 
 import "./main.css";
 
@@ -17,12 +15,7 @@ const App = memo(function App() {
     >
       <ApolloWrapper>
         <IntlProvider messages={{}} locale="en" defaultLocale="en">
-          <BrowserRouter>
-            <Routes>
-              <Route path="/" element={<YourAnswer />} />
-              <Route path="/graphs" element={<Graphs />} />
-            </Routes>
-          </BrowserRouter>
+          <Router />
         </IntlProvider>
       </ApolloWrapper>
     </GoogleOAuthProvider>
