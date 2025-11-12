@@ -15,12 +15,10 @@ export default memo(function Graphs() {
   }
 
   return (
-    <div className="min-h-screen px-4 py-8 md:px-8 lg:px-16 xl:px-32">
-      <div className="max-w-6xl mx-auto space-y-6">
-        <AnswersByDate />
-        <AnswersByLocation />
-        <LoginButton />
-      </div>
+    <div className="my-6 space-y-6">
+      <AnswersByDate />
+      <AnswersByLocation />
+      <LoginButton />
     </div>
   );
 });

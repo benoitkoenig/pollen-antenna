@@ -6,11 +6,13 @@ import YourAnswer from "./your-answer";
 
 export default memo(function Router() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<YourAnswer />} />
-        <Route path="/graphs" element={<Graphs />} />
-      </Routes>
-    </BrowserRouter>
+    <div className="h-full max-w-2xl mx-auto">
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<YourAnswer />} />
+          <Route path="/graphs" element={<Graphs />} />
+        </Routes>
+      </BrowserRouter>
+    </div>
   );
 });
