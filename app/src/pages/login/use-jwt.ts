@@ -1,7 +1,7 @@
 import { useLazyQuery } from "@apollo/client/react";
 import { useCallback } from "react";
 
-import { graphql } from "../../../generated/gql";
+import { graphql } from "generated/gql";
 
 const GetJwtDocument = graphql(/* GraphQL */ `
   query GetJwt($provider: String!, $token: String!) {

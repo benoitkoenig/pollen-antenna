@@ -1,12 +1,26 @@
+import { googleLogout } from "@react-oauth/google";
 import { memo, useState, useRef, useEffect, useCallback } from "react";
 import { FormattedMessage } from "react-intl";
+import { useNavigate } from "react-router-dom";
 
 import { useAuthentication } from "global-providers/authentication";
 
 export default memo(function Header() {
-  const { isAuthenticated } = useAuthentication();
+  const { isAuthenticated, clearAuthentication } = useAuthentication();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
+  const navigate = useNavigate();
+
+  const logout = useCallback(() => {
+    googleLogout();
+    clearAuthentication();
+    setIsDropdownOpen(false);
+  }, []);
+
+  const navigateToLogin = useCallback(() => {
+    setIsDropdownOpen(false);
+    navigate("/login");
+  }, []);
 
   useEffect(() => {
     if (!isDropdownOpen) {
@@ -61,10 +75,7 @@ export default memo(function Header() {
             {!isAuthenticated ? (
               <button
                 className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                onClick={() => {
-                  // TODO: Implement sign in/sign up
-                  setIsDropdownOpen(false);
-                }}
+                onClick={navigateToLogin}
               >
                 <FormattedMessage
                   defaultMessage="Sign in/Sign up"
@@ -87,10 +98,7 @@ export default memo(function Header() {
                 </button>
                 <button
                   className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                  onClick={() => {
-                    // TODO: Implement log out
-                    setIsDropdownOpen(false);
-                  }}
+                  onClick={logout}
                 >
                   <FormattedMessage
                     defaultMessage="Log out"

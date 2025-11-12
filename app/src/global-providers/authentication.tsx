@@ -22,15 +22,23 @@ function setCookie(token: string, expiresAt: string) {
   document.cookie = `${COOKIE_NAME}=Bearer ${token}; expires=${expiresAt}; path=/`;
 }
 
+function clearCookie() {
+  document.cookie = `${COOKIE_NAME}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/`;
+}
+
 interface AuthenticationContextValue {
   isAuthenticated: boolean;
   setAuthenticationHeader: (token: string, expiresAt: string) => void;
+  clearAuthentication: () => void;
 }
 
 const AuthenticationContext = createContext<AuthenticationContextValue>({
   isAuthenticated: false,
   setAuthenticationHeader() {
     throw new Error("Cannot set authentication header: provider not found");
+  },
+  clearAuthentication() {
+    throw new Error("Cannot clear authentication: provider not found");
   },
 });
 
@@ -51,11 +59,17 @@ export const AuthenticationProvider = memo(function AuthenticationProvider({
     [],
   );
 
+  const clearAuthentication = useCallback(() => {
+    setIsAuthenticatedState(false);
+    clearCookie();
+  }, []);
+
   return (
     <AuthenticationContext.Provider
       value={{
         isAuthenticated,
         setAuthenticationHeader,
+        clearAuthentication,
       }}
     >
       {children}
