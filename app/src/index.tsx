@@ -5,6 +5,7 @@ import { IntlProvider } from "react-intl";
 
 import ApolloWrapper from "apollo-wrapper";
 import Router from "pages/router";
+import { AuthenticationProvider } from "store/authentication";
 
 import "./main.css";
 
@@ -13,11 +14,13 @@ const App = memo(function App() {
     <GoogleOAuthProvider
       clientId={import.meta.env["VITE_GOOGLE_OAUTH_CLIENT_ID"]}
     >
-      <ApolloWrapper>
-        <IntlProvider messages={{}} locale="en" defaultLocale="en">
-          <Router />
-        </IntlProvider>
-      </ApolloWrapper>
+      <AuthenticationProvider>
+        <ApolloWrapper>
+          <IntlProvider messages={{}} locale="en" defaultLocale="en">
+            <Router />
+          </IntlProvider>
+        </ApolloWrapper>
+      </AuthenticationProvider>
     </GoogleOAuthProvider>
   );
 });

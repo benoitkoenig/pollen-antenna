@@ -1,7 +1,7 @@
 import { GoogleLogin, type CredentialResponse } from "@react-oauth/google";
 import { memo, useCallback } from "react";
 
-import { useAuthentication } from "store/use-authentication";
+import { useAuthentication } from "store/authentication";
 
 import { useJwt } from "./use-jwt";
 
