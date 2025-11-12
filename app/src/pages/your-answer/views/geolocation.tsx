@@ -81,7 +81,7 @@ export default memo(function Geolocation({
           <div>
             <label
               htmlFor="country"
-              className="block text-sm font-medium text-gray-700 mb-2"
+              className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
             >
               <FormattedMessage
                 defaultMessage="Country"
@@ -96,7 +96,7 @@ export default memo(function Geolocation({
                 setSelectedCountryCode(e.target.value as CountryCode)
               }
               required
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100"
             >
               <option value="">
                 {intl.formatMessage({
@@ -115,7 +115,7 @@ export default memo(function Geolocation({
           <div>
             <label
               htmlFor="subdivision"
-              className="block text-sm font-medium text-gray-700 mb-2"
+              className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
             >
               <FormattedMessage
                 defaultMessage="Region/State"
@@ -129,7 +129,7 @@ export default memo(function Geolocation({
               onChange={(e) => setSelectedSubdivision(e.target.value)}
               disabled={!subdivisions}
               required
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent disabled:bg-gray-100 disabled:cursor-not-allowed text-base"
+              className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent disabled:bg-gray-100 dark:disabled:bg-gray-700 disabled:cursor-not-allowed text-base bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100"
             >
               {subdivisions ? (
                 <>
@@ -159,7 +159,7 @@ export default memo(function Geolocation({
           <button
             type="submit"
             disabled={!selectedCountryCode || !selectedSubdivision}
-            className="w-full py-4 px-6 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700 transition-colors disabled:bg-gray-300 disabled:cursor-not-allowed"
+            className="w-full py-4 px-6 bg-blue-600 dark:bg-blue-700 text-white rounded-lg font-semibold hover:bg-blue-700 dark:hover:bg-blue-600 transition-colors disabled:bg-gray-300 dark:disabled:bg-gray-600 disabled:cursor-not-allowed"
           >
             <FormattedMessage
               defaultMessage="See the graphs"

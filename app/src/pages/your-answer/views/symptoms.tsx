@@ -22,14 +22,14 @@ export default memo(function Symptoms({
         <div className="flex flex-col gap-4">
           <button
             onClick={answerYes}
-            className="w-full py-4 px-6 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700 transition-colors"
+            className="w-full py-4 px-6 bg-blue-600 dark:bg-blue-700 text-white rounded-lg font-semibold hover:bg-blue-700 dark:hover:bg-blue-600 transition-colors"
           >
             <FormattedMessage defaultMessage="Yes" description="symptoms" />
           </button>
 
           <button
             onClick={answerNo}
-            className="w-full py-4 px-6 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700 transition-colors"
+            className="w-full py-4 px-6 bg-blue-600 dark:bg-blue-700 text-white rounded-lg font-semibold hover:bg-blue-700 dark:hover:bg-blue-600 transition-colors"
           >
             <FormattedMessage defaultMessage="No" description="symptoms" />
           </button>

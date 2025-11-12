@@ -16,8 +16,8 @@ export const AnswersByDate = memo(function AnswersByDate() {
 
   if (!geolocation) {
     return (
-      <div className="w-full p-4 bg-gray-50 rounded-lg">
-        <p className="text-gray-600 text-center">
+      <div className="w-full p-4 bg-gray-50 dark:bg-gray-800 rounded-lg">
+        <p className="text-gray-600 dark:text-gray-400 text-center">
           <FormattedMessage
             defaultMessage="Please set your location first"
             description="graphs - no location"
@@ -29,8 +29,8 @@ export const AnswersByDate = memo(function AnswersByDate() {
 
   if (loading) {
     return (
-      <div className="w-full p-4 bg-gray-50 rounded-lg">
-        <p className="text-gray-600 text-center">
+      <div className="w-full p-4 bg-gray-50 dark:bg-gray-800 rounded-lg">
+        <p className="text-gray-600 dark:text-gray-400 text-center">
           <FormattedMessage
             defaultMessage="Loading answers by date..."
             description="graphs - loading answers by date"
@@ -42,8 +42,8 @@ export const AnswersByDate = memo(function AnswersByDate() {
 
   if (error) {
     return (
-      <div className="w-full p-4 bg-red-50 rounded-lg">
-        <p className="text-red-600 text-center">
+      <div className="w-full p-4 bg-red-50 dark:bg-red-900 rounded-lg">
+        <p className="text-red-600 dark:text-red-400 text-center">
           <FormattedMessage
             defaultMessage="Error loading data: {error}"
             description="graphs - error loading answers by date"
@@ -55,7 +55,7 @@ export const AnswersByDate = memo(function AnswersByDate() {
   }
 
   return (
-    <div className="w-full p-4 bg-white rounded-lg shadow">
+    <div className="w-full p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
       <h2 className="text-xl font-semibold mb-4">
         <FormattedMessage
           defaultMessage="Answers by Date"
@@ -65,7 +65,7 @@ export const AnswersByDate = memo(function AnswersByDate() {
       {data?.answersByDate && data.answersByDate.length > 0 ? (
         <AnswersByDateChart data={data.answersByDate} />
       ) : (
-        <p className="text-gray-600 text-center py-8">
+        <p className="text-gray-600 dark:text-gray-400 text-center py-8">
           <FormattedMessage
             defaultMessage="No data available"
             description="graphs - no data"

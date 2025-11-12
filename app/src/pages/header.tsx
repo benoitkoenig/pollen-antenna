@@ -57,14 +57,14 @@ export default memo(function Header() {
       {/* Graph icon in top left */}
       <button
         onClick={navigateToHome}
-        className="w-10 h-10 rounded-full hover:bg-gray-200 transition-colors flex items-center justify-center focus:outline-none focus:ring-2 focus:ring-blue-500"
+        className="w-10 h-10 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors flex items-center justify-center focus:outline-none focus:ring-2 focus:ring-blue-500"
         aria-label={intl.formatMessage({
           defaultMessage: "Home",
           description: "header home button aria-label",
         })}
       >
         <svg
-          className="w-6 h-6 text-gray-700"
+          className="w-6 h-6 text-gray-700 dark:text-gray-300"
           fill="none"
           stroke="currentColor"
           strokeWidth="2"
@@ -83,10 +83,10 @@ export default memo(function Header() {
         {/* Avatar circle */}
         <button
           onClick={toggleDropdown}
-          className="w-10 h-10 rounded-full bg-gray-300 hover:bg-gray-400 transition-colors flex items-center justify-center focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="w-10 h-10 rounded-full bg-gray-300 dark:bg-gray-600 hover:bg-gray-400 dark:hover:bg-gray-500 transition-colors flex items-center justify-center focus:outline-none focus:ring-2 focus:ring-blue-500"
         >
           <svg
-            className="w-6 h-6 text-gray-600"
+            className="w-6 h-6 text-gray-600 dark:text-gray-300"
             fill="currentColor"
             viewBox="0 0 20 20"
             xmlns="http://www.w3.org/2000/svg"
@@ -101,10 +101,10 @@ export default memo(function Header() {
 
         {/* Dropdown menu */}
         {isDropdownOpen && (
-          <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-10 border border-gray-200">
+          <div className="absolute right-0 mt-2 w-48 bg-white dark:bg-gray-800 rounded-md shadow-lg py-1 z-10 border border-gray-200 dark:border-gray-700">
             {!isAuthenticated ? (
               <button
-                className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                className="block w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
                 onClick={navigateToLogin}
               >
                 <FormattedMessage
@@ -115,7 +115,7 @@ export default memo(function Header() {
             ) : (
               <>
                 <button
-                  className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                  className="block w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
                   onClick={() => {
                     // TODO: Implement my allergies page
                     setIsDropdownOpen(false);
@@ -127,7 +127,7 @@ export default memo(function Header() {
                   />
                 </button>
                 <button
-                  className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                  className="block w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
                   onClick={logout}
                 >
                   <FormattedMessage

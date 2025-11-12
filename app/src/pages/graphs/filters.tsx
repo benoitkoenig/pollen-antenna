@@ -20,7 +20,7 @@ export const Filters = memo(function Filters() {
         />
       </label>
       {!isAuthenticated && (
-        <div style={{ marginTop: "8px", fontSize: "0.9em", color: "#666" }}>
+        <div className="mt-2 text-sm text-gray-600 dark:text-gray-400">
           <FormattedMessage
             defaultMessage="You need to be authenticated to filter-out data from non-authenticated users"
             description="filters authentication requirement message"
