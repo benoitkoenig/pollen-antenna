@@ -1,5 +1,6 @@
 packages:
   - "app"
   - "data-storage"
+  - "map"
   - "static-data"
 sharedWorkspaceLockfile: false # Necessary for @pollen-antenna/data-storage
