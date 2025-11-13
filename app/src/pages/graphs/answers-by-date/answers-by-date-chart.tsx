@@ -30,7 +30,7 @@ export const AnswersByDateChart = memo(function AnswersByDateChart({
     const containerHeight = containerRect.height;
 
     // Set up dimensions
-    const margin = { top: 20, right: 80, bottom: 50, left: 60 };
+    const margin = { top: 0, right: 30, bottom: 30, left: 30 };
     const width = containerWidth - margin.left - margin.right;
     const height = containerHeight - margin.top - margin.bottom;
 
@@ -42,6 +42,8 @@ export const AnswersByDateChart = memo(function AnswersByDateChart({
         noCount: d.noCount,
       }))
       .sort((a, b) => a.date.getTime() - b.date.getTime());
+
+    const maxCount = d3.max(parsedData, (d) => d.yesCount + d.noCount) || 1;
 
     // Create SVG
     const svg = d3
@@ -55,14 +57,9 @@ export const AnswersByDateChart = memo(function AnswersByDateChart({
     const x = d3
       .scaleBand()
       .domain(parsedData.map((d) => d.date.toISOString()))
-      .range([0, width])
-      .padding(0.2);
+      .range([0, width]);
 
-    const y = d3
-      .scaleLinear()
-      .domain([0, d3.max(parsedData, (d) => d.yesCount + d.noCount) || 0])
-      .nice()
-      .range([height, 0]);
+    const y = d3.scaleLinear().domain([0, maxCount]).nice().range([height, 0]);
 
     // Add X axis
     svg
@@ -78,7 +75,12 @@ export const AnswersByDateChart = memo(function AnswersByDateChart({
       .attr("transform", "rotate(-45)");
 
     // Add Y axis
-    svg.append("g").call(d3.axisLeft(y));
+    svg.append("g").call(
+      d3
+        .axisLeft(y)
+        .tickValues([0, maxCount])
+        .tickFormat((value) => value.toString()),
+    );
 
     // Add Y axis label
     svg
@@ -103,7 +105,7 @@ export const AnswersByDateChart = memo(function AnswersByDateChart({
       .attr("y", (d) => y(d.yesCount))
       .attr("width", x.bandwidth())
       .attr("height", (d) => height - y(d.yesCount))
-      .attr("fill", "#10b981");
+      .attr("fill", "#4a90e2");
 
     // Add "No" bars (top layer, stacked on "Yes")
     svg
@@ -116,7 +118,7 @@ export const AnswersByDateChart = memo(function AnswersByDateChart({
       .attr("y", (d) => y(d.yesCount + d.noCount))
       .attr("width", x.bandwidth())
       .attr("height", (d) => y(d.yesCount) - y(d.yesCount + d.noCount))
-      .attr("fill", "#ef4444");
+      .attr("fill", "#999");
 
     // Add tooltip
     const tooltip = d3
@@ -149,8 +151,8 @@ export const AnswersByDateChart = memo(function AnswersByDateChart({
         tooltip
           .html(
             `<strong>${d3.timeFormat("%B %d, %Y")(d.date)}</strong><br/>
-             <span style="color: #10b981;">● Yes: ${d.yesCount}</span><br/>
-             <span style="color: #ef4444;">● No: ${d.noCount}</span><br/>
+             <span style="color: #999;">● No: ${d.noCount}</span><br/>
+             <span style="color: #4a90e2;">● Yes: ${d.yesCount}</span><br/>
              <span style="color: #999;">Total: ${d.yesCount + d.noCount}</span>`,
           )
           .style("left", event.pageX + 10 + "px")
@@ -160,41 +162,6 @@ export const AnswersByDateChart = memo(function AnswersByDateChart({
         tooltip.transition().duration(200).style("opacity", 0);
       });
 
-    // Add legend
-    const legend = svg
-      .append("g")
-      .attr("transform", `translate(${width - 60}, 0)`);
-
-    legend
-      .append("circle")
-      .attr("cx", 0)
-      .attr("cy", 0)
-      .attr("r", 6)
-      .attr("fill", "#ef4444");
-
-    legend
-      .append("text")
-      .attr("x", 15)
-      .attr("y", 0)
-      .attr("dy", ".35em")
-      .style("font-size", "14px")
-      .text("No");
-
-    legend
-      .append("circle")
-      .attr("cx", 0)
-      .attr("cy", 25)
-      .attr("r", 6)
-      .attr("fill", "#10b981");
-
-    legend
-      .append("text")
-      .attr("x", 15)
-      .attr("y", 25)
-      .attr("dy", ".35em")
-      .style("font-size", "14px")
-      .text("Yes");
-
     // Cleanup tooltip on unmount
     return () => {
       tooltip.remove();
@@ -202,8 +169,8 @@ export const AnswersByDateChart = memo(function AnswersByDateChart({
   }, [data]);
 
   return (
-    <div ref={containerRef} className="w-full aspect-12/3 overflow-x-auto">
-      <svg ref={svgRef} className="mx-auto" />
+    <div ref={containerRef} className="w-full aspect-12/3">
+      <svg ref={svgRef} className="overflow-visible" />
     </div>
   );
 });

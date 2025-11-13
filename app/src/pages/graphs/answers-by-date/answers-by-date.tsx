@@ -58,8 +58,11 @@ export const AnswersByDate = memo(function AnswersByDate() {
     <div className="w-full p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
       <h2 className="text-xl font-semibold mb-4">
         <FormattedMessage
-          defaultMessage="Answers by Date"
+          defaultMessage="Answers for {subdivision}"
           description="graphs - answers by date title"
+          values={{
+            subdivision: geolocation.subdivision,
+          }}
         />
       </h2>
       {data?.answersByDate && data.answersByDate.length > 0 ? (
