@@ -6,7 +6,8 @@
     "prestart": "rimraf dist && tsc --incremental && docker compose up -d",
     "start": "pnpm run --parallel start:func start:build",
     "start:func": "dotenvx run -f .env.local -- func start",
-    "start:build": "tsc -w --incremental --preserveWatchOutput"
+    "start:build": "tsc -w --incremental --preserveWatchOutput",
+    "populate-subdivisions": "node --experimental-strip-types scripts/populate-subdivisions/index.ts"
   },
   "dependencies": {
     "@apollo/server": "^4.10.4",
@@ -15,10 +16,12 @@
     "jsonwebtoken": "^9.0.2",
     "pg": "^8.12.0",
     "pg-hstore": "^2.3.4",
-    "sequelize": "^6.37.3"
+    "sequelize": "^6.37.3",
+    "zod": "^4.1.12"
   },
   "devDependencies": {
     "@dotenvx/dotenvx": "^0.44.5",
+    "@pollen-antenna/static-data": "workspace:^",
     "@types/jsonwebtoken": "^9.0.10",
     "@types/node": "^20.12.12",
     "rimraf": "^5.0.0",

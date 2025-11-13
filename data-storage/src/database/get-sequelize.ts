@@ -66,6 +66,38 @@ export async function getSequelize() {
     },
   });
 
+  s.define("Subdivisions", {
+    id: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      primaryKey: true,
+    },
+    countryCode: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    coordinates: {
+      type: DataTypes.JSONB,
+      allowNull: false,
+    },
+    northBound: {
+      type: DataTypes.FLOAT,
+      allowNull: false,
+    },
+    eastBound: {
+      type: DataTypes.FLOAT,
+      allowNull: false,
+    },
+    westBound: {
+      type: DataTypes.FLOAT,
+      allowNull: false,
+    },
+    southBound: {
+      type: DataTypes.FLOAT,
+      allowNull: false,
+    },
+  });
+
   sequelizePromise = s.sync().then(() => {
     return s;
   });
