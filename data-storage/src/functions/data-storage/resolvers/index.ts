@@ -1,7 +1,9 @@
-import { mutations } from "./mutations";
-import { queries } from "./queries";
+import { answersResolvers } from "./answers";
+import { authenticationResolvers } from "./authentication";
+import { healthResolvers } from "./health";
 
-export const resolvers = {
-  Query: queries,
-  Mutation: mutations,
-};
+export const resolvers = [
+  answersResolvers,
+  authenticationResolvers,
+  healthResolvers,
+];
