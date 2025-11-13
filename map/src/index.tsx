@@ -42,33 +42,37 @@ const Map = memo(function Map({
       preserveAspectRatio="xMidYMid meet"
     >
       <g transform="scale(1, -1)">
-        {subdivisions.map((subdivision) => (
-          <g key={subdivision.id}>
-            {subdivision.coordinates.map((polygon, idx) => {
+        {subdivisions.map((subdivision) => {
+          const isHovered = hoveredId === subdivision.id;
+
+          // Convert all rings to SVG path data
+          // First ring is outer boundary, subsequent rings are holes
+          const pathData = subdivision.coordinates
+            .map((polygon) => {
               const points = polygon
                 .map((coord) => `${coord[0]},${-coord[1]}`)
-                .join(" ");
+                .join(" L ");
+              return `M ${points} Z`;
+            })
+            .join(" ");
 
-              const isHovered = hoveredId === subdivision.id;
-
-              return (
-                <polygon
-                  key={idx}
-                  points={points}
-                  fill={isHovered ? "#4a90e2" : "#e0e0e0"}
-                  stroke="#333"
-                  strokeWidth={width * 0.001}
-                  style={{
-                    cursor: "pointer",
-                    transition: "fill 0.2s ease",
-                  }}
-                  onMouseEnter={() => setHoveredId(subdivision.id)}
-                  onMouseLeave={() => setHoveredId(null)}
-                />
-              );
-            })}
-          </g>
-        ))}
+          return (
+            <path
+              key={subdivision.id}
+              d={pathData}
+              fill={isHovered ? "#4a90e2" : "#e0e0e0"}
+              fillRule="evenodd"
+              stroke="#333"
+              strokeWidth={width * 0.001}
+              style={{
+                cursor: "pointer",
+                transition: "fill 0.2s ease",
+              }}
+              onMouseEnter={() => setHoveredId(subdivision.id)}
+              onMouseLeave={() => setHoveredId(null)}
+            />
+          );
+        })}
       </g>
     </svg>
   );
