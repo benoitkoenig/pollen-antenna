@@ -1,9 +1,8 @@
 import { useState, memo, useCallback } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
 
+import { useGeolocation } from "global-providers/geolocation";
 import { useTodaysAnswerId } from "global-providers/todays-answer-id";
-
-import { useStore } from "../../global-providers";
 
 import type { GeolocationData } from "./types";
 import { useRegisterAnswer } from "./use-register-answer";
@@ -16,7 +15,7 @@ export default memo(function YourAnswer() {
 
   const { todaysAnswerId, setTodaysAnswerId } = useTodaysAnswerId();
 
-  const setGeolocation = useStore(({ setGeolocation }) => setGeolocation);
+  const { setGeolocation } = useGeolocation();
 
   const [hasSymptoms, setHasSymptoms] = useState<string | null>(null);
 

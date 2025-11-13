@@ -5,6 +5,7 @@ import { IntlProvider } from "react-intl";
 
 import ApolloWrapper from "apollo-wrapper";
 import { AuthenticationProvider } from "global-providers/authentication";
+import { GeolocationProvider } from "global-providers/geolocation";
 import { TodaysAnswerIdProvider } from "global-providers/todays-answer-id";
 import Pages from "pages";
 
@@ -17,11 +18,13 @@ const App = memo(function App() {
     >
       <AuthenticationProvider>
         <TodaysAnswerIdProvider>
-          <ApolloWrapper>
-            <IntlProvider messages={{}} locale="en" defaultLocale="en">
-              <Pages />
-            </IntlProvider>
-          </ApolloWrapper>
+          <GeolocationProvider>
+            <ApolloWrapper>
+              <IntlProvider messages={{}} locale="en" defaultLocale="en">
+                <Pages />
+              </IntlProvider>
+            </ApolloWrapper>
+          </GeolocationProvider>
         </TodaysAnswerIdProvider>
       </AuthenticationProvider>
     </GoogleOAuthProvider>

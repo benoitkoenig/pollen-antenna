@@ -7,7 +7,7 @@ import {
   importSubdivisions,
 } from "@pollen-antenna/static-data";
 
-import { useStore } from "global-providers";
+import { useGeolocation } from "global-providers/geolocation";
 
 import type { GeolocationData } from "../types";
 
@@ -18,15 +18,15 @@ export default memo(function Geolocation({
 }) {
   const intl = useIntl();
 
-  const initialGeolocation = useStore(({ geolocation }) => geolocation);
+  const { geolocation: storedGeolocation } = useGeolocation();
 
   const [selectedCountryCode, setSelectedCountryCode] = useState<
     CountryCode | undefined
-  >(initialGeolocation?.countryCode ?? undefined);
+  >(storedGeolocation?.countryCode ?? undefined);
   const [subdivisions, setSubdivisions] = useState<string[] | null>(null);
   const [selectedSubdivision, setSelectedSubdivision] = useState<
     string | undefined
-  >(initialGeolocation?.subdivision ?? undefined);
+  >(storedGeolocation?.subdivision ?? undefined);
 
   useEffect(() => {
     if (!selectedCountryCode) {
