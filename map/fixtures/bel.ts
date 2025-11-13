@@ -3,7 +3,6 @@ import type { Subdivision } from "../src/types";
 export const bel: Subdivision[] = [
   {
     id: "27649430B17719898407236",
-    name: "Brussels Hoofdstedelijk",
     coordinates: [
       [
         [4.283083477000048, 50.813608929000054],
@@ -17,7 +16,6 @@ export const bel: Subdivision[] = [
   },
   {
     id: "27649430B69989386836371",
-    name: "Vlaams Gewest",
     coordinates: [
       [
         [5.892073, 50.755237499000032],
@@ -95,7 +93,6 @@ export const bel: Subdivision[] = [
   },
   {
     id: "27649430B38670918582344",
-    name: "Wallonne Gewest",
     coordinates: [
       [
         [5.682000500000072, 50.757446499000082],
