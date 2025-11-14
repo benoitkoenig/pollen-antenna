@@ -7,7 +7,7 @@
     "start": "pnpm run --parallel start:func start:build",
     "start:func": "dotenvx run -f .env.local -- func start",
     "start:build": "tsc -w --incremental --preserveWatchOutput",
-    "populate-subdivisions": "node --experimental-strip-types scripts/populate-subdivisions/index.ts"
+    "populate-subdivisions": "dotenvx run -f .env.local -- node --experimental-strip-types scripts/populate-subdivisions/index.ts"
   },
   "dependencies": {
     "@apollo/server": "^4.10.4",

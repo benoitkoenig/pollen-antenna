@@ -1,4 +1,7 @@
-import { DataTypes, Sequelize } from "sequelize";
+import { Sequelize } from "sequelize";
+
+import { defineAnswersModel } from "./models/answers";
+import { defineSubdivisionsModel } from "./models/subdivisions";
 
 const DATABASE_URL = process.env["DATABASE_URL"];
 
@@ -38,65 +41,8 @@ export async function getSequelize() {
     },
   });
 
-  s.define("Answers", {
-    id: {
-      type: DataTypes.UUID,
-      defaultValue: DataTypes.UUIDV4,
-      primaryKey: true,
-    },
-    userId: {
-      type: DataTypes.STRING,
-      allowNull: true,
-    },
-    hasSymptoms: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    country: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    subdivision: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    date: {
-      type: DataTypes.DATEONLY,
-      allowNull: false,
-    },
-  });
-
-  s.define("Subdivisions", {
-    id: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      primaryKey: true,
-    },
-    countryCode: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    coordinates: {
-      type: DataTypes.JSONB,
-      allowNull: false,
-    },
-    northBound: {
-      type: DataTypes.FLOAT,
-      allowNull: false,
-    },
-    eastBound: {
-      type: DataTypes.FLOAT,
-      allowNull: false,
-    },
-    westBound: {
-      type: DataTypes.FLOAT,
-      allowNull: false,
-    },
-    southBound: {
-      type: DataTypes.FLOAT,
-      allowNull: false,
-    },
-  });
+  defineAnswersModel(s);
+  defineSubdivisionsModel(s);
 
   sequelizePromise = s.sync().then(() => {
     return s;
