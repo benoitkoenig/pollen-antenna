@@ -4,6 +4,7 @@ type Query {
   answersByDate(country: String!, subdivision: String!): [DateAnswers!]!
   answersByLocation: [LocationAnswers!]!
   jwt(provider: String!, token: String!): JwtResponse!
+  nearbySubdivisions(subdivisionId: String!): [Subdivision!]!
 }
 
 type DateAnswers {
@@ -26,6 +27,16 @@ type JwtResponse {
 
 type RegisterAnswerResponse {
   id: ID!
+}
+
+type Subdivision {
+  id: ID!
+  countryCode: String!
+  coordinates: String!
+  northBound: Float!
+  eastBound: Float!
+  westBound: Float!
+  southBound: Float!
 }
 
 type Mutation {
