@@ -3,18 +3,15 @@
  * Attribution: Runfola, D. et al. (2020) geoBoundaries: A global database of political administrative boundaries
  */
 
-// import { countryCodes } from "@pollen-antenna/static-data";
-
 import { Sequelize } from "sequelize";
 
+import { countryCodes } from "../../../static-data/src/countries.ts";
 import { defineSubdivisionsModel } from "../../src/database/models/subdivisions.ts";
 
 import { fetchFeatures } from "./fetch-features.ts";
 import mapFeatureToSubdivision from "./map-feature-to-subdivision.ts";
 
 const DATABASE_URL = process.env["DATABASE_URL"];
-
-const countryCodes = ["bel", "usa"];
 
 async function populateSubdivisions() {
   if (!DATABASE_URL) {
