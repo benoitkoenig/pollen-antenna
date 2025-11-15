@@ -3,8 +3,7 @@ type Query {
   health: String!
   jwt(provider: String!, token: String!): JwtResponse!
   nearbySubdivisions(subdivisionId: String!): [Subdivision!]!
-  subdivisionsByCountry(countryCode: String!): [Subdivision!]!
-  subdivisionsById(ids: [String!]!): [Subdivision!]!
+  subdivisions(countryCode: String, ids: [String!]): [Subdivision!]!
 }
 
 type DateAnswers {

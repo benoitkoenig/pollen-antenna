@@ -6,12 +6,9 @@ export interface NearbySubdivisionsArgs {
   subdivisionId: string;
 }
 
-export interface SubdivisionsByCountryArgs {
-  countryCode: string;
-}
-
-export interface SubdivisionsByIdArgs {
-  ids: string[];
+export interface SubdivisionsArgs {
+  countryCode?: string;
+  ids?: string[];
 }
 
 export const geolocationResolvers = {
@@ -51,30 +48,28 @@ export const geolocationResolvers = {
         sequelize.connectionManager.close();
       }
     },
-    subdivisionsByCountry: async (
+    subdivisions: async (
       _: unknown,
-      { countryCode }: SubdivisionsByCountryArgs,
+      { countryCode, ids }: SubdivisionsArgs,
     ) => {
-      const sequelize = await getSequelize();
-
-      try {
-        const results = await sequelize.models["Subdivisions"].findAll({
-          where: { countryCode },
-          order: [["id", "ASC"]],
-          raw: true,
-        });
-
-        return results;
-      } finally {
-        sequelize.connectionManager.close();
+      if (!countryCode && !ids) {
+        throw new Error("At least one of countryCode or ids must be provided");
       }
-    },
-    subdivisionsById: async (_: unknown, { ids }: SubdivisionsByIdArgs) => {
+
       const sequelize = await getSequelize();
 
       try {
+        const where: Record<string, unknown> = {};
+
+        if (countryCode) {
+          where.countryCode = countryCode;
+        }
+        if (ids) {
+          where.id = { [Op.in]: ids };
+        }
+
         const results = await sequelize.models["Subdivisions"].findAll({
-          where: { id: { [Op.in]: ids } },
+          where,
           order: [["id", "ASC"]],
           raw: true,
         });

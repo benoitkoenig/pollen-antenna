@@ -16,12 +16,12 @@ import type { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-
 type Documents = {
     "\n  query GetJwt($provider: String!, $token: String!) {\n    jwt(provider: $provider, token: $token) {\n      token\n      expiresAt\n    }\n  }\n": typeof types.GetJwtDocument,
     "\n  mutation RegisterAnswer(\n    $hasSymptoms: String!\n    $subdivision: String!\n    $date: String!\n  ) {\n    registerAnswer(\n      hasSymptoms: $hasSymptoms\n      subdivision: $subdivision\n      date: $date\n    ) {\n      id\n    }\n  }\n": typeof types.RegisterAnswerDocument,
-    "\n  query SubdivisionsByCountry($countryCode: String!) {\n    subdivisionsByCountry(countryCode: $countryCode) {\n      id\n    }\n  }\n": typeof types.SubdivisionsByCountryDocument,
+    "\n  query SubdivisionsByCountry($countryCode: String!) {\n    subdivisions(countryCode: $countryCode) {\n      id\n    }\n  }\n": typeof types.SubdivisionsByCountryDocument,
 };
 const documents: Documents = {
     "\n  query GetJwt($provider: String!, $token: String!) {\n    jwt(provider: $provider, token: $token) {\n      token\n      expiresAt\n    }\n  }\n": types.GetJwtDocument,
     "\n  mutation RegisterAnswer(\n    $hasSymptoms: String!\n    $subdivision: String!\n    $date: String!\n  ) {\n    registerAnswer(\n      hasSymptoms: $hasSymptoms\n      subdivision: $subdivision\n      date: $date\n    ) {\n      id\n    }\n  }\n": types.RegisterAnswerDocument,
-    "\n  query SubdivisionsByCountry($countryCode: String!) {\n    subdivisionsByCountry(countryCode: $countryCode) {\n      id\n    }\n  }\n": types.SubdivisionsByCountryDocument,
+    "\n  query SubdivisionsByCountry($countryCode: String!) {\n    subdivisions(countryCode: $countryCode) {\n      id\n    }\n  }\n": types.SubdivisionsByCountryDocument,
 };
 
 /**
@@ -49,7 +49,7 @@ export function graphql(source: "\n  mutation RegisterAnswer(\n    $hasSymptoms:
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "\n  query SubdivisionsByCountry($countryCode: String!) {\n    subdivisionsByCountry(countryCode: $countryCode) {\n      id\n    }\n  }\n"): (typeof documents)["\n  query SubdivisionsByCountry($countryCode: String!) {\n    subdivisionsByCountry(countryCode: $countryCode) {\n      id\n    }\n  }\n"];
+export function graphql(source: "\n  query SubdivisionsByCountry($countryCode: String!) {\n    subdivisions(countryCode: $countryCode) {\n      id\n    }\n  }\n"): (typeof documents)["\n  query SubdivisionsByCountry($countryCode: String!) {\n    subdivisions(countryCode: $countryCode) {\n      id\n    }\n  }\n"];
 
 export function graphql(source: string) {
   return (documents as any)[source] ?? {};

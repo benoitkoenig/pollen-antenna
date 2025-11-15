@@ -6,7 +6,7 @@ import { graphql } from "generated/gql";
 
 const SubdivisionsByCountryDocument = graphql(/* GraphQL */ `
   query SubdivisionsByCountry($countryCode: String!) {
-    subdivisionsByCountry(countryCode: $countryCode) {
+    subdivisions(countryCode: $countryCode) {
       id
     }
   }
@@ -20,5 +20,5 @@ export function useSubdivisionsByCountry(countryCode: string | null) {
     skip: !countryCode,
   });
 
-  return { subdivisions: data?.subdivisionsByCountry ?? null, loading, error };
+  return { subdivisions: data?.subdivisions ?? null, loading, error };
 }
