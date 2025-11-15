@@ -22,12 +22,12 @@ export const answersResolvers = {
         const results = await sequelize.query(
           `
           SELECT
-            CAST("createdAt" AS DATE) as date,
+            "date",
             SUM(CASE WHEN "hasSymptoms" = 'yes' THEN 1 ELSE 0 END) as "yesCount",
             SUM(CASE WHEN "hasSymptoms" = 'no' THEN 1 ELSE 0 END) as "noCount"
           FROM "Answers"
           WHERE "subdivision" = :subdivision
-          GROUP BY CAST("createdAt" AS DATE)
+          GROUP BY "date"
           ORDER BY "date" DESC
           `,
           {
