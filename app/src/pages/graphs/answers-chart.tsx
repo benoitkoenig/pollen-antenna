@@ -1,21 +1,18 @@
 import * as d3 from "d3";
-import { memo, useEffect, useRef } from "react";
+import { memo, useEffect, useMemo, useRef } from "react";
 
-interface DataPoint {
-  date: string;
-  yesCount: number;
-  noCount: number;
-}
+import { useGraphs } from "./graphs-provider";
 
-interface AnswersByDateChartProps {
-  data: DataPoint[];
-}
-
-export const AnswersByDateChart = memo(function AnswersByDateChart({
-  data,
-}: AnswersByDateChartProps) {
+export const AnswersChart = memo(function AnswersChart() {
   const svgRef = useRef<SVGSVGElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
+
+  const { focusedSubdivisionId, subdivisions } = useGraphs();
+
+  const data = useMemo(
+    () => subdivisions.find(({ id }) => id === focusedSubdivisionId)?.answers,
+    [subdivisions, focusedSubdivisionId],
+  );
 
   useEffect(() => {
     if (!svgRef.current || !containerRef.current || !data || data.length === 0)

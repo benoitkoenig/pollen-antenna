@@ -1,6 +1,6 @@
-import type { Subdivision } from "../src/types";
+import type { MapSubdivision } from "../src/types";
 
-export const bel: Subdivision[] = [
+export const bel: MapSubdivision[] = [
   {
     id: "27649430B17719898407236",
     coordinates: [

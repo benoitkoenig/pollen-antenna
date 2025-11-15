@@ -1,11 +1,11 @@
 import { memo, useState } from "react";
 
-import type { Subdivision } from "./types";
+import type { MapSubdivision } from "./types";
 
-const Map = memo(function Map({
+export const Map = memo(function Map({
   subdivisions,
 }: {
-  subdivisions: Subdivision[];
+  subdivisions: MapSubdivision[];
 }) {
   const [hoveredId, setHoveredId] = useState<string | null>(null);
 
@@ -77,5 +77,3 @@ const Map = memo(function Map({
     </svg>
   );
 });
-
-export default Map;
