@@ -45,7 +45,7 @@ export type Query = {
   __typename?: 'Query';
   health: Scalars['String']['output'];
   jwt: JwtResponse;
-  nearbySubdivisions: Array<Subdivision>;
+  nearbySubdivisions: Array<SubdivisionGeography>;
   subdivisions: Array<Subdivision>;
 };
 
@@ -74,6 +74,16 @@ export type RegisterAnswerResponse = {
 export type Subdivision = {
   __typename?: 'Subdivision';
   answersByDate: Array<DateAnswers>;
+  countryCode: Scalars['String']['output'];
+  eastBound: Scalars['Float']['output'];
+  id: Scalars['ID']['output'];
+  northBound: Scalars['Float']['output'];
+  southBound: Scalars['Float']['output'];
+  westBound: Scalars['Float']['output'];
+};
+
+export type SubdivisionGeography = {
+  __typename?: 'SubdivisionGeography';
   coordinates: Scalars['String']['output'];
   countryCode: Scalars['String']['output'];
   eastBound: Scalars['Float']['output'];

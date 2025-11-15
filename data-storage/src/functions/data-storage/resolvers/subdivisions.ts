@@ -73,6 +73,9 @@ export const subdivisionsResolvers = {
         }
 
         const results = await sequelize.models["Subdivisions"].findAll({
+          attributes: {
+            exclude: ["coordinates"],
+          },
           where,
           order: [["id", "ASC"]],
           raw: true,
