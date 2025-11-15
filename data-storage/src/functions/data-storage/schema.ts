@@ -36,7 +36,7 @@ type Subdivision {
 type SubdivisionGeography {
   id: ID!
   countryCode: String!
-  coordinates: String!
+  coordinates: [[[Float!]!]!]!
   northBound: Float!
   eastBound: Float!
   westBound: Float!

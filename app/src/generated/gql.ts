@@ -14,11 +14,15 @@ import type { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-
  * Learn more about it here: https://the-guild.dev/graphql/codegen/plugins/presets/preset-client#reducing-bundle-size
  */
 type Documents = {
+    "\n  query NearbySubdivisions($subdivisionId: String!) {\n    nearbySubdivisions(subdivisionId: $subdivisionId) {\n      id\n      coordinates\n    }\n  }\n": typeof types.NearbySubdivisionsDocument,
+    "\n  query Subdivisions($ids: [String!]!) {\n    subdivisions(ids: $ids) {\n      id\n      answersByDate {\n        date\n        yesCount\n        noCount\n      }\n    }\n  }\n": typeof types.SubdivisionsDocument,
     "\n  query GetJwt($provider: String!, $token: String!) {\n    jwt(provider: $provider, token: $token) {\n      token\n      expiresAt\n    }\n  }\n": typeof types.GetJwtDocument,
     "\n  mutation RegisterAnswer(\n    $hasSymptoms: String!\n    $subdivision: String!\n    $date: String!\n  ) {\n    registerAnswer(\n      hasSymptoms: $hasSymptoms\n      subdivision: $subdivision\n      date: $date\n    ) {\n      id\n    }\n  }\n": typeof types.RegisterAnswerDocument,
     "\n  query SubdivisionsByCountry($countryCode: String!) {\n    subdivisions(countryCode: $countryCode) {\n      id\n    }\n  }\n": typeof types.SubdivisionsByCountryDocument,
 };
 const documents: Documents = {
+    "\n  query NearbySubdivisions($subdivisionId: String!) {\n    nearbySubdivisions(subdivisionId: $subdivisionId) {\n      id\n      coordinates\n    }\n  }\n": types.NearbySubdivisionsDocument,
+    "\n  query Subdivisions($ids: [String!]!) {\n    subdivisions(ids: $ids) {\n      id\n      answersByDate {\n        date\n        yesCount\n        noCount\n      }\n    }\n  }\n": types.SubdivisionsDocument,
     "\n  query GetJwt($provider: String!, $token: String!) {\n    jwt(provider: $provider, token: $token) {\n      token\n      expiresAt\n    }\n  }\n": types.GetJwtDocument,
     "\n  mutation RegisterAnswer(\n    $hasSymptoms: String!\n    $subdivision: String!\n    $date: String!\n  ) {\n    registerAnswer(\n      hasSymptoms: $hasSymptoms\n      subdivision: $subdivision\n      date: $date\n    ) {\n      id\n    }\n  }\n": types.RegisterAnswerDocument,
     "\n  query SubdivisionsByCountry($countryCode: String!) {\n    subdivisions(countryCode: $countryCode) {\n      id\n    }\n  }\n": types.SubdivisionsByCountryDocument,
@@ -38,6 +42,14 @@ const documents: Documents = {
  */
 export function graphql(source: string): unknown;
 
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  query NearbySubdivisions($subdivisionId: String!) {\n    nearbySubdivisions(subdivisionId: $subdivisionId) {\n      id\n      coordinates\n    }\n  }\n"): (typeof documents)["\n  query NearbySubdivisions($subdivisionId: String!) {\n    nearbySubdivisions(subdivisionId: $subdivisionId) {\n      id\n      coordinates\n    }\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  query Subdivisions($ids: [String!]!) {\n    subdivisions(ids: $ids) {\n      id\n      answersByDate {\n        date\n        yesCount\n        noCount\n      }\n    }\n  }\n"): (typeof documents)["\n  query Subdivisions($ids: [String!]!) {\n    subdivisions(ids: $ids) {\n      id\n      answersByDate {\n        date\n        yesCount\n        noCount\n      }\n    }\n  }\n"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

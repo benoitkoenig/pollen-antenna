@@ -10,7 +10,8 @@ export const AnswersChart = memo(function AnswersChart() {
   const { focusedSubdivisionId, subdivisions } = useGraphs();
 
   const data = useMemo(
-    () => subdivisions.find(({ id }) => id === focusedSubdivisionId)?.answers,
+    () =>
+      subdivisions.find(({ id }) => id === focusedSubdivisionId)?.answersByDate,
     [subdivisions, focusedSubdivisionId],
   );
 
