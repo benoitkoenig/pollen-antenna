@@ -41,31 +41,6 @@ export const answersResolvers = {
         sequelize.connectionManager.close();
       }
     },
-    answersByLocation: async () => {
-      const sequelize = await getSequelize();
-
-      try {
-        const results = await sequelize.query(
-          `
-          SELECT
-            "subdivision",
-            SUM(CASE WHEN "hasSymptoms" = 'yes' THEN 1 ELSE 0 END) as "yesCount",
-            SUM(CASE WHEN "hasSymptoms" = 'no' THEN 1 ELSE 0 END) as "noCount"
-          FROM "Answers"
-          WHERE CAST("createdAt" AS DATE) = CURRENT_DATE
-          GROUP BY "subdivision"
-          ORDER BY "subdivision"
-          `,
-          {
-            type: QueryTypes.SELECT,
-          },
-        );
-
-        return results;
-      } finally {
-        sequelize.connectionManager.close();
-      }
-    },
   },
   Mutation: {
     registerAnswer: async (

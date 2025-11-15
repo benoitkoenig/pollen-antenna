@@ -2,7 +2,6 @@ export const typeDefs = `#graphql
 type Query {
   health: String!
   answersByDate(subdivision: String!): [DateAnswers!]!
-  answersByLocation: [LocationAnswers!]!
   jwt(provider: String!, token: String!): JwtResponse!
   nearbySubdivisions(subdivisionId: String!): [Subdivision!]!
   subdivisionsByCountry(countryCode: String!): [Subdivision!]!
@@ -10,12 +9,6 @@ type Query {
 
 type DateAnswers {
   date: String!
-  yesCount: Int!
-  noCount: Int!
-}
-
-type LocationAnswers {
-  subdivision: String!
   yesCount: Int!
   noCount: Int!
 }
