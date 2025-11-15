@@ -1,9 +1,13 @@
-import { QueryTypes } from "sequelize";
+import { Op } from "sequelize";
 
 import { getSequelize } from "../../../database/get-sequelize";
 
 export interface NearbySubdivisionsArgs {
   subdivisionId: string;
+}
+
+export interface SubdivisionsByCountryArgs {
+  countryCode: string;
 }
 
 export const geolocationResolvers = {
@@ -15,7 +19,6 @@ export const geolocationResolvers = {
       const sequelize = await getSequelize();
 
       try {
-        // First, get the bounds of the target subdivision
         const targetSubdivision =
           await sequelize.models["Subdivisions"].findByPk(subdivisionId);
 
@@ -28,35 +31,34 @@ export const geolocationResolvers = {
         const westBound = targetSubdivision.get("westBound") as number;
         const southBound = targetSubdivision.get("southBound") as number;
 
-        // Query for subdivisions that overlap with the target subdivision's bounding box
-        // Two bounding boxes overlap if:
-        // - The target's westBound is less than the other's eastBound
-        // - The target's eastBound is greater than the other's westBound
-        // - The target's southBound is less than the other's northBound
-        // - The target's northBound is greater than the other's southBound
-        const results = await sequelize.query(
-          `
-          SELECT
-            id,
-            "countryCode",
-            coordinates,
-            "northBound",
-            "eastBound",
-            "westBound",
-            "southBound"
-          FROM "Subdivisions"
-          WHERE
-            :westBound < "eastBound" AND
-            :eastBound > "westBound" AND
-            :southBound < "northBound" AND
-            :northBound > "southBound"
-          ORDER BY id
-          `,
-          {
-            replacements: { northBound, eastBound, westBound, southBound },
-            type: QueryTypes.SELECT,
+        const results = await sequelize.models["Subdivisions"].findAll({
+          where: {
+            eastBound: { [Op.gt]: westBound },
+            westBound: { [Op.lt]: eastBound },
+            northBound: { [Op.gt]: southBound },
+            southBound: { [Op.lt]: northBound },
           },
-        );
+          order: [["id", "ASC"]],
+          raw: true,
+        });
+
+        return results;
+      } finally {
+        sequelize.connectionManager.close();
+      }
+    },
+    subdivisionsByCountry: async (
+      _: unknown,
+      { countryCode }: SubdivisionsByCountryArgs,
+    ) => {
+      const sequelize = await getSequelize();
+
+      try {
+        const results = await sequelize.models["Subdivisions"].findAll({
+          where: { countryCode },
+          order: [["id", "ASC"]],
+          raw: true,
+        });
 
         return results;
       } finally {

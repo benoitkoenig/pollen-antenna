@@ -5,6 +5,7 @@ type Query {
   answersByLocation: [LocationAnswers!]!
   jwt(provider: String!, token: String!): JwtResponse!
   nearbySubdivisions(subdivisionId: String!): [Subdivision!]!
+  subdivisionsByCountry(countryCode: String!): [Subdivision!]!
 }
 
 type DateAnswers {
