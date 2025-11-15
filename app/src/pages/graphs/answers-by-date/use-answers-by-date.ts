@@ -3,8 +3,8 @@ import { useQuery } from "@apollo/client/react";
 import { graphql } from "generated/gql";
 
 const AnswersByDateDocument = graphql(/* GraphQL */ `
-  query AnswersByDate($country: String!, $subdivision: String!) {
-    answersByDate(country: $country, subdivision: $subdivision) {
+  query AnswersByDate($subdivision: String!) {
+    answersByDate(subdivision: $subdivision) {
       date
       yesCount
       noCount
@@ -12,10 +12,9 @@ const AnswersByDateDocument = graphql(/* GraphQL */ `
   }
 `);
 
-export function useAnswersByDate(country: string, subdivision: string) {
+export function useAnswersByDate(subdivision: string) {
   return useQuery(AnswersByDateDocument, {
     variables: {
-      country,
       subdivision,
     },
     context: {

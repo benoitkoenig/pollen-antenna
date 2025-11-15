@@ -5,7 +5,6 @@ import { graphql } from "generated/gql";
 const AnswersByLocationDocument = graphql(/* GraphQL */ `
   query AnswersByLocation {
     answersByLocation {
-      country
       subdivision
       yesCount
       noCount

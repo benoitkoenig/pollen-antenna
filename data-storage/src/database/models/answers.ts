@@ -15,10 +15,6 @@ export function defineAnswersModel(s: Sequelize) {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    country: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
     subdivision: {
       type: DataTypes.STRING,
       allowNull: false,

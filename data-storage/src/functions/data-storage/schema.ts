@@ -1,7 +1,7 @@
 export const typeDefs = `#graphql
 type Query {
   health: String!
-  answersByDate(country: String!, subdivision: String!): [DateAnswers!]!
+  answersByDate(subdivision: String!): [DateAnswers!]!
   answersByLocation: [LocationAnswers!]!
   jwt(provider: String!, token: String!): JwtResponse!
   nearbySubdivisions(subdivisionId: String!): [Subdivision!]!
@@ -15,7 +15,6 @@ type DateAnswers {
 }
 
 type LocationAnswers {
-  country: String!
   subdivision: String!
   yesCount: Int!
   noCount: Int!
@@ -41,6 +40,6 @@ type Subdivision {
 }
 
 type Mutation {
-  registerAnswer(hasSymptoms: String!, country: String!, subdivision: String!, date: String!): RegisterAnswerResponse
+  registerAnswer(hasSymptoms: String!, subdivision: String!, date: String!): RegisterAnswerResponse
 }
 `;

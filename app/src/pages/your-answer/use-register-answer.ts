@@ -6,13 +6,11 @@ import { graphql } from "../../generated/gql";
 const RegisterAnswerDocument = graphql(/* GraphQL */ `
   mutation RegisterAnswer(
     $hasSymptoms: String!
-    $country: String!
     $subdivision: String!
     $date: String!
   ) {
     registerAnswer(
       hasSymptoms: $hasSymptoms
-      country: $country
       subdivision: $subdivision
       date: $date
     ) {
@@ -25,16 +23,10 @@ export function useRegisterAnswer() {
   const [registerAnswerMutation] = useMutation(RegisterAnswerDocument);
 
   const registerAnswer = useCallback(
-    async (
-      hasSymptoms: string,
-      country: string,
-      subdivision: string,
-      date: string,
-    ) => {
+    async (hasSymptoms: string, subdivision: string, date: string) => {
       const result = await registerAnswerMutation({
         variables: {
           hasSymptoms,
-          country,
           subdivision,
           date,
         },

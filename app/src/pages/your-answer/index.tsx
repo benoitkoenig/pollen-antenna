@@ -39,7 +39,6 @@ export default memo(function YourAnswer() {
 
       const answerId = await registerAnswer(
         hasSymptoms,
-        geolocation.countryCode,
         geolocation.subdivision,
         date,
       );

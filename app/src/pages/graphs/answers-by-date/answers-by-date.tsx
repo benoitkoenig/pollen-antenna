@@ -10,7 +10,6 @@ export const AnswersByDate = memo(function AnswersByDate() {
   const { geolocation } = useGeolocation();
 
   const { data, loading, error } = useAnswersByDate(
-    geolocation?.countryCode ?? "",
     geolocation?.subdivision ?? "",
   );
 
