@@ -1,6 +1,10 @@
-import { Op } from "sequelize";
+import { QueryTypes, Op } from "sequelize";
 
 import { getSequelize } from "../../../database/get-sequelize";
+
+export interface Subdivision {
+  id: string;
+}
 
 export interface NearbySubdivisionsArgs {
   subdivisionId: string;
@@ -73,6 +77,34 @@ export const geolocationResolvers = {
           order: [["id", "ASC"]],
           raw: true,
         });
+
+        return results;
+      } finally {
+        sequelize.connectionManager.close();
+      }
+    },
+  },
+  Subdivision: {
+    answersByDate: async (parent: Subdivision) => {
+      const sequelize = await getSequelize();
+
+      try {
+        const results = await sequelize.query(
+          `
+          SELECT
+            "date",
+            SUM(CASE WHEN "hasSymptoms" = 'yes' THEN 1 ELSE 0 END) as "yesCount",
+            SUM(CASE WHEN "hasSymptoms" = 'no' THEN 1 ELSE 0 END) as "noCount"
+          FROM "Answers"
+          WHERE "subdivision" = :subdivision
+          GROUP BY "date"
+          ORDER BY "date" DESC
+          `,
+          {
+            replacements: { subdivision: parent.id },
+            type: QueryTypes.SELECT,
+          },
+        );
 
         return results;
       } finally {
