@@ -18,12 +18,14 @@ type Documents = {
     "\n  query AnswersByLocation {\n    answersByLocation {\n      country\n      subdivision\n      yesCount\n      noCount\n    }\n  }\n": typeof types.AnswersByLocationDocument,
     "\n  query GetJwt($provider: String!, $token: String!) {\n    jwt(provider: $provider, token: $token) {\n      token\n      expiresAt\n    }\n  }\n": typeof types.GetJwtDocument,
     "\n  mutation RegisterAnswer(\n    $hasSymptoms: String!\n    $country: String!\n    $subdivision: String!\n    $date: String!\n  ) {\n    registerAnswer(\n      hasSymptoms: $hasSymptoms\n      country: $country\n      subdivision: $subdivision\n      date: $date\n    ) {\n      id\n    }\n  }\n": typeof types.RegisterAnswerDocument,
+    "\n  query SubdivisionsByCountry($countryCode: String!) {\n    subdivisionsByCountry(countryCode: $countryCode) {\n      id\n    }\n  }\n": typeof types.SubdivisionsByCountryDocument,
 };
 const documents: Documents = {
     "\n  query AnswersByDate($country: String!, $subdivision: String!) {\n    answersByDate(country: $country, subdivision: $subdivision) {\n      date\n      yesCount\n      noCount\n    }\n  }\n": types.AnswersByDateDocument,
     "\n  query AnswersByLocation {\n    answersByLocation {\n      country\n      subdivision\n      yesCount\n      noCount\n    }\n  }\n": types.AnswersByLocationDocument,
     "\n  query GetJwt($provider: String!, $token: String!) {\n    jwt(provider: $provider, token: $token) {\n      token\n      expiresAt\n    }\n  }\n": types.GetJwtDocument,
     "\n  mutation RegisterAnswer(\n    $hasSymptoms: String!\n    $country: String!\n    $subdivision: String!\n    $date: String!\n  ) {\n    registerAnswer(\n      hasSymptoms: $hasSymptoms\n      country: $country\n      subdivision: $subdivision\n      date: $date\n    ) {\n      id\n    }\n  }\n": types.RegisterAnswerDocument,
+    "\n  query SubdivisionsByCountry($countryCode: String!) {\n    subdivisionsByCountry(countryCode: $countryCode) {\n      id\n    }\n  }\n": types.SubdivisionsByCountryDocument,
 };
 
 /**
@@ -56,6 +58,10 @@ export function graphql(source: "\n  query GetJwt($provider: String!, $token: St
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(source: "\n  mutation RegisterAnswer(\n    $hasSymptoms: String!\n    $country: String!\n    $subdivision: String!\n    $date: String!\n  ) {\n    registerAnswer(\n      hasSymptoms: $hasSymptoms\n      country: $country\n      subdivision: $subdivision\n      date: $date\n    ) {\n      id\n    }\n  }\n"): (typeof documents)["\n  mutation RegisterAnswer(\n    $hasSymptoms: String!\n    $country: String!\n    $subdivision: String!\n    $date: String!\n  ) {\n    registerAnswer(\n      hasSymptoms: $hasSymptoms\n      country: $country\n      subdivision: $subdivision\n      date: $date\n    ) {\n      id\n    }\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  query SubdivisionsByCountry($countryCode: String!) {\n    subdivisionsByCountry(countryCode: $countryCode) {\n      id\n    }\n  }\n"): (typeof documents)["\n  query SubdivisionsByCountry($countryCode: String!) {\n    subdivisionsByCountry(countryCode: $countryCode) {\n      id\n    }\n  }\n"];
 
 export function graphql(source: string) {
   return (documents as any)[source] ?? {};

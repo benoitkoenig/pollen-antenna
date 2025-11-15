@@ -1,15 +1,12 @@
-import { useState, useEffect, memo, useCallback } from "react";
+import { useState, memo, useCallback } from "react";
 import { FormattedMessage, useIntl } from "react-intl";
 
-import {
-  countryCodes,
-  type CountryCode,
-  importSubdivisions,
-} from "@pollen-antenna/static-data";
+import { countryCodes, type CountryCode } from "@pollen-antenna/static-data";
 
 import { useGeolocation } from "global-providers/geolocation";
 
 import type { GeolocationData } from "../types";
+import { useSubdivisionsByCountry } from "../use-subdivisions";
 
 export default memo(function Geolocation({
   onSubmit,
@@ -23,33 +20,14 @@ export default memo(function Geolocation({
   const [selectedCountryCode, setSelectedCountryCode] = useState<
     CountryCode | undefined
   >(storedGeolocation?.countryCode ?? undefined);
-  const [subdivisions, setSubdivisions] = useState<string[] | null>(null);
+
+  const { subdivisions } = useSubdivisionsByCountry(
+    selectedCountryCode ?? null,
+  );
+
   const [selectedSubdivision, setSelectedSubdivision] = useState<
     string | undefined
   >(storedGeolocation?.subdivision ?? undefined);
-
-  useEffect(() => {
-    if (!selectedCountryCode) {
-      return;
-    }
-
-    let isCanceled = false;
-
-    (async () => {
-      const subdivisionsToSet = await importSubdivisions(selectedCountryCode);
-
-      if (!isCanceled) {
-        setSubdivisions(subdivisionsToSet);
-      }
-    })();
-
-    return () => {
-      setSubdivisions(null);
-      setSelectedSubdivision(undefined);
-
-      isCanceled = true;
-    };
-  }, [selectedCountryCode]);
 
   const handleSubmit = useCallback(
     (e: React.FormEvent<HTMLFormElement>) => {
@@ -139,9 +117,9 @@ export default memo(function Geolocation({
                       description: "geolocation",
                     })}
                   </option>
-                  {subdivisions.map((subdivision) => (
-                    <option key={subdivision} value={subdivision}>
-                      {subdivision}
+                  {subdivisions.map(({ id }) => (
+                    <option key={id} value={id}>
+                      {id}
                     </option>
                   ))}
                 </>
