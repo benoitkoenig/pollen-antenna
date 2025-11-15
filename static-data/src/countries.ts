@@ -230,7 +230,7 @@ export const countryCodes = [
   "zmb",
   "zwe",
   "tkl",
-];
+] as const;
 
 export type CountryCode = (typeof countryCodes)[number];
 
