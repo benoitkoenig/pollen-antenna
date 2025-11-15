@@ -15,7 +15,7 @@ export interface SubdivisionsArgs {
   ids?: string[];
 }
 
-export const geolocationResolvers = {
+export const subdivisionsResolvers = {
   Query: {
     nearbySubdivisions: async (
       _: unknown,
