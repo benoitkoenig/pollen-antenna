@@ -3,19 +3,19 @@ import { QueryTypes } from "sequelize";
 import { getSequelize } from "../../../database/get-sequelize";
 import type { ExtendedContext } from "../middlewares";
 
-export interface AnswersByDateArgs {
-  subdivision: string;
-}
-
 export interface RegisterAnswerArgs {
   hasSymptoms: boolean;
   subdivision: string;
   date: string;
 }
 
+export interface Subdivision {
+  id: string;
+}
+
 export const answersResolvers = {
-  Query: {
-    answersByDate: async (_: unknown, { subdivision }: AnswersByDateArgs) => {
+  Subdivision: {
+    answersByDate: async (parent: Subdivision) => {
       const sequelize = await getSequelize();
 
       try {
@@ -31,7 +31,7 @@ export const answersResolvers = {
           ORDER BY "date" DESC
           `,
           {
-            replacements: { subdivision },
+            replacements: { subdivision: parent.id },
             type: QueryTypes.SELECT,
           },
         );

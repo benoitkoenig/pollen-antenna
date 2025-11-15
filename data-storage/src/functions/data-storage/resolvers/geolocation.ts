@@ -10,6 +10,10 @@ export interface SubdivisionsByCountryArgs {
   countryCode: string;
 }
 
+export interface SubdivisionsByIdArgs {
+  ids: string[];
+}
+
 export const geolocationResolvers = {
   Query: {
     nearbySubdivisions: async (
@@ -56,6 +60,21 @@ export const geolocationResolvers = {
       try {
         const results = await sequelize.models["Subdivisions"].findAll({
           where: { countryCode },
+          order: [["id", "ASC"]],
+          raw: true,
+        });
+
+        return results;
+      } finally {
+        sequelize.connectionManager.close();
+      }
+    },
+    subdivisionsById: async (_: unknown, { ids }: SubdivisionsByIdArgs) => {
+      const sequelize = await getSequelize();
+
+      try {
+        const results = await sequelize.models["Subdivisions"].findAll({
+          where: { id: { [Op.in]: ids } },
           order: [["id", "ASC"]],
           raw: true,
         });

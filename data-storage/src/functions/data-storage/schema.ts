@@ -1,10 +1,10 @@
 export const typeDefs = `#graphql
 type Query {
   health: String!
-  answersByDate(subdivision: String!): [DateAnswers!]!
   jwt(provider: String!, token: String!): JwtResponse!
   nearbySubdivisions(subdivisionId: String!): [Subdivision!]!
   subdivisionsByCountry(countryCode: String!): [Subdivision!]!
+  subdivisionsById(ids: [String!]!): [Subdivision!]!
 }
 
 type DateAnswers {
@@ -30,6 +30,7 @@ type Subdivision {
   eastBound: Float!
   westBound: Float!
   southBound: Float!
+  answersByDate: [DateAnswers!]!
 }
 
 type Mutation {
