@@ -19,10 +19,6 @@ export default memo(function YourAnswer() {
 
   const [hasSymptoms, setHasSymptoms] = useState<string | null>(null);
 
-  if (todaysAnswerId) {
-    return <Navigate to="/graphs" />;
-  }
-
   const onSubmitSymptoms = useCallback((answer: string) => {
     setHasSymptoms(answer);
   }, []);
@@ -50,6 +46,10 @@ export default memo(function YourAnswer() {
     },
     [hasSymptoms, registerAnswer, navigate],
   );
+
+  if (todaysAnswerId) {
+    return <Navigate to="/graphs" />;
+  }
 
   // Display symptoms view if hasSymptoms is not set
   if (!hasSymptoms) {
