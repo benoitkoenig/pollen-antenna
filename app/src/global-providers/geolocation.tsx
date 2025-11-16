@@ -7,7 +7,10 @@ import {
   type ReactNode,
 } from "react";
 
-import type { CountryCode } from "@pollen-antenna/static-data";
+import {
+  checkIsCountryCode,
+  type CountryCode,
+} from "@pollen-antenna/static-data";
 
 const COOKIE_NAME = "geolocation";
 
@@ -25,6 +28,10 @@ function getGeolocationFromCookie(): Geolocation | null {
   }
 
   const [countryCode, subdivision] = cookie.split("=")[1].split(":");
+
+  if (!checkIsCountryCode(countryCode)) {
+    throw new Error("CountryCode is not valid");
+  }
 
   return { countryCode, subdivision };
 }
