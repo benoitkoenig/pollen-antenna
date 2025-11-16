@@ -5,8 +5,7 @@
   "scripts": {
     "tsc": "tsc",
     "madge": "madge --circular --ts-config tsconfig.json src/index.tsx",
-    "ts-unused-exports": "ts-unused-exports tsconfig.json",
-    "sync-subdivisions": "node --experimental-strip-types scripts/sync-subdivisions/index.ts"
+    "ts-unused-exports": "ts-unused-exports tsconfig.json"
   },
   "type": "module",
   "exports": {
