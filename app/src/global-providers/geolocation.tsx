@@ -37,7 +37,7 @@ function getGeolocationFromCookie(): Geolocation | null {
 }
 
 function setGeolocationCookie({ countryCode, subdivision }: Geolocation) {
-  document.cookie = `${COOKIE_NAME}=${countryCode}:${subdivision}; path=/`;
+  document.cookie = `${COOKIE_NAME}=${countryCode}:${subdivision}; expires=Tue, 31 Dec 2999 00:00:00 GMT; path=/`;
 }
 
 interface GeolocationContextValue {
