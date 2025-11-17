@@ -21,13 +21,25 @@ export const NonAuthenticatedFilters = memo(function NonAuthenticatedFilters() {
 
   return (
     <div>
-      <label>
-        <input type="checkbox" onClick={handleCheckboxClick} className="mr-2" />
-        <FormattedMessage
-          defaultMessage="Exclude data from non-authenticated users"
-          description="filters checkbox label"
-        />
-      </label>
+      <div>
+        <label>
+          <input
+            type="checkbox"
+            onClick={handleCheckboxClick}
+            className="mr-2"
+          />
+          <FormattedMessage
+            defaultMessage="Exclude data from non-authenticated users"
+            description="Filters"
+          />
+        </label>
+        <div className="text-sm text-gray-400 ml-6">
+          <FormattedMessage
+            defaultMessage="Data from authenticated users is more reliable and allows filtering per allergen"
+            description="Filters"
+          />
+        </div>
+      </div>
 
       {showModalToAuthentication ? (
         <ModalToAuthentication onClose={onCloseModalToAuthentication} />
