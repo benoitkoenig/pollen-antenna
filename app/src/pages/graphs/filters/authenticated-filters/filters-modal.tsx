@@ -21,7 +21,7 @@ export const FiltersModal = memo(function FiltersModal({
         <input
           checked={authenticatedOnly}
           type="checkbox"
-          onClick={toggleAuthenticatedOnly}
+          onChange={toggleAuthenticatedOnly}
           className="mr-2"
         />
         <FormattedMessage
