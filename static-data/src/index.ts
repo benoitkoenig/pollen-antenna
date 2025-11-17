@@ -1,3 +1,5 @@
+export { allergensByType } from "./allergens";
+
 export {
   countryCodes,
   checkIsCountryCode,
