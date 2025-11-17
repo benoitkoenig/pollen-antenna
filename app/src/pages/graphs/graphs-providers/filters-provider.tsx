@@ -1,18 +1,17 @@
 import {
   createContext,
   memo,
+  useCallback,
   useContext,
   useState,
-  type Dispatch,
   type ReactNode,
-  type SetStateAction,
 } from "react";
 
 interface FiltersContextValue {
   authenticatedOnly: boolean;
   allergen: string | null;
-  setAuthenticatedOnly: Dispatch<SetStateAction<boolean>>;
-  setAllergen: Dispatch<SetStateAction<string | null>>;
+  setAuthenticatedOnly: (authenticatedOnly: boolean) => void;
+  setAllergen: (allergen: string | null) => void;
 }
 
 const FiltersContext = createContext<FiltersContextValue>({
@@ -31,8 +30,24 @@ export const FiltersProvider = memo(function FiltersProvider({
 }: {
   children: ReactNode;
 }) {
-  const [authenticatedOnly, setAuthenticatedOnly] = useState(false);
-  const [allergen, setAllergen] = useState<string | null>(null);
+  const [authenticatedOnly, setAuthenticatedOnlyState] = useState(false);
+  const [allergen, setAllergenState] = useState<string | null>(null);
+
+  const setAuthenticatedOnly = useCallback((authenticatedOnly: boolean) => {
+    setAuthenticatedOnlyState(authenticatedOnly);
+
+    if (!authenticatedOnly) {
+      setAllergen(null);
+    }
+  }, []);
+
+  const setAllergen = useCallback((allergen: string | null) => {
+    setAllergenState(allergen);
+
+    if (allergen) {
+      setAuthenticatedOnly(true);
+    }
+  }, []);
 
   return (
     <FiltersContext.Provider

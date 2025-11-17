@@ -50,7 +50,7 @@ export const Modal = memo(function Modal({
   return createPortal(
     <dialog
       ref={dialogRef}
-      className="relative m-auto bg-white text-center p-12 rounded-lg max-w-md backdrop:bg-black/50 shadow-lg"
+      className="relative m-auto bg-white p-12 rounded-lg max-w-2xl backdrop:bg-black/50 shadow-lg"
       onClick={handleBackdropClick}
     >
       <button
