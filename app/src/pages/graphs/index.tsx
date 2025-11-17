@@ -24,9 +24,9 @@ export default memo(function Graphs() {
   return (
     <div className="my-6 space-y-6">
       <GraphsProvider currentSubdivisionId={geolocation.subdivision}>
-        <AnswersChart />
         <Filters />
         <AnswersMap />
+        <AnswersChart />
       </GraphsProvider>
     </div>
   );
