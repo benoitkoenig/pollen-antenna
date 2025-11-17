@@ -24,15 +24,15 @@ export default memo(function Graphs() {
 
   return (
     <div className="my-6 space-y-6">
-      <GraphsSubdivisionsProvider
-        currentSubdivisionId={geolocation.subdivision}
-      >
-        <FiltersProvider>
+      <FiltersProvider>
+        <GraphsSubdivisionsProvider
+          currentSubdivisionId={geolocation.subdivision}
+        >
           <Filters />
           <AnswersMap />
           <AnswersChart />
-        </FiltersProvider>
-      </GraphsSubdivisionsProvider>
+        </GraphsSubdivisionsProvider>
+      </FiltersProvider>
     </div>
   );
 });

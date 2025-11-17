@@ -88,10 +88,18 @@ export const subdivisionsResolvers = {
     },
   },
   Subdivision: {
-    answersByDate: async (parent: Subdivision) => {
+    answersByDate: async (
+      parent: Subdivision,
+      { authenticatedOnly }: { authenticatedOnly?: boolean },
+    ) => {
       const sequelize = await getSequelize();
 
       try {
+        const whereClause =
+          authenticatedOnly === true
+            ? `"subdivision" = :subdivision AND "userId" IS NOT NULL`
+            : `"subdivision" = :subdivision`;
+
         const results = await sequelize.query(
           `
           SELECT
@@ -99,7 +107,7 @@ export const subdivisionsResolvers = {
             SUM(CASE WHEN "hasSymptoms" = 'yes' THEN 1 ELSE 0 END) as "yesCount",
             SUM(CASE WHEN "hasSymptoms" = 'no' THEN 1 ELSE 0 END) as "noCount"
           FROM "Answers"
-          WHERE "subdivision" = :subdivision
+          WHERE ${whereClause}
           GROUP BY "date"
           ORDER BY "date" DESC
           `,

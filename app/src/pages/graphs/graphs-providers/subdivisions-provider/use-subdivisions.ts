@@ -3,10 +3,10 @@ import { useQuery } from "@apollo/client/react";
 import { graphql } from "generated/gql";
 
 const SubdivisionsDocument = graphql(/* GraphQL */ `
-  query Subdivisions($ids: [String!]!) {
+  query Subdivisions($ids: [String!]!, $authenticatedOnly: Boolean!) {
     subdivisions(ids: $ids) {
       id
-      answersByDate {
+      answersByDate(authenticatedOnly: $authenticatedOnly) {
         date
         yesCount
         noCount
@@ -15,10 +15,17 @@ const SubdivisionsDocument = graphql(/* GraphQL */ `
   }
 `);
 
-export default function useSubdivisions(ids: string[] | null) {
+export default function useSubdivisions({
+  ids,
+  authenticatedOnly,
+}: {
+  ids: string[] | null;
+  authenticatedOnly: boolean;
+}) {
   const { data } = useQuery(SubdivisionsDocument, {
     variables: {
       ids: ids ?? [],
+      authenticatedOnly,
     },
     skip: !ids,
   });

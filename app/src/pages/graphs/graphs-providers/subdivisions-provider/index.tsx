@@ -6,6 +6,8 @@ import {
   type ReactNode,
 } from "react";
 
+import { useFilters } from "../filters-provider";
+
 import type { SubdivisionData } from "./types";
 import useNearbySubdivisions from "./use-nearby-subdivisions";
 import useSubdivisions from "./use-subdivisions";
@@ -30,7 +32,11 @@ export const GraphsSubdivisionsProvider = memo(
     currentSubdivisionId: string;
     children: ReactNode;
   }) {
-    const currentSubdivisionSingleton = useSubdivisions([currentSubdivisionId]);
+    const { authenticatedOnly } = useFilters();
+    const currentSubdivisionSingleton = useSubdivisions({
+      ids: [currentSubdivisionId],
+      authenticatedOnly,
+    });
     const subdivisionGeographies = useNearbySubdivisions(currentSubdivisionId);
 
     const otherSubdivisionIds = useMemo(() => {
@@ -43,7 +49,10 @@ export const GraphsSubdivisionsProvider = memo(
         .map(({ id }) => id);
     }, [currentSubdivisionId, subdivisionGeographies]);
 
-    const otherSubdivisions = useSubdivisions(otherSubdivisionIds);
+    const otherSubdivisions = useSubdivisions({
+      ids: otherSubdivisionIds,
+      authenticatedOnly,
+    });
 
     const subdivisions = useMemo((): SubdivisionData[] => {
       const currentSubdivision = currentSubdivisionSingleton?.[0] ?? undefined;

@@ -28,7 +28,7 @@ type Subdivision {
   eastBound: Float!
   westBound: Float!
   southBound: Float!
-  answersByDate: [DateAnswers!]!
+  answersByDate(authenticatedOnly: Boolean): [DateAnswers!]!
 }
 
 # Subdivision cold-data. Responses to this query are safe to cache for long durations.

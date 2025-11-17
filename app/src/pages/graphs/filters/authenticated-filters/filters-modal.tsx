@@ -25,7 +25,7 @@ export const FiltersModal = memo(function FiltersModal({
           className="mr-2"
         />
         <FormattedMessage
-          defaultMessage="Only include data from authenticated users (Coming soon)"
+          defaultMessage="Only include data from authenticated users"
           description="Filters"
         />
       </label>
