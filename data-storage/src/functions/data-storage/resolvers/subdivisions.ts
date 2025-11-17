@@ -38,10 +38,10 @@ export const subdivisionsResolvers = {
 
         const results = await sequelize.models["Subdivisions"].findAll({
           where: {
-            eastBound: { [Op.gt]: westBound },
-            westBound: { [Op.lt]: eastBound },
-            northBound: { [Op.gt]: southBound },
-            southBound: { [Op.lt]: northBound },
+            eastBound: { [Op.gt]: westBound - 1 },
+            westBound: { [Op.lt]: eastBound + 1 },
+            northBound: { [Op.gt]: southBound - 1 },
+            southBound: { [Op.lt]: northBound + 1 },
           },
           order: [["id", "ASC"]],
           raw: true,
