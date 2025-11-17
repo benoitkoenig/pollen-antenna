@@ -29,7 +29,7 @@ export const NonAuthenticatedFilters = memo(function NonAuthenticatedFilters() {
             className="mr-2"
           />
           <FormattedMessage
-            defaultMessage="Exclude data from non-authenticated users"
+            defaultMessage="Only include data from authenticated users"
             description="Filters"
           />
         </label>
