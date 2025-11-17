@@ -2,10 +2,10 @@ import { memo, useMemo } from "react";
 
 import { Map, type MapSubdivision } from "@pollen-antenna/map";
 
-import { useGraphs } from "./graphs-provider";
+import { useGraphsSubdivisions } from "./graphs-providers/subdivisions-provider";
 
 export const AnswersMap = memo(function AnswersMap() {
-  const { subdivisions } = useGraphs();
+  const { subdivisions } = useGraphsSubdivisions();
 
   const subdivisionsWithCoordinates = useMemo(
     () =>

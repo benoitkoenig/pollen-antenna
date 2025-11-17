@@ -1,13 +1,13 @@
 import * as d3 from "d3";
 import { memo, useEffect, useMemo, useRef } from "react";
 
-import { useGraphs } from "./graphs-provider";
+import { useGraphsSubdivisions } from "./graphs-providers/subdivisions-provider";
 
 export const AnswersChart = memo(function AnswersChart() {
   const svgRef = useRef<SVGSVGElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
 
-  const { focusedSubdivisionId, subdivisions } = useGraphs();
+  const { focusedSubdivisionId, subdivisions } = useGraphsSubdivisions();
 
   const data = useMemo(
     () =>

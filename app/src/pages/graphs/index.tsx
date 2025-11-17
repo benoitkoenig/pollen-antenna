@@ -7,7 +7,7 @@ import { useTodaysAnswerId } from "global-providers/todays-answer-id";
 import { AnswersChart } from "./answers-chart";
 import { AnswersMap } from "./answers-map";
 import { Filters } from "./filters";
-import { GraphsProvider } from "./graphs-provider";
+import { GraphsSubdivisionsProvider } from "./graphs-providers/subdivisions-provider";
 
 export default memo(function Graphs() {
   const { todaysAnswerId } = useTodaysAnswerId();
@@ -23,11 +23,13 @@ export default memo(function Graphs() {
 
   return (
     <div className="my-6 space-y-6">
-      <GraphsProvider currentSubdivisionId={geolocation.subdivision}>
+      <GraphsSubdivisionsProvider
+        currentSubdivisionId={geolocation.subdivision}
+      >
         <Filters />
         <AnswersMap />
         <AnswersChart />
-      </GraphsProvider>
+      </GraphsSubdivisionsProvider>
     </div>
   );
 });
