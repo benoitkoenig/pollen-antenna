@@ -31,7 +31,7 @@ export const Map = memo(function Map({
 
   // Add padding (10% on each side)
   const padding = 0.1;
-  const viewBox = `${minLng - width * padding} ${minLat - height * padding} ${
+  const viewBox = `${minLng - width * padding} ${-maxLat - height * padding} ${
     width * (1 + 2 * padding)
   } ${height * (1 + 2 * padding)}`;
 
@@ -41,7 +41,7 @@ export const Map = memo(function Map({
       className="w-full h-full border-gray-400"
       preserveAspectRatio="xMidYMid meet"
     >
-      <g transform="scale(1, -1)">
+      <g transform="scale(1, 1)">
         {subdivisions.map((subdivision) => {
           const isHovered = hoveredId === subdivision.id;
 
