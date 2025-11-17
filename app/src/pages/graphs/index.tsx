@@ -7,6 +7,7 @@ import { useTodaysAnswerId } from "global-providers/todays-answer-id";
 import { AnswersChart } from "./answers-chart";
 import { AnswersMap } from "./answers-map";
 import { Filters } from "./filters";
+import { FiltersProvider } from "./graphs-providers/filters-provider";
 import { GraphsSubdivisionsProvider } from "./graphs-providers/subdivisions-provider";
 
 export default memo(function Graphs() {
@@ -26,9 +27,11 @@ export default memo(function Graphs() {
       <GraphsSubdivisionsProvider
         currentSubdivisionId={geolocation.subdivision}
       >
-        <Filters />
-        <AnswersMap />
-        <AnswersChart />
+        <FiltersProvider>
+          <Filters />
+          <AnswersMap />
+          <AnswersChart />
+        </FiltersProvider>
       </GraphsSubdivisionsProvider>
     </div>
   );
