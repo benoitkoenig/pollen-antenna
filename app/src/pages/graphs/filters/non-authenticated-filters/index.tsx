@@ -4,19 +4,18 @@ import { FormattedMessage } from "react-intl";
 import { ModalToAuthentication } from "./modal-to-authentication";
 
 export const NonAuthenticatedFilters = memo(function NonAuthenticatedFilters() {
-  const [showModalToAuthentication, setShowModalToAuthentication] =
-    useState(false);
+  const [modalIsVisible, setModalIsVisible] = useState(false);
 
   const handleCheckboxClick = useCallback(
     (e: React.MouseEvent<HTMLInputElement>) => {
       e.preventDefault();
-      setShowModalToAuthentication(true);
+      setModalIsVisible(true);
     },
     [],
   );
 
-  const onCloseModalToAuthentication = useCallback(() => {
-    setShowModalToAuthentication(false);
+  const closeModal = useCallback(() => {
+    setModalIsVisible(false);
   }, []);
 
   return (
@@ -41,9 +40,7 @@ export const NonAuthenticatedFilters = memo(function NonAuthenticatedFilters() {
         </div>
       </div>
 
-      {showModalToAuthentication ? (
-        <ModalToAuthentication onClose={onCloseModalToAuthentication} />
-      ) : null}
+      {modalIsVisible ? <ModalToAuthentication onClose={closeModal} /> : null}
     </div>
   );
 });
