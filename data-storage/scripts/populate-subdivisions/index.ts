@@ -5,11 +5,13 @@
 
 import { Sequelize } from "sequelize";
 
-import { countryCodes } from "../../../static-data/src/countries.ts";
+// import { countryCodes } from "../../../static-data/src/countries.ts";
 import { defineSubdivisionsModel } from "../../src/database/models/subdivisions.ts";
 
 import { fetchFeatures } from "./fetch-features.ts";
 import mapFeatureToSubdivision from "./map-feature-to-subdivision.ts";
+
+const countryCodes = ["bel", "fra", "nld", "lux"] as const;
 
 const DATABASE_URL = process.env["DATABASE_URL"];
 

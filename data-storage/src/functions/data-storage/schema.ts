@@ -1,4 +1,6 @@
 export const typeDefs = `#graphql
+scalar Json
+
 type Query {
   health: String!
   jwt(provider: String!, token: String!): JwtResponse!
@@ -32,11 +34,11 @@ type Subdivision {
 }
 
 # Subdivision cold-data. Responses to this query are safe to cache for long durations.
-# Since "coordinates" are very heavy, they can only be accessed on "SubdivisionGeography"
+# Since "geoJson" is very heavy, it can only be accessed on "SubdivisionGeography"
 type SubdivisionGeography {
   id: ID!
   countryCode: String!
-  coordinates: [[[Float!]!]!]!
+  geoJson: Json!
   northBound: Float!
   eastBound: Float!
   westBound: Float!

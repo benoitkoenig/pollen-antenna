@@ -8,7 +8,7 @@ const NearbySubdivisionsDocument = graphql(/* GraphQL */ `
   query NearbySubdivisions($subdivisionId: String!) {
     nearbySubdivisions(subdivisionId: $subdivisionId) {
       id
-      coordinates
+      geoJson
     }
   }
 `);
@@ -21,6 +21,6 @@ export default function useNearbySubdivisions(subdivisionId: string) {
   });
 
   return (data?.nearbySubdivisions ?? undefined) as
-    | Required<Pick<SubdivisionData, "id" | "coordinates">>[]
+    | Required<Pick<SubdivisionData, "id" | "geoJson">>[]
     | undefined;
 }

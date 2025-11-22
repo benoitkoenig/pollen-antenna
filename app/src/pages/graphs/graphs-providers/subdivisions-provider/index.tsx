@@ -87,7 +87,7 @@ export const GraphsSubdivisionsProvider = memo(
       for (const subdivisionGeography of subdivisionGeographies) {
         const completeSubdivision: SubdivisionData = {
           id: subdivisionGeography.id,
-          coordinates: subdivisionGeography.coordinates,
+          geoJson: subdivisionGeography.geoJson,
         };
 
         const answerData = subdivisionsAnswersData.find(

@@ -11,7 +11,7 @@ export function defineSubdivisionsModel(s: Sequelize) {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    coordinates: {
+    geoJson: {
       type: DataTypes.JSONB,
       allowNull: false,
     },

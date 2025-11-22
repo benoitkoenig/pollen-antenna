@@ -2,7 +2,6 @@
   "references": [
     { "path": "app" },
     { "path": "data-storage" },
-    { "path": "map" },
     { "path": "static-data" },
   ],
   "compilerOptions": {

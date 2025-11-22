@@ -1,6 +1,6 @@
 export interface SubdivisionData {
   id: string;
-  coordinates?: [number, number][][] | undefined;
+  geoJson?: unknown;
   answersByDate?:
     | {
         date: string;
