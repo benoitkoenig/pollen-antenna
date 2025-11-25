@@ -27,15 +27,15 @@ export function useGeoJsons(subdivisions: Subdivision[]) {
   useEffect(() => {
     let isCanceled = false;
 
-    setGeoJsons([]);
-
-    subdivisions.forEach(async ({ id }) => {
-      const geoJson = await fetchGeoJson(id);
+    (async () => {
+      const geoJsons = await Promise.all(
+        subdivisions.map(async ({ id }) => await fetchGeoJson(id)),
+      );
 
       if (!isCanceled) {
-        setGeoJsons((g) => [...g, geoJson]); // TODO: useDebouncing to save on CPU
+        setGeoJsons(geoJsons);
       }
-    });
+    })();
 
     return () => {
       isCanceled = true;
