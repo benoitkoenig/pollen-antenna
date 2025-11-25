@@ -1,0 +1,16 @@
+{
+  "name": "@pollen-antenna/cdn",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "populate-subdivisions": "node --experimental-strip-types scripts/populate-subdivisions/index.ts"
+  },
+  "dependencies": {
+  },
+  "devDependencies": {
+    "@pollen-antenna/static-data": "workspace:^",
+    "@types/node": "^20.12.12",
+    "typescript": "^5.9.2",
+    "zod": "^4.1.12"
+  }
+}
