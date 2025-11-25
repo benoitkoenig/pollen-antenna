@@ -2,25 +2,35 @@ import { useQuery } from "@apollo/client/react";
 
 import { graphql } from "generated/gql";
 
-import type { SubdivisionData } from "./types";
-
 const NearbySubdivisionsDocument = graphql(/* GraphQL */ `
-  query NearbySubdivisions($subdivisionId: String!) {
+  query NearbySubdivisions(
+    $subdivisionId: String!
+    $authenticatedOnly: Boolean!
+  ) {
     nearbySubdivisions(subdivisionId: $subdivisionId) {
       id
-      geoJson
+      answersByDate(authenticatedOnly: $authenticatedOnly) {
+        date
+        yesCount
+        noCount
+      }
     }
   }
 `);
 
-export default function useNearbySubdivisions(subdivisionId: string) {
+export default function useNearbySubdivisions({
+  subdivisionId,
+  authenticatedOnly,
+}: {
+  subdivisionId: string;
+  authenticatedOnly: boolean;
+}) {
   const { data } = useQuery(NearbySubdivisionsDocument, {
     variables: {
       subdivisionId,
+      authenticatedOnly,
     },
   });
 
-  return (data?.nearbySubdivisions ?? undefined) as
-    | Required<Pick<SubdivisionData, "id" | "geoJson">>[]
-    | undefined;
+  return data?.nearbySubdivisions ?? undefined;
 }

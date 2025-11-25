@@ -6,14 +6,16 @@ import {
   type ReactNode,
 } from "react";
 
+import type { NearbySubdivisionsQuery } from "generated/graphql";
+
 import { useFilters } from "../filters-provider";
 
-import type { SubdivisionData } from "./types";
 import useNearbySubdivisions from "./use-nearby-subdivisions";
-import useSubdivisions from "./use-subdivisions";
 
 interface GraphsSubdivisionsContextValue {
-  subdivisions: SubdivisionData[];
+  subdivisions:
+    | { id: string; answersByDate?: never }[]
+    | NearbySubdivisionsQuery["nearbySubdivisions"];
   focusedSubdivisionId: string;
 }
 
@@ -33,80 +35,15 @@ export const GraphsSubdivisionsProvider = memo(
     children: ReactNode;
   }) {
     const { authenticatedOnly } = useFilters();
-    const currentSubdivisionSingleton = useSubdivisions({
-      ids: [currentSubdivisionId],
-      authenticatedOnly,
-    });
-    const subdivisionGeographies = useNearbySubdivisions(currentSubdivisionId);
-
-    const otherSubdivisionIds = useMemo(() => {
-      if (!subdivisionGeographies) {
-        return null;
-      }
-
-      return subdivisionGeographies
-        .filter(({ id }) => id !== currentSubdivisionId)
-        .map(({ id }) => id);
-    }, [currentSubdivisionId, subdivisionGeographies]);
-
-    const otherSubdivisions = useSubdivisions({
-      ids: otherSubdivisionIds,
+    const nearbySubdivisions = useNearbySubdivisions({
+      subdivisionId: currentSubdivisionId,
       authenticatedOnly,
     });
 
-    const subdivisions = useMemo((): SubdivisionData[] => {
-      const currentSubdivision = currentSubdivisionSingleton?.[0] ?? undefined;
-
-      if (!currentSubdivision && !subdivisionGeographies) {
-        return [
-          {
-            id: currentSubdivisionId,
-          },
-        ];
-      }
-
-      if (currentSubdivision && !subdivisionGeographies) {
-        return [currentSubdivision];
-      }
-
-      if (!currentSubdivision && subdivisionGeographies) {
-        return subdivisionGeographies;
-      }
-
-      if (!currentSubdivision || !subdivisionGeographies) {
-        throw new Error("Impossible scenario, but I need to tell typescript");
-      }
-
-      const subdivisionsAnswersData = [
-        currentSubdivision,
-        ...(otherSubdivisions ?? []),
-      ];
-
-      const subdivisions: SubdivisionData[] = [];
-
-      for (const subdivisionGeography of subdivisionGeographies) {
-        const completeSubdivision: SubdivisionData = {
-          id: subdivisionGeography.id,
-          geoJson: subdivisionGeography.geoJson,
-        };
-
-        const answerData = subdivisionsAnswersData.find(
-          ({ id }) => id === subdivisionGeography.id,
-        );
-
-        if (answerData) {
-          completeSubdivision.answersByDate = answerData.answersByDate;
-        }
-
-        subdivisions.push(completeSubdivision);
-      }
-
-      return subdivisions;
-    }, [
-      currentSubdivisionSingleton,
-      subdivisionGeographies,
-      otherSubdivisions,
-    ]);
+    const subdivisions = useMemo(
+      () => nearbySubdivisions ?? [{ id: currentSubdivisionId }],
+      [nearbySubdivisions, currentSubdivisionId],
+    );
 
     return (
       <GraphsSubdivisionsContext.Provider

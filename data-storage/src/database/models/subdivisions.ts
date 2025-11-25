@@ -11,10 +11,6 @@ export function defineSubdivisionsModel(s: Sequelize) {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    geoJson: {
-      type: DataTypes.JSONB,
-      allowNull: false,
-    },
     northBound: {
       type: DataTypes.FLOAT,
       allowNull: false,

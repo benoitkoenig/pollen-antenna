@@ -28,7 +28,6 @@ export default function mapFeatureToSubdivision(feature: Feature) {
 
   return {
     id: feature.properties.shapeID,
-    geoJson: feature,
     northBound,
     southBound,
     eastBound,
