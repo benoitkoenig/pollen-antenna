@@ -4,7 +4,7 @@ scalar Json
 type Query {
   health: String!
   jwt(provider: String!, token: String!): JwtResponse!
-  nearbySubdivisions(subdivisionId: String!): [Subdivision!]!
+  nearbySubdivisions(subdivisionId: String!): NearbySubdivisionsResponse!
   subdivisions(countryCode: String, ids: [String!]): [Subdivision!]!
 }
 
@@ -31,6 +31,18 @@ type Subdivision {
   westBound: Float!
   southBound: Float!
   answersByDate(authenticatedOnly: Boolean): [DateAnswers!]!
+}
+
+type BoundingBox {
+  north: Float!
+  east: Float!
+  west: Float!
+  south: Float!
+}
+
+type NearbySubdivisionsResponse {
+  subdivisions: [Subdivision!]!
+  boundingBox: BoundingBox!
 }
 
 type Mutation {

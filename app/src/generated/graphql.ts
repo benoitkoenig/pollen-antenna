@@ -17,6 +17,14 @@ export type Scalars = {
   Json: { input: any; output: any; }
 };
 
+export type BoundingBox = {
+  __typename?: 'BoundingBox';
+  east: Scalars['Float']['output'];
+  north: Scalars['Float']['output'];
+  south: Scalars['Float']['output'];
+  west: Scalars['Float']['output'];
+};
+
 export type DateAnswers = {
   __typename?: 'DateAnswers';
   date: Scalars['String']['output'];
@@ -42,11 +50,17 @@ export type MutationRegisterAnswerArgs = {
   subdivision: Scalars['String']['input'];
 };
 
+export type NearbySubdivisionsResponse = {
+  __typename?: 'NearbySubdivisionsResponse';
+  boundingBox: BoundingBox;
+  subdivisions: Array<Subdivision>;
+};
+
 export type Query = {
   __typename?: 'Query';
   health: Scalars['String']['output'];
   jwt: JwtResponse;
-  nearbySubdivisions: Array<Subdivision>;
+  nearbySubdivisions: NearbySubdivisionsResponse;
   subdivisions: Array<Subdivision>;
 };
 
@@ -94,7 +108,7 @@ export type NearbySubdivisionsQueryVariables = Exact<{
 }>;
 
 
-export type NearbySubdivisionsQuery = { __typename?: 'Query', nearbySubdivisions: Array<{ __typename?: 'Subdivision', id: string, answersByDate: Array<{ __typename?: 'DateAnswers', date: string, yesCount: number, noCount: number }> }> };
+export type NearbySubdivisionsQuery = { __typename?: 'Query', nearbySubdivisions: { __typename?: 'NearbySubdivisionsResponse', subdivisions: Array<{ __typename?: 'Subdivision', id: string, answersByDate: Array<{ __typename?: 'DateAnswers', date: string, yesCount: number, noCount: number }> }>, boundingBox: { __typename?: 'BoundingBox', north: number, east: number, west: number, south: number } } };
 
 export type GetJwtQueryVariables = Exact<{
   provider: Scalars['String']['input'];
@@ -121,7 +135,7 @@ export type SubdivisionsByCountryQueryVariables = Exact<{
 export type SubdivisionsByCountryQuery = { __typename?: 'Query', subdivisions: Array<{ __typename?: 'Subdivision', id: string }> };
 
 
-export const NearbySubdivisionsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"NearbySubdivisions"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"subdivisionId"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"authenticatedOnly"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Boolean"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"nearbySubdivisions"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"subdivisionId"},"value":{"kind":"Variable","name":{"kind":"Name","value":"subdivisionId"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"answersByDate"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"authenticatedOnly"},"value":{"kind":"Variable","name":{"kind":"Name","value":"authenticatedOnly"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"date"}},{"kind":"Field","name":{"kind":"Name","value":"yesCount"}},{"kind":"Field","name":{"kind":"Name","value":"noCount"}}]}}]}}]}}]} as unknown as DocumentNode<NearbySubdivisionsQuery, NearbySubdivisionsQueryVariables>;
+export const NearbySubdivisionsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"NearbySubdivisions"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"subdivisionId"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"authenticatedOnly"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Boolean"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"nearbySubdivisions"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"subdivisionId"},"value":{"kind":"Variable","name":{"kind":"Name","value":"subdivisionId"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"subdivisions"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"answersByDate"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"authenticatedOnly"},"value":{"kind":"Variable","name":{"kind":"Name","value":"authenticatedOnly"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"date"}},{"kind":"Field","name":{"kind":"Name","value":"yesCount"}},{"kind":"Field","name":{"kind":"Name","value":"noCount"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"boundingBox"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"north"}},{"kind":"Field","name":{"kind":"Name","value":"east"}},{"kind":"Field","name":{"kind":"Name","value":"west"}},{"kind":"Field","name":{"kind":"Name","value":"south"}}]}}]}}]}}]} as unknown as DocumentNode<NearbySubdivisionsQuery, NearbySubdivisionsQueryVariables>;
 export const GetJwtDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetJwt"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"provider"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"token"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"jwt"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"provider"},"value":{"kind":"Variable","name":{"kind":"Name","value":"provider"}}},{"kind":"Argument","name":{"kind":"Name","value":"token"},"value":{"kind":"Variable","name":{"kind":"Name","value":"token"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"token"}},{"kind":"Field","name":{"kind":"Name","value":"expiresAt"}}]}}]}}]} as unknown as DocumentNode<GetJwtQuery, GetJwtQueryVariables>;
 export const RegisterAnswerDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"RegisterAnswer"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"hasSymptoms"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"subdivision"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"date"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"registerAnswer"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"hasSymptoms"},"value":{"kind":"Variable","name":{"kind":"Name","value":"hasSymptoms"}}},{"kind":"Argument","name":{"kind":"Name","value":"subdivision"},"value":{"kind":"Variable","name":{"kind":"Name","value":"subdivision"}}},{"kind":"Argument","name":{"kind":"Name","value":"date"},"value":{"kind":"Variable","name":{"kind":"Name","value":"date"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}}]}}]}}]} as unknown as DocumentNode<RegisterAnswerMutation, RegisterAnswerMutationVariables>;
 export const SubdivisionsByCountryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"SubdivisionsByCountry"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"countryCode"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"subdivisions"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"countryCode"},"value":{"kind":"Variable","name":{"kind":"Name","value":"countryCode"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}}]}}]}}]} as unknown as DocumentNode<SubdivisionsByCountryQuery, SubdivisionsByCountryQueryVariables>;

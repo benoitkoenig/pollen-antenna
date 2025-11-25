@@ -8,11 +8,19 @@ const NearbySubdivisionsDocument = graphql(/* GraphQL */ `
     $authenticatedOnly: Boolean!
   ) {
     nearbySubdivisions(subdivisionId: $subdivisionId) {
-      id
-      answersByDate(authenticatedOnly: $authenticatedOnly) {
-        date
-        yesCount
-        noCount
+      subdivisions {
+        id
+        answersByDate(authenticatedOnly: $authenticatedOnly) {
+          date
+          yesCount
+          noCount
+        }
+      }
+      boundingBox {
+        north
+        east
+        west
+        south
       }
     }
   }

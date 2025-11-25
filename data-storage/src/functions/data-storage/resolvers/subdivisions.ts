@@ -31,23 +31,31 @@ export const subdivisionsResolvers = {
           throw new Error(`Subdivision with id ${subdivisionId} not found`);
         }
 
-        const northBound = targetSubdivision.get("northBound") as number;
-        const eastBound = targetSubdivision.get("eastBound") as number;
-        const westBound = targetSubdivision.get("westBound") as number;
-        const southBound = targetSubdivision.get("southBound") as number;
+        const northBound = (targetSubdivision.get("northBound") as number) + 1;
+        const eastBound = (targetSubdivision.get("eastBound") as number) + 1;
+        const westBound = (targetSubdivision.get("westBound") as number) - 1;
+        const southBound = (targetSubdivision.get("southBound") as number) - 1;
 
         const results = await sequelize.models["Subdivisions"].findAll({
           where: {
-            eastBound: { [Op.gt]: westBound - 1 },
-            westBound: { [Op.lt]: eastBound + 1 },
-            northBound: { [Op.gt]: southBound - 1 },
-            southBound: { [Op.lt]: northBound + 1 },
+            eastBound: { [Op.gt]: westBound },
+            westBound: { [Op.lt]: eastBound },
+            northBound: { [Op.gt]: southBound },
+            southBound: { [Op.lt]: northBound },
           },
           order: [["id", "ASC"]],
           raw: true,
         });
 
-        return results;
+        return {
+          subdivisions: results,
+          boundingBox: {
+            north: northBound,
+            east: eastBound,
+            west: westBound,
+            south: southBound,
+          },
+        };
       } finally {
         sequelize.connectionManager.close();
       }
