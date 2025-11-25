@@ -3,6 +3,7 @@
   "compilerOptions": {
     "baseUrl": "./scripts",
     "allowImportingTsExtensions": true,
-    "noEmit": true
+    "noEmit": true,
+    "composite": true
   }
 }

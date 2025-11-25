@@ -7,9 +7,9 @@ import { existsSync } from "node:fs";
 import { mkdir, writeFile } from "node:fs/promises";
 import path from "node:path";
 
-import { fetchFeatures } from "./fetch-features.ts";
+import { countryCodes } from "../../../static-data/src/countries.ts";
 
-const countryCodes = ["bel", "fra", "nld", "lux"] as const;
+import { fetchFeatures } from "./fetch-features.ts";
 
 const DIR_PATH = "./public/geo-json";
 

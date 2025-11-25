@@ -1,5 +1,5 @@
 // Extracted from https://www.geoboundaries.org/api/current/gbOpen/ALL/ADM0/
-export const countryCodes = [
+const allCountryCodes = [
   "abw",
   "afg",
   "ago",
@@ -231,6 +231,12 @@ export const countryCodes = [
   "zwe",
   "tkl",
 ] as const;
+
+const devCountryCodes = ["bel", "fra", "nld", "lux"] as const;
+
+const isProd = (import.meta as { env?: { PROD?: unknown } })?.env?.PROD;
+
+export const countryCodes = isProd ? allCountryCodes : devCountryCodes;
 
 export type CountryCode = (typeof countryCodes)[number];
 
